@@ -10,12 +10,12 @@ import java.sql.SQLException;
 public class DatabaseConnection {
 
     private static final String sqlPath = "jdbc:mysql://localhost:3306/ampify";
-    private static final String sqlPaswd = "password";
+    private static final String sqlPaswd = "XXXXX";
 
 
     public static void displayUser() throws ClassNotFoundException, SQLException {
         Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection connection = DriverManager.getConnection(sqlPath, "java", sqlPaswd);
+        Connection connection = DriverManager.getConnection(sqlPath, "XXXXX", sqlPaswd);
 
         String query = "SELECT * FROM users";
         PreparedStatement preStat = connection.prepareStatement(query);
