@@ -1,4 +1,5 @@
 
+import java.io.EOFException;
 import java.io.IOException;
 import java.net.ConnectException;
 import java.net.Socket;
@@ -30,11 +31,13 @@ public class Main {
         while(true){                                                       //Runs and accepts clients until manually stopped
             try {
                 clientSocket = serverSocket.accept();
-                System.out.println("[SERVER]New Client connected.");
+                System.out.println("[SERVER] New Client connected.");
 
                 Thread t = new Thread(new HandleClient(clientSocket));     //New client connected and processed in new thread
                 t.start();
 
+            } catch (EOFException e){
+                System.out.println("[SERVER]Client disconnected.");
             } catch (IOException e) {
                 e.printStackTrace();
             }

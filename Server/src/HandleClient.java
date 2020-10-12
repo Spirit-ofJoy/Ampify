@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.sql.ResultSet;
+import java.net.SocketException;
 import java.sql.SQLException;
 
 //Class to handle and interact with incoming clients
@@ -30,20 +30,28 @@ public class HandleClient implements Runnable {
 
         while (true) {
             try {
-                Request clientRequest = (Request) objectInputStream.readObject();
+                Object incomingRequest = objectInputStream.readObject();
+                Request clientRequest = (Request) incomingRequest;
 
                 if( clientRequest.getReqType().equals("LOGIN_CHECK") ){
-                    String clientUserID = DatabaseConnection.checkLogin(clientRequest.getVar1(), clientRequest.getVar2());
-                    objectOutputStream.writeObject(new Response("LOGIN_CHECK", clientUserID));
+                    LoginRequest loginRequest = (LoginRequest) incomingRequest;
+                    String clientUserID = DatabaseConnection.checkLogin(loginRequest.getUsername(), loginRequest.getPassword());
+                    objectOutputStream.writeObject(new LoginResponse(clientUserID));
                     objectOutputStream.flush();
                 }
 
             } catch (EOFException e) {
-                System.out.println("User disconnected or offline.");
+                System.out.println("[SERVER] User disconnected or offline.");
+                break;
+            } catch (SocketException e){
+                System.out.println("[SERVER] User connection lost");
+                break;
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
+                break;
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
+                System.out.println("[SERVER] Error in retrieval of data from database.");
             }
         }
 
