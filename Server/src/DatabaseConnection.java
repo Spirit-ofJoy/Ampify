@@ -16,7 +16,7 @@ public class DatabaseConnection {
     //Checks login credentials and returns appropriate profile
     public static ResultSet checkLogin(String uname, String paswd) throws ClassNotFoundException, SQLException {
         Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection connection = DriverManager.getConnection(sqlPath, sqlName, sqlPaswd);
+        Connection connection = DriverManager.getConnection(sqlPath, sqlName, sqlPaswd); //Connected to database
 
         String query = "SELECT USERID FROM users WHERE Uname = ? AND Password = ?";
         PreparedStatement preStat = connection.prepareStatement(query);
@@ -24,7 +24,7 @@ public class DatabaseConnection {
         preStat.setString(2, paswd);
         ResultSet result = preStat.executeQuery();
 
-        if (!result.isBeforeFirst() ) {             //Empty result set check
+        if ( !result.isBeforeFirst() ) {             //Empty result set check
             return result;
         }
         else {

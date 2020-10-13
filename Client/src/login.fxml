@@ -22,7 +22,7 @@
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <Button fx:id="loginProcessButton" mnemonicParsing="false" onAction="#processLogin" prefHeight="26.0" prefWidth="99.0" text="Login" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+      <Button fx:id="loginProcessButton" mnemonicParsing="false" onAction="#processLogin" prefHeight="26.0" prefWidth="99.0" text="Login" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
       <Separator opacity="0.0" orientation="VERTICAL" prefHeight="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
       <PasswordField fx:id="passwordFld" prefHeight="26.0" prefWidth="153.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="3" />
       <TextField fx:id="usernameTextfld" prefHeight="26.0" prefWidth="173.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2" />
@@ -40,9 +40,10 @@
          <font>
             <Font name="Century Gothic Bold" size="16.0" />
          </font></Label>
+      <Button fx:id="backButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#backToHome" text="Back" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
       <TextField fx:id="msgDisplay" alignment="CENTER" editable="false" GridPane.columnSpan="2147483647" GridPane.rowIndex="6" />
    </children>
    <padding>
-      <Insets bottom="10.0" left="15.0" right="15.0" top="20.0" />
+      <Insets bottom="30.0" left="15.0" right="15.0" top="20.0" />
    </padding>
 </GridPane>
