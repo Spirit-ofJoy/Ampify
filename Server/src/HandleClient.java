@@ -1,4 +1,7 @@
 
+import Request.*;
+import Response.*;
+
 import java.io.EOFException;
 import java.io.IOException;
 import java.io.ObjectInputStream;

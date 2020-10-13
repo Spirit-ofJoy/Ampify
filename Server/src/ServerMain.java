@@ -5,11 +5,9 @@ import java.net.ConnectException;
 import java.net.Socket;
 import java.net.ServerSocket;
 import java.sql.SQLException;
-//import java.util.Set;
-//import java.util.HashSet;
-//import java.util.Vector;
 
-public class Main {
+//Main Server class
+public class ServerMain {
 
     private static final int PORT = 5436;   //location of server
 

@@ -1,5 +1,6 @@
-import java.io.Serializable;
+package Response;
 
+import java.io.Serializable;
 
 //Object sent back to clients
 public abstract class Response implements Serializable {

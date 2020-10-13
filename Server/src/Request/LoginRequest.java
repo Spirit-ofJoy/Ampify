@@ -1,3 +1,5 @@
+package Request;
+
 import java.io.Serializable;
 
 public class LoginRequest extends Request implements Serializable {

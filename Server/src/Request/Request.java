@@ -1,3 +1,5 @@
+package Request;
+
 import java.io.Serializable;
 
 //Object sent from client to Server

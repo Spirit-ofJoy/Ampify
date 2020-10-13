@@ -1,5 +1,8 @@
+package Response;
+
 import java.io.Serializable;
 
+//Response of login request
 public class LoginResponse extends Response implements Serializable {
 
     private String userID;
