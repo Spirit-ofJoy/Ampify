@@ -1,4 +1,4 @@
-package Response;
+package Responses;
 
 import java.io.Serializable;
 

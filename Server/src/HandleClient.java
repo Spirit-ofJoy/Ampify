@@ -1,6 +1,6 @@
 
-import Request.*;
-import Response.*;
+import Requests.*;
+import Responses.*;
 
 import java.io.EOFException;
 import java.io.IOException;
@@ -33,10 +33,10 @@ public class HandleClient implements Runnable {
 
         while (true) {
             try {
-                Object incomingRequest = objectInputStream.readObject();
-                Request clientRequest = (Request) incomingRequest;
+                Request incomingRequest = (Request) objectInputStream.readObject();
+                //Request clientRequest = (Request) incomingRequest;
 
-                if( clientRequest.getReqType().equals("LOGIN_CHECK") ){
+                if( incomingRequest.getReqType().equals("LOGIN_CHECK") ){
                     LoginRequest loginRequest = (LoginRequest) incomingRequest;
                     String clientUserID = DatabaseConnection.checkLogin(loginRequest.getUsername(), loginRequest.getPassword());
                     objectOutputStream.writeObject(new LoginResponse(clientUserID));
