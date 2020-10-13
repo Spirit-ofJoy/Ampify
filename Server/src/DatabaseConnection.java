@@ -10,8 +10,8 @@ import java.sql.SQLException;
 public class DatabaseConnection {
 
     private static final String sqlPath = "jdbc:mysql://localhost:3306/ampify";
-    private static final String sqlPaswd = "password";
-    private static final String sqlName = "java";
+    private static final String sqlPaswd = "XXXXX";
+    private static final String sqlName = "XXXXX";
 
     //Checks login credentials and returns appropriate profile
     public static ResultSet checkLogin(String uname, String paswd) throws ClassNotFoundException, SQLException {
