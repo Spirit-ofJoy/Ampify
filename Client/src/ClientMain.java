@@ -22,7 +22,7 @@ public class ClientMain extends Application{
         Parent root = FXMLLoader.load(getClass().getResource("home.fxml"));
         primaryStage.setTitle("Ampify");
 
-        primaryStage.setScene(new Scene(root, 300, 275));                        //Scene setting for home
+        primaryStage.setScene(new Scene(root, 400, 375));                        //Scene setting for home
         primaryStage.show();
     }
 

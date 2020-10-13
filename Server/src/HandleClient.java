@@ -8,6 +8,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.SocketException;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 //Class to handle and interact with incoming clients
@@ -34,13 +35,28 @@ public class HandleClient implements Runnable {
         while (true) {
             try {
                 Request incomingRequest = (Request) objectInputStream.readObject();
-                //Request clientRequest = (Request) incomingRequest;
 
+                //executes if Request type is of login
                 if( incomingRequest.getReqType().equals("LOGIN_CHECK") ){
                     LoginRequest loginRequest = (LoginRequest) incomingRequest;
-                    String clientUserID = DatabaseConnection.checkLogin(loginRequest.getUsername(), loginRequest.getPassword());
-                    objectOutputStream.writeObject(new LoginResponse(clientUserID));
-                    objectOutputStream.flush();
+                    ResultSet queryResult = DatabaseConnection.checkLogin(loginRequest.getUsername(), loginRequest.getPassword());
+
+                    //Login request processed and result set returned
+                    if (!queryResult.isBeforeFirst() ){
+                        //If User not registered
+                        objectOutputStream.writeObject(new LoginResponse("USER_NOT_FOUND"));
+                        objectOutputStream.flush();
+                    }
+                    else {
+                        //If user found, then send back profile details
+                        queryResult.next();
+
+                        objectOutputStream.writeObject(new LoginResponse(queryResult.getString("USERID"),
+                                queryResult.getString("History"), queryResult.getString("Liked"),
+                                queryResult.getString("Disliked"), queryResult.getString("Playlists") ));
+                        objectOutputStream.flush();
+                    }
+
                 }
 
             } catch (EOFException e) {

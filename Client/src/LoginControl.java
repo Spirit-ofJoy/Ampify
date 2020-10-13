@@ -14,6 +14,8 @@ public class LoginControl {
     public TextField usernameTextfld;
     public PasswordField passwordFld;
     public Button loginProcessButton;
+    public TextField msgDisplay;
+
 
     public void processLogin() {
         String uname = usernameTextfld.getText();          //Takes username
@@ -31,7 +33,13 @@ public class LoginControl {
                     LoginResponse incomingResponse;
                     incomingResponse = (LoginResponse) ClientMain.clientInputStream.readObject();   //Response accepted
 
-                    System.out.println("[CLIENT] "+incomingResponse.getUserID());
+                    if(incomingResponse.getUserID().equals("USER_NOT_FOUND")){
+                        msgDisplay.setText("User not Found. Please check credentials or Sign-Up if don't have an account.");
+                    }
+                    else {
+                        msgDisplay.setText("User found. Loading Profile now.");
+                        System.out.println(incomingResponse.getHistory()+incomingResponse.getLiked()+incomingResponse.getDisliked()+incomingResponse.getPlaylists());
+                    }
                 } catch (IOException | ClassNotFoundException e) {
                     e.printStackTrace();
                 }
@@ -39,7 +47,7 @@ public class LoginControl {
             }
         };
 
-        Thread loginThread = new Thread(loginProcess);
+        Thread loginThread = new Thread(loginProcess);  //Request run and handled in new thread
         loginThread.start();
     }
 

@@ -10,28 +10,13 @@ import java.sql.SQLException;
 public class DatabaseConnection {
 
     private static final String sqlPath = "jdbc:mysql://localhost:3306/ampify";
-    private static final String sqlPaswd = "XXXXX";
+    private static final String sqlPaswd = "password";
+    private static final String sqlName = "java";
 
-
-    public static void displayUser() throws ClassNotFoundException, SQLException {
+    //Checks login credentials and returns appropriate profile
+    public static ResultSet checkLogin(String uname, String paswd) throws ClassNotFoundException, SQLException {
         Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection connection = DriverManager.getConnection(sqlPath, "XXXXX", sqlPaswd);
-
-        String query = "SELECT * FROM users";
-        PreparedStatement preStat = connection.prepareStatement(query);
-
-        ResultSet result = preStat.executeQuery();
-
-        while (result.next()){
-            String s = result.getString("USERID");
-            System.out.println(s);
-        }
-
-    }
-
-    public static String checkLogin(String uname, String paswd) throws ClassNotFoundException, SQLException {
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection connection = DriverManager.getConnection(sqlPath, "java", sqlPaswd);
+        Connection connection = DriverManager.getConnection(sqlPath, sqlName, sqlPaswd);
 
         String query = "SELECT USERID FROM users WHERE Uname = ? AND Password = ?";
         PreparedStatement preStat = connection.prepareStatement(query);
@@ -39,14 +24,19 @@ public class DatabaseConnection {
         preStat.setString(2, paswd);
         ResultSet result = preStat.executeQuery();
 
-        if (!result.isBeforeFirst() ) {
-            return "USER_NOT_FOUND";
+        if (!result.isBeforeFirst() ) {             //Empty result set check
+            return result;
         }
-
-        while (result.next()){
+        else {
+            result.next();
             String s = result.getString("USERID");
-            return s;
+
+            String query2 = "SELECT * FROM user_interact WHERE USERID = ?";
+            PreparedStatement preStat2 = connection.prepareStatement(query2);
+            preStat2.setString(1, s);
+            ResultSet result2 = preStat2.executeQuery();
+
+            return result2;
         }
-        return "USER_NOT_FOUND";
     }
 }
