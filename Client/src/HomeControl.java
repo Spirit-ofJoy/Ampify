@@ -19,13 +19,13 @@ public class HomeControl  {
         System.out.println("[CLIENT] Login Page invoked.");
         loginButton.setText("Loading...");
 
-        Parent loginRoot = FXMLLoader.load(getClass().getResource("login.fxml"));      //call login class
+        Parent loginRoot = FXMLLoader.load(getClass().getResource("login.fxml"));      //call login.fxml and load it to loginRoot
         Scene loginScene = new Scene(loginRoot);                                             //create scene
 
         Stage window = (Stage) loginButton.getScene().getWindow();                           //Gets original stage of scene
 
         window.setScene(loginScene);                                                         //Sets scene
-        window.show();
+        window.show();                                                                       //Shows scene
     }
 
     //Change to Sign Up scene
