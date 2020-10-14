@@ -1,4 +1,4 @@
-//Class to connect and have operations with the database
+package main;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

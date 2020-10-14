@@ -1,4 +1,4 @@
-
+package main;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -19,7 +19,7 @@ public class ClientMain extends Application{
 
     @Override
     public void start(Stage primaryStage) throws Exception{                             //loads Home page in JavaFX GUI thread
-        Parent root = FXMLLoader.load(getClass().getResource("home.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/resources/home.fxml"));
         primaryStage.setTitle("Ampify");
 
         primaryStage.setScene(new Scene(root, 400, 375));                        //Scene setting for home
