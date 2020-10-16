@@ -1,6 +1,10 @@
+package controllers;
 
 import Requests.LoginRequest;
 import Responses.LoginResponse;
+import javafx.application.Platform;
+import main.ActiveProfile;
+import main.ClientMain;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,6 +15,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 
 public class LoginControl {
@@ -20,9 +25,11 @@ public class LoginControl {
     public Button loginProcessButton;
     public TextField msgDisplay;
     public Button backButton;
+    public Button profileLoader;
 
-
+    //Checking login credentials by sending request to server
     public void processLogin() {
+
         String uname = usernameTextfld.getText();          //Takes username
         String pass = passwordFld.getText();               //Takes password
         loginProcessButton.setText("Loading...");
@@ -39,32 +46,51 @@ public class LoginControl {
                     incomingResponse = (LoginResponse) ClientMain.clientInputStream.readObject();   //Response accepted
 
                     if(incomingResponse.getUserID().equals("USER_NOT_FOUND")){
-                        loginProcessButton.setText("Retry Login");
                         msgDisplay.setText("User not Found. Please check credentials or Sign-Up if don't have an account.");
                     }
                     else {
                         msgDisplay.setText("User found. Loading Profile now.");
-                        System.out.println(incomingResponse.getHistory()+incomingResponse.getLiked()+incomingResponse.getDisliked()+incomingResponse.getPlaylists());
+
+                        //Making a profile for user found
+                        ActiveProfile arbitary = ActiveProfile.getProfile(uname, incomingResponse.getUserID(),
+                                incomingResponse.getHistory(), incomingResponse.getLiked(),
+                                 incomingResponse.getDisliked(), incomingResponse.getPlaylists());
+
+                        //Update GUI for button to load Profile
+                        Platform.runLater(()-> { profileLoader.setVisible(true); } );
                     }
                 } catch(NullPointerException e) {
                     msgDisplay.setText("Server currently offline. Try again later.");
                 } catch(IOException | ClassNotFoundException e) {
                     e.printStackTrace();
                 }
-
             }
         };
 
         Thread loginThread = new Thread(loginProcess);  //Request run and handled in new thread
         loginThread.start();
+
     }
 
+    //Go back to home
     public void backToHome() throws IOException {
         System.out.println("[CLIENT] Home Page invoked.");
-        Parent homeRoot = FXMLLoader.load(getClass().getResource("home.fxml"));
+        Parent homeRoot = FXMLLoader.load(getClass().getResource("/resources/home.fxml"));
         Scene homeScene = new Scene(homeRoot, 400, 375);
         Stage homeStage = (Stage) backButton.getScene().getWindow();
         homeStage.setScene(homeScene);
         homeStage.show();
     }
+
+    //Go to Profile
+    public void loadProfilePage() throws IOException {
+        System.out.println("[CLIENT] Profile Page invoked.");
+
+        Parent profileRoot = FXMLLoader.load(getClass().getResource("/resources/profile.fxml"));
+        Scene profileScene = new Scene(profileRoot);
+        Stage profileStage = (Stage) profileLoader.getScene().getWindow();
+        profileStage.setScene(profileScene);
+        profileStage.show();
+    }
+
 }

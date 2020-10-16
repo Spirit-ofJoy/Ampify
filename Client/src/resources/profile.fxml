@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="650.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ProfileControl">
+   <children>
+      <Label alignment="CENTER" layoutX="204.0" layoutY="21.0" prefHeight="38.0" prefWidth="92.0" text="Ampify" AnchorPane.topAnchor="21.0">
+         <font>
+            <Font name="Bauhaus 93" size="26.0" />
+         </font>
+      </Label>
+      <Label fx:id="userGreeting" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="163.0" layoutY="59.0" prefHeight="26.0" prefWidth="173.0" text="Label" textAlignment="CENTER">
+         <font>
+            <Font name="Arial" size="14.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
