@@ -11,6 +11,7 @@ import java.net.Socket;
 import java.net.SocketException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 //Class to handle and interact with incoming clients
 public class HandleClient implements Runnable {
@@ -43,6 +44,7 @@ public class HandleClient implements Runnable {
                     ResultSet queryResult = DatabaseConnection.checkLogin(loginRequest.getUsername(), loginRequest.getPassword());
 
                     //Login request processed and result set returned
+
                     if (!queryResult.isBeforeFirst() ){
                         //If User not registered
                         objectOutputStream.writeObject(new LoginResponse("USER_NOT_FOUND"));
@@ -57,7 +59,23 @@ public class HandleClient implements Runnable {
                                 queryResult.getString("Disliked"), queryResult.getString("Playlists") ));
                         objectOutputStream.flush();
                     }
+                }
+                //executes if Request is made for the top songs based on viewership
+                else if(incomingRequest.getReqType().equals("TOP_HITS_LIST")) {
+                    ResultSet mostViewed = DatabaseConnection.getMostViewed();
 
+                    //Send back the most viewed songs
+                    objectOutputStream.writeObject(new TopHitsResponse(mostViewed));
+                    objectOutputStream.flush();
+                }
+                //executes to load and provide personalized recommendations
+                else if(incomingRequest.getReqType().equals("RECOMMENDS_GIVEN")) {
+                    RecommendsRequest recommendsRequest = (RecommendsRequest) incomingRequest;
+                    ResultSet personalRecommends = DatabaseConnection.getRecommends(recommendsRequest.getUserID(), recommendsRequest.liked);
+
+                    //Send back personalized selection
+                    objectOutputStream.writeObject(new RecommendsResponse(personalRecommends));
+                    objectOutputStream.flush();
                 }
 
             } catch (EOFException e) {

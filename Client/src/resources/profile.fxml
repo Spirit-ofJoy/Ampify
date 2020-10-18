@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -11,9 +12,39 @@
             <Font name="Bauhaus 93" size="26.0" />
          </font>
       </Label>
-      <Label fx:id="userGreeting" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="163.0" layoutY="59.0" prefHeight="26.0" prefWidth="173.0" text="Label" textAlignment="CENTER">
+      <Label fx:id="userGreeting" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="163.0" layoutY="59.0" prefHeight="26.0" prefWidth="173.0" text=" " textAlignment="CENTER">
          <font>
             <Font name="Arial" size="14.0" />
+         </font>
+      </Label>
+      <AnchorPane layoutY="143.0" prefHeight="131.0" prefWidth="500.0">
+         <children>
+            <TextField fx:id="mostViewed" layoutX="24.0" layoutY="53.0" prefHeight="26.0" prefWidth="454.0" />
+         </children>
+      </AnchorPane>
+      <Label layoutX="14.0" layoutY="133.0" text="Top of the Charts">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <AnchorPane layoutX="5.0" layoutY="298.0" prefHeight="131.0" prefWidth="500.0">
+         <children>
+            <TextField fx:id="recommends" layoutX="24.0" layoutY="53.0" prefHeight="26.0" prefWidth="454.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="5.0" layoutY="458.0" prefHeight="131.0" prefWidth="500.0">
+         <children>
+            <TextField fx:id="mood" layoutX="24.0" layoutY="53.0" prefHeight="26.0" prefWidth="454.0" />
+         </children>
+      </AnchorPane>
+      <Label layoutX="14.0" layoutY="274.0" text="Recommends">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="14.0" layoutY="448.0" text="Mood of the Hour">
+         <font>
+            <Font name="System Bold" size="14.0" />
          </font>
       </Label>
    </children>
