@@ -1,5 +1,7 @@
 package main;
 
+import DatabaseConnection.DatabaseConnect;
+
 import java.io.EOFException;
 import java.io.IOException;
 import java.net.ConnectException;
@@ -13,7 +15,6 @@ public class ServerMain {
     private static final int PORT = 5436;   //location of server
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
-
 
         ServerSocket serverSocket = null;  //Server Socket
         Socket clientSocket;               //Reference for new incoming client Socket to pass into HandleClient

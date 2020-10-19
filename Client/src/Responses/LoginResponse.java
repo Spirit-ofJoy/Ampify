@@ -17,13 +17,13 @@ public class LoginResponse extends Response implements Serializable {
         this.userID = id;
     }
 
-    public LoginResponse(String id, String a, String b, String c, String d){      //Loads back profile if user found
+    public LoginResponse(String id, String history, String liked, String disliked, String playlists){      //Login serialized response loads back profile if user found
         this.respType = "LOGIN_CHECK";
         this.userID = id;
-        this.History = a;
-        this.Liked = b;
-        this.Disliked = c;
-        this.Playlists = d;
+        this.History = history;
+        this.Liked = liked;
+        this.Disliked = disliked;
+        this.Playlists = playlists;
     }
 
     @Override
@@ -51,4 +51,3 @@ public class LoginResponse extends Response implements Serializable {
         return Playlists;
     }
 }
-

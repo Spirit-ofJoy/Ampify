@@ -18,27 +18,27 @@ public class ActiveProfile {
     private static ActiveProfile activeProfile = null;
 
     //Constructor call
-    private ActiveProfile(String uname, String uid, String a, String b, String c, String d){
+    private ActiveProfile(String uname, String uid, String hist, String like, String dislike, String playlist){
         userID = uid;
         username = uname;
 
-        if(a!=null){
-            for (String temp: a.split(".")){
+        if(hist !=null){
+            for (String temp: hist.split("-")){
                 History.add(temp);
             }
         }
-        if(b!=null){
-            for (String temp: b.split(".")){
+        if(like !=null){
+            for (String temp: like.split("-")){
                 Liked.add(temp);
             }
         }
-        if(c!=null){
-            for (String temp: c.split(".")){
+        if(dislike !=null){
+            for (String temp: dislike.split("-")){
                 Disliked.add(temp);
             }
         }
-        if(d!=null){
-            for (String temp: d.split(".")){
+        if(playlist !=null){
+            for (String temp: playlist.split("-")){
                 Playlists.add(temp);
             }
         }

@@ -8,14 +8,14 @@ import java.util.TreeSet;
 public class RecommendsRequest extends Request implements Serializable {
 
     private String userID;
-    public ArrayList history = new ArrayList<String>();
-    public ArrayList liked = new ArrayList<String>();
+    //public ArrayList history = new ArrayList<String>();
+    //public ArrayList liked = new ArrayList<String>();
     int i=0;
 
-    public RecommendsRequest(String a, TreeSet<String> x, TreeSet<String> y) {
+    public RecommendsRequest(String a) {
         this.reqType = "RECOMMENDS_GIVEN";
         this.userID = a;
-
+/*
         //Keeps track of last 3 watched or liked
         for(String temp : x){
             if(i==3){ break; }
@@ -29,6 +29,8 @@ public class RecommendsRequest extends Request implements Serializable {
             liked.add(temp);
             i++;
         }
+
+ */
     }
 
     @Override

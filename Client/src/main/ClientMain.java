@@ -1,8 +1,6 @@
 package main;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -13,7 +11,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ConnectException;
 import java.net.Socket;
-import java.sql.SQLException;
+import java.net.SocketException;
 
 public class ClientMain extends Application{
 
@@ -38,7 +36,9 @@ public class ClientMain extends Application{
             clientOutputStream = new ObjectOutputStream(mySocket.getOutputStream());
             clientInputStream = new ObjectInputStream(mySocket.getInputStream());
         } catch (ConnectException e){
-          System.out.println("[CLIENT] Server offline currently. Try again later...");
+            System.out.println("[CLIENT] Server offline currently. Try again later...");
+        } catch (SocketException e) {
+            System.out.println("[CLIENT] Server connection Lost.");
         } catch (IOException e) {
             e.printStackTrace();
         }

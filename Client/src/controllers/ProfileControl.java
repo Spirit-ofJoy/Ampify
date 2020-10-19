@@ -7,7 +7,6 @@ import Responses.TopHitsResponse;
 
 import javafx.application.Platform;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import main.ActiveProfile;
@@ -30,42 +29,49 @@ public class ProfileControl implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         userGreeting.setText("Welcome, " + currProfile.getUsername());
 
-        try {
-            Thread mostViewedThread = new Thread(new MostViewedProcess());
-            mostViewedThread.start();
-            mostViewedThread.join();
+        //Loads Profile details in another thread
+        Thread LoadProfileThread = new Thread(new LoadProfileProcess());
+        LoadProfileThread.start();
 
-            Thread personalRecThread = new Thread(new PersonalizedRecommends());
-            personalRecThread.start();
-            personalRecThread.join();
-
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
     }
 
-    class MostViewedProcess implements Runnable {
+    class LoadProfileProcess implements Runnable {
 
-        public MostViewedProcess() {
-            System.out.println("[CLIENT] Top Hits requested");
+        public LoadProfileProcess() {
+            System.out.println("[CLIENT] Loading Profile....");
         }
 
         @Override
         public void run() {
             try {
+                //Request for Most Viewed playlist sent and response received
                 ClientMain.clientOutputStream.writeObject(new TopHitsRequest());
-                ClientMain.clientOutputStream.flush();                                          //Request sent
+                ClientMain.clientOutputStream.flush();
+                TopHitsResponse serverTopHitsResponse;
+                serverTopHitsResponse = (TopHitsResponse) ClientMain.clientInputStream.readObject();
 
-                TopHitsResponse incomingResponse;
-                incomingResponse = (TopHitsResponse) ClientMain.clientInputStream.readObject();   //Response accepted
+                //Request for Personalized Recommendations playlist sent and response received
+                ClientMain.clientOutputStream.writeObject(new RecommendsRequest(currProfile.getUserID()));
+                ClientMain.clientOutputStream.flush();
+                RecommendsResponse serverRecommendsResponse;
+                serverRecommendsResponse = (RecommendsResponse) ClientMain.clientInputStream.readObject();
 
-                //Update GUI for Most Viewed songs Playlist to load Profile
+
                 Platform.runLater(() -> {
-                    for (int i = 0; i < incomingResponse.topHitsPlaylist.size(); i++) {
-                        SongInfo t = (SongInfo) incomingResponse.topHitsPlaylist.get(i);
+
+                    //Update GUI for Most Viewed songs Playlist to load Profile
+                    for (int i = 0; i < serverTopHitsResponse.topHitsPlaylist.size(); i++) {
+                        SongInfo t = (SongInfo) serverTopHitsResponse.topHitsPlaylist.get(i);
                         mostViewed.appendText(t.getSongID() + " ");
                     }
+
+                    //Update GUI for Recommendations songs Playlist to load Profile
+                    for (int i = 0; i < serverRecommendsResponse.recommendations.size(); i++) {
+                        SongInfo t2 = (SongInfo) serverRecommendsResponse.recommendations.get(i);
+                        recommends.appendText(t2.getSongID() + " ");
+                    }
+
                 });
 
             } catch (IOException e) {
@@ -75,37 +81,6 @@ public class ProfileControl implements Initializable {
             }
         }
 
-    }
-
-    class PersonalizedRecommends implements Runnable{
-
-        public PersonalizedRecommends() {
-            System.out.println("[CLIENT] Recommendations requested");
-        }
-
-        @Override
-        public void run() {
-
-        try {
-            ClientMain.clientOutputStream.writeObject(new RecommendsRequest(currProfile.getUserID(), currProfile.History, currProfile.Liked));
-            ClientMain.clientOutputStream.flush();
-
-            RecommendsResponse incomingResponse;
-            incomingResponse = (RecommendsResponse) ClientMain.clientInputStream.readObject();   //Response accepted
-
-            //Update GUI for Recommendations songs Playlist to load Profile
-            Platform.runLater(()-> {
-                for (int i=0; i < incomingResponse.recommendations.size(); i++){
-                    SongInfo t = (SongInfo) incomingResponse.recommendations.get(i);
-                    recommends.appendText(t.getSongID() + " ");
-                } } );
-
-        } catch(NullPointerException e) {
-            System.out.println("Server currently offline. Try again later.");
-        } catch(IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        }
     }
 
 
