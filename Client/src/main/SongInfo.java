@@ -13,14 +13,14 @@ public class SongInfo implements Serializable {
     private String albumName;
     private String uploadTime;
 
-    public SongInfo(String a, String b, String c, String d, String e, String f,String g) {
-        this.songID = a;
-        this.songName = b;
-        this.genre = c;
-        this.language = d;
-        this.artistName = e;
-        this.albumName = f;
-        this.uploadTime = g;
+    public SongInfo(String sid, String sname, String gen, String lang, String artist, String album, String upload) {
+        this.songID = sid;
+        this.songName = sname;
+        this.genre = gen;
+        this.language = lang;
+        this.artistName = artist;
+        this.albumName = album;
+        this.uploadTime = upload;
     }
 
     public String getAlbumName() {

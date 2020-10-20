@@ -3,6 +3,7 @@ package main;
 import Requests.*;
 import Responses.*;
 import DatabaseConnection.*;
+import constants.Constant;
 
 import java.io.EOFException;
 import java.io.IOException;
@@ -10,7 +11,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.SocketException;
-import java.sql.SQLException;
+
 
 //Class to handle and interact with incoming clients
 public class HandleClient implements Runnable {
@@ -37,10 +38,21 @@ public class HandleClient implements Runnable {
             try {
                 Request incomingRequest = (Request) objectInputStream.readObject();
 
+                //executes if Request is for Signing Up
+                if(incomingRequest.getReqType().equals("SIGNUP_START")) {
+                    SignUpRequest signUpRequest = (SignUpRequest) incomingRequest;
+                    SignUpResponse signUpResponse = NewSignUp.createAccount(signUpRequest.getUsername(), signUpRequest.getPassword(),
+                            signUpRequest.getPreferenceLanguage(), signUpRequest.getPreferenceGenre(), signUpRequest.getPreferenceArtists());
+
+                    //Sign Up request processed and eligible response sent
+                    objectOutputStream.writeObject(signUpResponse);
+                    objectOutputStream.flush();
+
+                }
                 //executes if Request type is of login
-                if( incomingRequest.getReqType().equals("LOGIN_CHECK") ){
+                else if( incomingRequest.getReqType().equals("LOGIN_CHECK")) {
                     LoginRequest loginRequest = (LoginRequest) incomingRequest;
-                    LoginResponse loginResponse = CheckLogin.checkLogin(loginRequest.getUsername(), loginRequest.getPassword());
+                    LoginResponse loginResponse = NewLogin.checkLogin(loginRequest.getUsername(), loginRequest.getPassword());
 
                     //Login request processed and response returned
                     objectOutputStream.writeObject(loginResponse);
@@ -55,7 +67,7 @@ public class HandleClient implements Runnable {
                     objectOutputStream.flush();
                 }
                 //executes to load and provide personalized recommendations
-                else if(incomingRequest.getReqType().equals("RECOMMENDS_GIVEN")) {
+                else if(incomingRequest.getReqType().equals("PERSONAL_RECOMMENDS")) {
                     RecommendsRequest recommendsRequest = (RecommendsRequest) incomingRequest;
                     RecommendsResponse personalRecommends = LoadProfile.getRecommends(recommendsRequest.getUserID());
 

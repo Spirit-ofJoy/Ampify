@@ -103,7 +103,7 @@ public class LoadProfile extends DatabaseConnect{
                 mainQuery += "OR songs.ARTIST_ID = ? ";
                 k++;
             }
-            mainQuery += "))";
+            mainQuery += ")) GROUP BY songs.SONG_ID";
 
             PreparedStatement preStatMain = connection.prepareStatement(mainQuery);
 

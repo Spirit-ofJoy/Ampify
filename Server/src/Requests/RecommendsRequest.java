@@ -9,7 +9,7 @@ public class RecommendsRequest extends Request implements Serializable {
     int i=0;
 
     public RecommendsRequest(String a) {
-        this.reqType = "RECOMMENDS_GIVEN";
+        this.reqType = "PERSONAL_RECOMMENDS";
         this.userID = a;
     }
 

@@ -29,9 +29,17 @@ public class HomeControl  {
     }
 
     //Change to Sign Up scene
-    public void signUpLoad() {
+    public void signUpLoad() throws IOException {
         System.out.println("[CLIENT] Sign Up page invoked.");
         signUpButton.setText("Loading...");
+
+        Parent signupRoot = FXMLLoader.load(getClass().getResource("/resources/signup.fxml"));      //call login.fxml and load it to loginRoot
+        Scene signupScene = new Scene(signupRoot, 600, 575);                                       //create scene
+
+        Stage window = (Stage) signUpButton.getScene().getWindow();                           //Gets original stage of scene
+
+        window.setScene(signupScene);                                                         //Sets scene
+        window.show();
     }
 
 }

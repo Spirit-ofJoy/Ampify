@@ -7,7 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class CheckLogin extends DatabaseConnect{
+public class NewLogin extends DatabaseConnect{
 
     //Checks login credentials and returns appropriate profile
     public static LoginResponse checkLogin(String uname, String paswd)  {

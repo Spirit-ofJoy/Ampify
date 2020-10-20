@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="575.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SignupControl">
+   <children>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="237.0" layoutY="14.0" prefHeight="20.0" prefWidth="125.0" text="Sign-Up Page" textAlignment="CENTER">
+         <font>
+            <Font name="Century Gothic Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="14.0" layoutY="34.0" text="Account Details :" />
+      <Label layoutX="33.0" layoutY="68.0" text="Username :">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="36.0" layoutY="100.0" text="Password :">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="usernameTextfld" layoutX="126.0" layoutY="67.0" prefHeight="26.0" prefWidth="412.0" promptText="Username" />
+      <PasswordField fx:id="passwordFld" layoutX="126.0" layoutY="99.0" prefHeight="26.0" prefWidth="412.0" promptText="Password" />
+      <Label layoutX="14.0" layoutY="143.0" text="Preferences :" />
+      <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="34.0" layoutY="272.0" prefHeight="26.0" prefWidth="84.0" text="Artists :">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER_RIGHT" layoutX="34.0" layoutY="206.0" prefHeight="26.0" prefWidth="84.0" text="Genres :" textAlignment="RIGHT">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="34.0" layoutY="171.0" text="Languages :" textAlignment="RIGHT">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <FlowPane fx:id="langPane" alignment="CENTER_LEFT" layoutX="126.0" layoutY="170.0" prefHeight="26.0" prefWidth="412.0">
+         <children>
+            <CheckBox fx:id="langEng" alignment="CENTER" mnemonicParsing="false" text="English">
+               <FlowPane.margin>
+                  <Insets left="5.0" right="5.0" />
+               </FlowPane.margin>
+            </CheckBox>
+            <CheckBox fx:id="langHin" alignment="CENTER" mnemonicParsing="false" text="Hindi">
+               <FlowPane.margin>
+                  <Insets left="5.0" />
+               </FlowPane.margin>
+            </CheckBox>
+         </children>
+      </FlowPane>
+      <FlowPane fx:id="genrePane" layoutX="126.0" layoutY="206.0" prefHeight="58.0" prefWidth="412.0">
+         <children>
+            <CheckBox fx:id="genPop" alignment="CENTER" mnemonicParsing="false" text="Pop">
+               <FlowPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </FlowPane.margin>
+            </CheckBox>
+            <CheckBox fx:id="genRnB" alignment="CENTER" mnemonicParsing="false" text="R &amp; B">
+               <FlowPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </FlowPane.margin>
+            </CheckBox>
+            <CheckBox fx:id="genIndie" alignment="CENTER" mnemonicParsing="false" text="Indie">
+               <FlowPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </FlowPane.margin>
+            </CheckBox>
+            <CheckBox fx:id="genRock" alignment="CENTER" mnemonicParsing="false" text="Rock">
+               <FlowPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </FlowPane.margin>
+            </CheckBox>
+            <CheckBox fx:id="genEpop" alignment="CENTER" mnemonicParsing="false" text="Electro-pop">
+               <FlowPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </FlowPane.margin>
+            </CheckBox>
+            <CheckBox fx:id="genHipHop" alignment="CENTER" mnemonicParsing="false" text="Hip Hop">
+               <FlowPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </FlowPane.margin>
+            </CheckBox>
+            <CheckBox fx:id="genElec" alignment="CENTER" mnemonicParsing="false" text="Electronic">
+               <FlowPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </FlowPane.margin>
+            </CheckBox>
+         </children>
+      </FlowPane>
+      <FlowPane alignment="CENTER_LEFT" layoutX="126.0" layoutY="272.0" prefHeight="26.0" prefWidth="412.0">
+         <children>
+            <FlowPane fx:id="artistPane" prefHeight="58.0" prefWidth="412.0">
+               <children>
+                  <CheckBox fx:id="artistA001" alignment="CENTER" mnemonicParsing="false" text="Alec Benjamin">
+                     <FlowPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </FlowPane.margin>
+                  </CheckBox>
+                  <CheckBox fx:id="artistA002" alignment="CENTER" mnemonicParsing="false" text="Ed Sheeran">
+                     <FlowPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </FlowPane.margin>
+                  </CheckBox>
+                  <CheckBox fx:id="artistA003" alignment="CENTER" mnemonicParsing="false" text="Maroon 5">
+                     <FlowPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </FlowPane.margin>
+                  </CheckBox>
+                  <CheckBox fx:id="artistA004" alignment="CENTER" mnemonicParsing="false" text="Billie Ellish">
+                     <FlowPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </FlowPane.margin>
+                  </CheckBox>
+                  <CheckBox fx:id="artistA005" alignment="CENTER" mnemonicParsing="false" text="The Chainsmokers">
+                     <FlowPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </FlowPane.margin>
+                  </CheckBox>
+                  <CheckBox fx:id="artistA006" alignment="CENTER" mnemonicParsing="false" text="Harry Styles">
+                     <FlowPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </FlowPane.margin>
+                  </CheckBox>
+                  <CheckBox fx:id="artistA007" alignment="CENTER" mnemonicParsing="false" text="Lil Nas X">
+                     <FlowPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </FlowPane.margin>
+                  </CheckBox>
+                  <CheckBox fx:id="artistA008" alignment="CENTER" mnemonicParsing="false" text="5 Seonds of Summer">
+                     <FlowPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </FlowPane.margin>
+                  </CheckBox>
+                  <CheckBox fx:id="artistA009" alignment="CENTER" mnemonicParsing="false" text="Eminem">
+                     <FlowPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </FlowPane.margin>
+                  </CheckBox>
+                  <CheckBox fx:id="artistA011" alignment="CENTER" mnemonicParsing="false" text="Marshmello">
+                     <FlowPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </FlowPane.margin>
+                  </CheckBox>
+                  <CheckBox fx:id="artistA012" alignment="CENTER" mnemonicParsing="false" text="Shawn Mendes">
+                     <FlowPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </FlowPane.margin>
+                  </CheckBox>
+                  <CheckBox fx:id="artistA013" alignment="CENTER" mnemonicParsing="false" text="Panic! At the Disco">
+                     <FlowPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </FlowPane.margin>
+                  </CheckBox>
+                  <CheckBox fx:id="artistA014" alignment="CENTER" mnemonicParsing="false" text="Queen">
+                     <FlowPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </FlowPane.margin>
+                  </CheckBox>
+                  <CheckBox fx:id="artistA015" alignment="CENTER" mnemonicParsing="false" text="Tones and I">
+                     <FlowPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </FlowPane.margin>
+                  </CheckBox>
+                  <CheckBox fx:id="artistA016" alignment="CENTER" mnemonicParsing="false" text="Post Malone">
+                     <FlowPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </FlowPane.margin>
+                  </CheckBox>
+                  <CheckBox fx:id="artistA017" alignment="CENTER" mnemonicParsing="false" text="The Weeknd">
+                     <FlowPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </FlowPane.margin>
+                  </CheckBox>
+               </children>
+            </FlowPane>
+         </children></FlowPane>
+      <Button fx:id="signupProcessButton" layoutX="250.0" layoutY="447.0" mnemonicParsing="false" onAction="#processSignUp" prefHeight="26.0" prefWidth="99.0" text="Sign Up" />
+      <TextField fx:id="msgDisplay" alignment="CENTER" editable="false" layoutX="8.0" layoutY="476.0" prefHeight="26.0" prefWidth="583.0" />
+      <Button fx:id="backButton" alignment="CENTER_RIGHT" layoutX="280.0" layoutY="514.0" mnemonicParsing="false" onAction="#backToHome" text="Back" textAlignment="CENTER" />
+      <Button fx:id="loginLoader" layoutX="512.0" layoutY="448.0" mnemonicParsing="false" onAction="#loadLoginPage" text="Proceed" visible="false" />
+   </children>
+</AnchorPane>

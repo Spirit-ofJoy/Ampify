@@ -11,7 +11,7 @@ public class RecommendsResponse extends Response implements Serializable {
     public ArrayList recommendations = new ArrayList<SongInfo>();
 
     public RecommendsResponse(ArrayList<SongInfo> recommends) throws SQLException {
-        this.respType = "RECOMMENDS_GIVEN";
+        this.respType = "PERSONAL_RECOMMENDS";
 
         this.recommendations = recommends;
     }
