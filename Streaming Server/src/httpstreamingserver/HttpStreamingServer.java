@@ -1,4 +1,4 @@
-package com.server;
+package httpstreamingserver;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;

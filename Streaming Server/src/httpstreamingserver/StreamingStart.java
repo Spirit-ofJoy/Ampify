@@ -1,8 +1,8 @@
-package com.server;
+package httpstreamingserver;
 
-import com.server.HttpRequestFilter;
-import com.server.HttpRequestHandler;
-import com.server.HttpStreamingServer;
+import httpstreamingserver.HttpRequestFilter;
+import httpstreamingserver.HttpRequestHandler;
+import httpstreamingserver.HttpStreamingServer;
 
 public class StreamingStart {
 
