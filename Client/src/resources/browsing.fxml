@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="553.0" prefWidth="767.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.BrowsingControl">
+   <center>
+      <TabPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="494.0" prefWidth="794.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Genre">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0">
+                     <children>
+                        <TabPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" tabClosingPolicy="UNAVAILABLE">
+                          <tabs>
+                            <Tab text="Pop">
+                              <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="434.0" prefWidth="794.0">
+                                       <children>
+                                          <TextField fx:id="popCollection" layoutX="34.0" layoutY="35.0" prefHeight="26.0" prefWidth="730.0" />
+                                       </children></AnchorPane>
+                              </content>
+                            </Tab>
+                            <Tab text="R &amp; B">
+                              <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <TextField fx:id="rnbCollection" layoutX="26.0" layoutY="27.0" prefHeight="26.0" prefWidth="730.0" />
+                                       </children></AnchorPane>
+                              </content>
+                            </Tab>
+                            <Tab text="Indie">
+                              <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <TextField fx:id="indieCollection" layoutX="32.0" layoutY="26.0" prefHeight="26.0" prefWidth="730.0" />
+                                       </children></AnchorPane>
+                              </content>
+                            </Tab>
+                            <Tab text="Rock">
+                              <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <TextField fx:id="rockCollection" layoutX="32.0" layoutY="30.0" prefHeight="26.0" prefWidth="730.0" />
+                                       </children></AnchorPane>
+                              </content>
+                            </Tab>
+                            <Tab text="Electro Pop">
+                              <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <TextField fx:id="epopCollection" layoutX="32.0" layoutY="38.0" prefHeight="26.0" prefWidth="730.0" />
+                                       </children></AnchorPane>
+                              </content>
+                            </Tab>
+                            <Tab text="Hip Hop">
+                              <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <TextField fx:id="hiphopCollection" layoutX="32.0" layoutY="40.0" prefHeight="26.0" prefWidth="730.0" />
+                                       </children></AnchorPane>
+                              </content>
+                            </Tab>
+                            <Tab text="Electronic">
+                              <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <TextField fx:id="elecCollection" layoutX="32.0" layoutY="37.0" prefHeight="26.0" prefWidth="730.0" />
+                                       </children></AnchorPane>
+                              </content>
+                            </Tab>
+                          </tabs>
+                        </TabPane>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Artists">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <AnchorPane prefHeight="78.0" prefWidth="794.0">
+                           <children>
+                              <TextField fx:id="searchArtistfld" layoutX="31.0" layoutY="27.0" prefHeight="26.0" prefWidth="602.0" promptText="Enter Artist Name" />
+                              <Button fx:id="searchArtistBtn" layoutX="677.0" layoutY="27.0" mnemonicParsing="false" onAction="#searchArtist" text="Search" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane layoutY="78.0" prefHeight="386.0" prefWidth="794.0">
+                           <children>
+                              <TextField fx:id="artistResult" layoutX="58.0" layoutY="105.0" prefHeight="26.0" prefWidth="677.0" />
+                           </children></AnchorPane>
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Albums">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <AnchorPane prefHeight="78.0" prefWidth="794.0">
+                           <children>
+                              <TextField fx:id="searchAlbumfld" layoutX="31.0" layoutY="27.0" prefHeight="26.0" prefWidth="602.0" promptText="Enter Album Name" />
+                              <Button fx:id="searchAlbumBtn" layoutX="677.0" layoutY="27.0" mnemonicParsing="false" onAction="#searchAlbum" text="Search" />
+                           </children>
+                        </AnchorPane>
+                        <TextField fx:id="albumResult" layoutX="58.0" layoutY="114.0" prefHeight="26.0" prefWidth="677.0" />
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </center>
+   <top>
+      <AnchorPane prefHeight="90.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="90.0" prefWidth="794.0">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="338.0" layoutY="14.0" prefHeight="38.0" prefWidth="92.0" text="Ampify" textAlignment="CENTER" AnchorPane.topAnchor="14.0">
+                     <font>
+                        <Font name="Bauhaus 93" size="26.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="userGreeting" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="297.0" layoutY="52.0" prefHeight="26.0" prefWidth="173.0" text="Browse Songs" textAlignment="CENTER">
+                     <font>
+                        <Font name="Arial" size="14.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="backButton" alignment="CENTER_RIGHT" layoutX="20.0" layoutY="18.0" mnemonicParsing="false" onAction="#backToProfile" text="Back" textAlignment="CENTER" />
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </top>
+</BorderPane>

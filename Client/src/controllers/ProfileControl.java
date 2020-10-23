@@ -6,9 +6,14 @@ import Responses.RecommendsResponse;
 import Responses.TopHitsResponse;
 
 import javafx.application.Platform;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import main.ActiveProfile;
 import main.ClientMain;
 import main.SongInfo;
@@ -24,6 +29,9 @@ public class ProfileControl implements Initializable {
     public TextField mostViewed;
     public TextField recommends;
     public TextField mood;
+    public Button browseLoader;
+    public Button historyLoader;
+    public Button playlistLoader;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -62,14 +70,14 @@ public class ProfileControl implements Initializable {
 
                     //Update GUI for Most Viewed songs Playlist to load Profile
                     for (int i = 0; i < serverTopHitsResponse.topHitsPlaylist.size(); i++) {
-                        SongInfo t = (SongInfo) serverTopHitsResponse.topHitsPlaylist.get(i);
-                        mostViewed.appendText(t.getSongID() + " ");
+                        SongInfo temp = (SongInfo) serverTopHitsResponse.topHitsPlaylist.get(i);
+                        mostViewed.appendText(temp.getSongID() + " ");
                     }
 
                     //Update GUI for Recommendations songs Playlist to load Profile
                     for (int i = 0; i < serverRecommendsResponse.recommendations.size(); i++) {
-                        SongInfo t2 = (SongInfo) serverRecommendsResponse.recommendations.get(i);
-                        recommends.appendText(t2.getSongID() + " ");
+                        SongInfo temp = (SongInfo) serverRecommendsResponse.recommendations.get(i);
+                        recommends.appendText(temp.getSongID() + " ");
                     }
 
                 });
@@ -83,6 +91,15 @@ public class ProfileControl implements Initializable {
 
     }
 
+    public void loadBrowsePage() throws IOException {
+        System.out.println("[CLIENT] Song Browsing Page invoked.");
+
+        Parent browseRoot = FXMLLoader.load(getClass().getResource("/resources/browsing.fxml"));
+        Scene browseScene = new Scene(browseRoot);
+        Stage browseStage = (Stage) browseLoader.getScene().getWindow();
+        browseStage.setScene(browseScene);
+        browseStage.show();
+    }
 
 
 

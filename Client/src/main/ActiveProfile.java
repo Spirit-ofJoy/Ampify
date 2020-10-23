@@ -1,5 +1,6 @@
 package main;
 
+import java.util.ArrayList;
 import java.util.TreeSet;
 
 //Class to store user profile details
@@ -9,10 +10,10 @@ public class ActiveProfile {
     private String userID;
 
     //Relevant collection of ids are stored in TreeSets
-    public TreeSet<String> History = new TreeSet<String>();
-    public TreeSet<String> Liked = new TreeSet<String>();
-    public TreeSet<String> Disliked = new TreeSet<String>();
-    public TreeSet<String> Playlists = new TreeSet<String>();
+    public ArrayList<String> History = new ArrayList<String>();
+    public ArrayList<String> Liked = new ArrayList<String>();
+    public ArrayList<String> Disliked = new ArrayList<String>();
+    public ArrayList<String> Playlists = new ArrayList<String>();
 
     //Singleton Object
     private static ActiveProfile activeProfile = null;
@@ -50,8 +51,8 @@ public class ActiveProfile {
     }
 
     //Return profile after it's creation
-    public static ActiveProfile getProfile(String u, String v, String w, String x, String y, String z) {
-        activeProfile = new ActiveProfile(u, v, w, x, y, z);
+    public static ActiveProfile getProfile(String uname, String uid, String hist, String like, String dislike, String playlist) {
+        activeProfile = new ActiveProfile(uname, uid, hist, like, dislike, playlist);
         return activeProfile;
     }
 

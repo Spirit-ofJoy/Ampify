@@ -33,7 +33,7 @@ public class LoginControl {
         String pass = passwordFld.getText();               //Takes password
         loginProcessButton.setText("Loading...");
 
-        //Anonymous Runnable over new thread to connect to Server through the connection streams
+        //Runnable over new thread to connect to Server through the connection streams and get login info
         Runnable loginProcess = new Runnable() {
             @Override
             public void run() {

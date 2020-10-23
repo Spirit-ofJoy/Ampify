@@ -9,7 +9,6 @@
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.text.Font?>
 
-
 <BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ProfileControl">
    <center>
       <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefWidth="506.0">
@@ -69,17 +68,17 @@
    <left>
       <FlowPane prefWidth="125.0" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="125.0" text="Browse songs">
+            <Button fx:id="browseLoader" mnemonicParsing="false" onAction="#loadBrowsePage" prefHeight="26.0" prefWidth="125.0" text="Browse songs">
                <FlowPane.margin>
                   <Insets bottom="5.0" top="5.0" />
                </FlowPane.margin>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="125.0" text="My History">
+            <Button fx:id="historyLoader" mnemonicParsing="false" prefHeight="26.0" prefWidth="125.0" text="My History">
                <FlowPane.margin>
                   <Insets bottom="5.0" top="5.0" />
                </FlowPane.margin>
             </Button>
-            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="26.0" prefWidth="125.0" text="My Playlists">
+            <Button fx:id="playlistLoader" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="26.0" prefWidth="125.0" text="My Playlists">
                <FlowPane.margin>
                   <Insets bottom="5.0" top="5.0" />
                </FlowPane.margin>

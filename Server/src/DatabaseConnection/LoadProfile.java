@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class LoadProfile extends DatabaseConnect{
 
@@ -20,7 +21,7 @@ public class LoadProfile extends DatabaseConnect{
             //Query all relevant details that may be used in display
             String query = "SELECT songs.SONG_ID, songs.Name, songs.Genre, songs.Language, artists.Artist_Name, " +
                 "albums.Album_Name, songs.Upload_time FROM songs JOIN artists ON songs.ARTIST_ID = artists.ARTIST_ID " +
-                "JOIN albums ON albums.ARTIST_ID = artists.ARTIST_ID WHERE songs.ALBUM_ID = albums.ALBUM_ID " +
+                "JOIN albums ON songs.ALBUM_ID = albums.ALBUM_ID WHERE songs.ALBUM_ID = albums.ALBUM_ID " +
                 "ORDER BY (Total_Views+Views_2+Views_1) DESC limit 5";
 
             PreparedStatement preStat = connection.prepareStatement(query);
@@ -82,7 +83,7 @@ public class LoadProfile extends DatabaseConnect{
             //Preparing SQL Statement to sort out according to preferences
             String mainQuery = "SELECT songs.SONG_ID, songs.Name, songs.Genre, songs.Language, artists.Artist_Name, albums.Album_Name, " +
                     "songs.Upload_time FROM songs JOIN artists ON songs.ARTIST_ID = artists.ARTIST_ID " +
-                    "JOIN albums ON albums.ARTIST_ID = artists.ARTIST_ID WHERE (1=2 ";
+                    "JOIN albums ON songs.ALBUM_ID = albums.ALBUM_ID WHERE (1=2 ";
 
             //Dynamic SQL prepared
             int i = 0, j = 0, k = 0;
@@ -103,7 +104,7 @@ public class LoadProfile extends DatabaseConnect{
                 mainQuery += "OR songs.ARTIST_ID = ? ";
                 k++;
             }
-            mainQuery += ")) GROUP BY songs.SONG_ID";
+            mainQuery += ")) ";
 
             PreparedStatement preStatMain = connection.prepareStatement(mainQuery);
 
@@ -135,6 +136,8 @@ public class LoadProfile extends DatabaseConnect{
 
                 recommendations.add(temp);
             }
+            //To randomize the recommendations at any given point of time
+            Collections.shuffle(recommendations);
 
             RecommendsResponse response = new RecommendsResponse(recommendations);
             return response;

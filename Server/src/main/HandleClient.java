@@ -3,7 +3,6 @@ package main;
 import Requests.*;
 import Responses.*;
 import DatabaseConnection.*;
-import constants.Constant;
 
 import java.io.EOFException;
 import java.io.IOException;
@@ -73,6 +72,23 @@ public class HandleClient implements Runnable {
 
                     //Send back personalized selection
                     objectOutputStream.writeObject(personalRecommends);
+                    objectOutputStream.flush();
+                }
+                //executes to load Browsing section of songs
+                else if(incomingRequest.getReqType().equals("SONG_BROWSE")) {
+                    BrowseResponse browseResponse = BrowseSongs.getSongs();
+
+                    //Send back filtered collection of songs
+                    objectOutputStream.writeObject(browseResponse);
+                    objectOutputStream.flush();
+                }
+                //executes to give apt songs for searched category
+                else if(incomingRequest.getReqType().equals("SONG_SEARCH")) {
+                    SongSearchRequest songSearchRequest = (SongSearchRequest) incomingRequest;
+                    SongSearchResponse searchResult = SearchSongs.getSearchedSongs(songSearchRequest.getSearchType(), songSearchRequest.getSearchKey());
+
+                    //Send back selection based on search result
+                    objectOutputStream.writeObject(searchResult);
                     objectOutputStream.flush();
                 }
 
