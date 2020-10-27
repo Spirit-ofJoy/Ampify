@@ -11,15 +11,12 @@ import java.io.*;
 import java.net.URLConnection;
 import java.net.URL;
 import static sample.Constants.*;
-import static sample.Constants.*;
 import static sample.functions.*;
 
 public class Download_Encrypt_Decrypt {
 
     //here we download the songs and make them inaccessable to the users through other media players
-
     /**
-     *
      * @param song_name without song format
      * @throws IOException
      * save the specified song in the @DESTINATION_DOWNLOAD_FOLDER

@@ -27,7 +27,7 @@
                 <Menu mnemonicParsing="false" text="File">
                   <items>
                      <MenuItem mnemonicParsing="false" onAction="#openSongMenu" text="Open Song" />
-                     <MenuItem mnemonicParsing="false" onAction="#openoffineMenu" text="Open local Song" />
+                     <MenuItem mnemonicParsing="false" onAction="#openLocalSongMenu" text="Open local Song" />
                      <MenuItem mnemonicParsing="false" onAction="#save_song" text="Save Current Song" />
                      <MenuItem mnemonicParsing="false" onAction="#play_downloaded_song" text="Play Downloaded Songs" />
                      <MenuItem mnemonicParsing="false" onAction="#exitFromPlayer" text="Exit" />

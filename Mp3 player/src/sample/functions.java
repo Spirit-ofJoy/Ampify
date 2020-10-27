@@ -13,7 +13,7 @@ public class functions {
     }
 
     /**
-     * @param query_url
+     * @param query_url give @query_url as the input
      * @param song_name (format is not needed to specify here)
      * @return Complete Usable URL
      */

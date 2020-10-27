@@ -18,7 +18,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         Controller obj = new Controller();
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-        primaryStage.setTitle("Hello World");
+        primaryStage.setTitle("Ampify");
         Scene scene = new Scene(root,1000,750);
         primaryStage.setScene(scene);
         scene.getStylesheets().add("DesignComponents.css");
@@ -26,9 +26,9 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) throws IOException {
+        launch(args);
         File file = new File(song_buffer_location);
         file.createNewFile();
-        launch(args);
         file.deleteOnExit();
     }
 }

@@ -27,6 +27,11 @@ public class HttpRequestFilter extends Filter {
         return FILTER_DESC;
     }
 
+    /**
+     * @param exchange
+     * @param chain
+     * @throws IOException
+     */
     @Override
     public void doFilter(HttpExchange exchange, Chain chain) throws IOException {
 

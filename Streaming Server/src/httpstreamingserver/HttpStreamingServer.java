@@ -1,12 +1,12 @@
 package httpstreamingserver;
 
-import java.io.IOException;
-import java.net.InetSocketAddress;
-
 import com.sun.net.httpserver.Filter;
 import com.sun.net.httpserver.HttpContext;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
+
+import java.io.IOException;
+import java.net.InetSocketAddress;
 
 
 @SuppressWarnings("restriction")
@@ -16,11 +16,10 @@ public class HttpStreamingServer {
 
     /**
      * Instantiates a new streaming http server with the
-     * @param port - the port
+     * @param port - the port on which the http Server is supoosed to work
      * @param context - the context
      * @param handler - the handler
      */
-
     public HttpStreamingServer(int port, String context, Filter filter, HttpHandler handler) {
         try {
 

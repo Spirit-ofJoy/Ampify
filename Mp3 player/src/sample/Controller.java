@@ -32,7 +32,6 @@ import java.io.InputStream;
 import javafx.concurrent.Task;
 import javax.sound.sampled.AudioInputStream;
 import java.lang.Object;
-import sample.Constants;
 
 import static sample.Constants.*;
 import static sample.functions.*;
@@ -149,7 +148,7 @@ public class Controller<e> implements Initializable{
             }
         });
 
-        volumeslider.setValue(mp3player.getVolume() * 100);
+        volumeslider.setValue(mp3player.getVolume() * 30);
 
         mp3player.setOnReady(new Runnable() {
             @Override
@@ -203,7 +202,7 @@ public class Controller<e> implements Initializable{
                 //media = new Media(new File(filepath).toURI().toURL().toString());
                 URL = useURL(query_url, use_song_name(SONG_NAME));
                 new Thread(streambuffer).start();
-                filepath = sample.Constants.song_buffer_location;
+                filepath = Constants.song_buffer_location;
                 //filepath = filepath.replace("\\", "/");
                 media = new Media(new File(filepath).toURI().toString());
                 String filename = file.getName();
@@ -255,13 +254,13 @@ public class Controller<e> implements Initializable{
         if(status == MediaPlayer.Status.PLAYING)
         {
             mp3player.pause();
-            playbtn.setGraphic(new ImageView(new Image(new FileInputStream("src/sample/assets/baseline_play_arrow_white_18dp.png"))));
+            playbtn.setGraphic(new ImageView(new Image(new FileInputStream(ASSETS_LOCATION+"baseline_play_arrow_white_18dp.png"))));
         }
         else
         {
             mp3player.play();
             mp3player.setRate(1);
-            playbtn.setGraphic(new ImageView(new Image(new FileInputStream("src/sample/assets/baseline_pause_white_18dp.png"))));
+            playbtn.setGraphic(new ImageView(new Image(new FileInputStream(ASSETS_LOCATION+"baseline_pause_white_18dp.png"))));
         }
     }
 
@@ -299,11 +298,11 @@ public class Controller<e> implements Initializable{
         try {
             if (volumesliderValue > 0) {
                 volumeslider.setValue(mp3player.getVolume() * 0);
-                volumeBtn.setGraphic(new ImageView(new Image(new FileInputStream("src/sample/assets/ic_volume_off_128_28773.png"))));
+                volumeBtn.setGraphic(new ImageView(new Image(new FileInputStream(ASSETS_LOCATION+"ic_volume_off_128_28773.png"))));
             }
             else if (volumesliderValue == 0) {
                 volumeslider.setValue(100);
-                volumeBtn.setGraphic(new ImageView(new Image(new FileInputStream("src/sample/assets/ic_volume_up_128_28772.png"))));
+                volumeBtn.setGraphic(new ImageView(new Image(new FileInputStream(ASSETS_LOCATION+"ic_volume_up_128_28772.png"))));
             }
             } catch(Exception e) {
             e.printStackTrace();
@@ -314,7 +313,7 @@ public class Controller<e> implements Initializable{
     void repeat(ActionEvent event) throws FileNotFoundException {
         int cycles = mp3player.getCycleCount();
         if(cycles != MediaPlayer.INDEFINITE) {
-            repeatBtn.setGraphic(new ImageView(new Image(new FileInputStream("src/sample/assets/baseline_repeat_green_18dp.png"))));
+            repeatBtn.setGraphic(new ImageView(new Image(new FileInputStream(ASSETS_LOCATION+"baseline_repeat_green_18dp.png"))));
             mp3player.setCycleCount(MediaPlayer.INDEFINITE);
             mp3player.setOnEndOfMedia(new Runnable() {
                 @Override
@@ -325,7 +324,7 @@ public class Controller<e> implements Initializable{
             });
         }
         else {
-            repeatBtn.setGraphic(new ImageView(new Image(new FileInputStream("src/sample/assets/baseline_repeat_white_18dp.png"))));
+            repeatBtn.setGraphic(new ImageView(new Image(new FileInputStream(ASSETS_LOCATION+"baseline_repeat_white_18dp.png"))));
             mp3player.setCycleCount(0);
         }
     }
@@ -448,10 +447,10 @@ public class Controller<e> implements Initializable{
     }
 
     @FXML
-    public void openoffineMenu(ActionEvent actionEvent) {
+    public void openLocalSongMenu(ActionEvent actionEvent) {
         FileChooser fc = new FileChooser();
         fc.setTitle("Choose Ampify Song to Load");
-        fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Downloaded Ampify Music Files", "*.amp"));
+        fc.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Downloaded Ampify Music Files", "*.mp3","*.mp4"));
         File file = fc.showOpenDialog(null);
         if(mp3player!=null)
             mp3player.stop();
@@ -479,13 +478,13 @@ public class Controller<e> implements Initializable{
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
-            playbtn.setGraphic(new ImageView(new Image(new FileInputStream("src/sample/assets/baseline_pause_white_18dp.png"))));
-            playprevbtn.setGraphic(new ImageView(new Image(new FileInputStream("src/sample/assets/Button-Backward-icon.png"))));
-            playnextbtn.setGraphic(new ImageView(new Image(new FileInputStream("src/sample/assets/Button-Forward-icon.png"))));
-            volumeBtn.setGraphic(new ImageView(new Image(new FileInputStream("src/sample/assets/ic_volume_up_128_28772.png"))));
-            previousSongBtn.setGraphic(new ImageView(new Image(new FileInputStream("src/sample/assets/baseline_skip_previous_white_18dp.png"))));
-            nextSongBtn.setGraphic(new ImageView(new Image(new FileInputStream("src/sample/assets/baseline_skip_next_white_18dp.png"))));
-            repeatBtn.setGraphic(new ImageView(new Image(new FileInputStream("src/sample/assets/baseline_repeat_white_18dp.png"))));
+            playbtn.setGraphic(new ImageView(new Image(new FileInputStream(ASSETS_LOCATION+"baseline_pause_white_18dp.png"))));
+            playprevbtn.setGraphic(new ImageView(new Image(new FileInputStream(ASSETS_LOCATION+"Button-Backward-icon.png"))));
+            playnextbtn.setGraphic(new ImageView(new Image(new FileInputStream(ASSETS_LOCATION+"Button-Forward-icon.png"))));
+            volumeBtn.setGraphic(new ImageView(new Image(new FileInputStream(ASSETS_LOCATION+"ic_volume_up_128_28772.png"))));
+            previousSongBtn.setGraphic(new ImageView(new Image(new FileInputStream(ASSETS_LOCATION+"baseline_skip_previous_white_18dp.png"))));
+            nextSongBtn.setGraphic(new ImageView(new Image(new FileInputStream(ASSETS_LOCATION+"baseline_skip_next_white_18dp.png"))));
+            repeatBtn.setGraphic(new ImageView(new Image(new FileInputStream(ASSETS_LOCATION+"baseline_repeat_white_18dp.png"))));
             playprevbtn.setId("playprevbtn");
             playbtn.setId("playbtn");
             playnextbtn.setId("playnextbtn");
@@ -503,14 +502,14 @@ public class Controller<e> implements Initializable{
                 mp3player.setVolume(volumeslider.getValue()/100);
                 if (volumeslider.getValue() == 0) {
                     try {
-                        volumeBtn.setGraphic(new ImageView(new Image(new FileInputStream("src/sample/assets/ic_volume_off_128_28773.png"))));
+                        volumeBtn.setGraphic(new ImageView(new Image(new FileInputStream(ASSETS_LOCATION+"ic_volume_off_128_28773.png"))));
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
                 }
                 else if (volumeslider.getValue() > 0) {
                     try {
-                        volumeBtn.setGraphic(new ImageView(new Image(new FileInputStream("src/sample/assets/ic_volume_up_128_28772.png"))));
+                        volumeBtn.setGraphic(new ImageView(new Image(new FileInputStream(ASSETS_LOCATION+"ic_volume_up_128_28772.png"))));
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
