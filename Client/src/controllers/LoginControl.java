@@ -2,8 +2,9 @@ package controllers;
 
 import Requests.LoginRequest;
 import Responses.LoginResponse;
+import constants.Constant;
 import javafx.application.Platform;
-import main.ActiveProfile;
+import utility.ActiveProfile;
 import main.ClientMain;
 
 import javafx.fxml.FXMLLoader;
@@ -44,7 +45,7 @@ public class LoginControl {
                     LoginResponse incomingResponse;
                     incomingResponse = (LoginResponse) ClientMain.clientInputStream.readObject();   //Response accepted
 
-                    if(incomingResponse.getUserID().equals("USER_NOT_FOUND")){
+                    if(incomingResponse.getUserID().equals(String.valueOf(Constant.USER_NOT_FOUND))){
                         msgDisplay.setText("User not Found. Please check credentials or Sign-Up if don't have an account.");
                     }
                     else {

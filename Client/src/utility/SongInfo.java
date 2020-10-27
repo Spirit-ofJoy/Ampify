@@ -1,4 +1,4 @@
-package main;
+package utility;
 
 import java.io.Serializable;
 
@@ -49,5 +49,9 @@ public class SongInfo implements Serializable {
 
     public String getUploadTime() {
         return uploadTime;
+    }
+
+    public String getSongDescription() {
+        return (this.songName +"\nby " +this.artistName );
     }
 }

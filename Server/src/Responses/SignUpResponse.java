@@ -1,11 +1,13 @@
 package Responses;
 
+import constants.Constant;
+
 public class SignUpResponse extends Response{
 
     private String status;
 
     public SignUpResponse(String finalStatus) {
-        this.respType = "SIGNUP_START";
+        this.respType = String.valueOf(Constant.SIGNUP_START);
         this.status = finalStatus;
     }
 

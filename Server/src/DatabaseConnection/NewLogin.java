@@ -1,6 +1,7 @@
 package DatabaseConnection;
 
 import Responses.LoginResponse;
+import constants.Constant;
 
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -24,7 +25,7 @@ public class NewLogin extends DatabaseConnect{
 
 
             if ( !result.isBeforeFirst() ) {             //Empty result set check
-                LoginResponse response = new LoginResponse("USER_NOT_FOUND");
+                LoginResponse response = new LoginResponse(String.valueOf(Constant.USER_NOT_FOUND));
 
                 return response;
             }

@@ -1,5 +1,7 @@
 package Requests;
 
+import constants.Constant;
+
 import java.io.Serializable;
 
 public class LoginRequest extends Request implements Serializable {
@@ -7,7 +9,7 @@ public class LoginRequest extends Request implements Serializable {
     private String password;
 
     public LoginRequest(String uname, String  pass){
-        this.reqType = "LOGIN_CHECK";
+        this.reqType = String.valueOf(Constant.LOGIN_CHECK);
         this.username = uname;
         this.password = pass;
     }

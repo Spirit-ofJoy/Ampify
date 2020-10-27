@@ -3,6 +3,7 @@ package controllers;
 
 import Requests.SignUpRequest;
 import Responses.SignUpResponse;
+import constants.Constant;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -160,7 +161,7 @@ public class SignupControl {
                     SignUpResponse incomingResponse;
                     incomingResponse = (SignUpResponse) ClientMain.clientInputStream.readObject();   //Response accepted
 
-                    if(incomingResponse.getStatus().equals("FAILURE")){
+                    if(incomingResponse.getStatus().equals(String.valueOf(Constant.FAILURE))){
                         msgDisplay.setText("Unable to Sign Up. Please use another Username or try again later.");
                     }
                     else {

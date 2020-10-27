@@ -14,9 +14,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import main.ActiveProfile;
+import utility.ActiveProfile;
 import main.ClientMain;
-import main.SongInfo;
+import utility.SongInfo;
 
 import java.io.IOException;
 import java.net.URL;
@@ -32,6 +32,7 @@ public class ProfileControl implements Initializable {
     public Button browseLoader;
     public Button historyLoader;
     public Button playlistLoader;
+    public Button groupLoader;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -99,6 +100,34 @@ public class ProfileControl implements Initializable {
         Stage browseStage = (Stage) browseLoader.getScene().getWindow();
         browseStage.setScene(browseScene);
         browseStage.show();
+    }
+
+    public void loadHistoryPage() throws IOException {
+        System.out.println("[CLIENT] History Page invoked.");
+
+        Parent historyRoot = FXMLLoader.load(getClass().getResource("/resources/history.fxml"));
+        Scene historyScene = new Scene(historyRoot);
+        Stage historyStage = (Stage) historyLoader.getScene().getWindow();
+        historyStage.setScene(historyScene);
+        historyStage.show();
+        /*
+        Parent historyRoot = FXMLLoader.load(getClass().getResource("/resources/history.fxml"));
+        Scene historyScene = new Scene(historyRoot);
+        Stage historyStage = new Stage();
+        historyStage.setScene(historyScene);
+        historyStage.setTitle("History");
+        historyStage.show();
+         */
+    }
+
+    public void loadPlaylistPage() throws IOException {
+        System.out.println("[CLIENT] Playlist Page invoked.");
+
+        Parent playlistsRoot = FXMLLoader.load(getClass().getResource("/resources/playlists.fxml"));
+        Scene playlistsScene = new Scene(playlistsRoot);
+        Stage playlistsStage = (Stage) playlistLoader.getScene().getWindow();
+        playlistsStage.setScene(playlistsScene);
+        playlistsStage.show();
     }
 
 

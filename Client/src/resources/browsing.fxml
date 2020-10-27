@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
@@ -23,7 +24,14 @@
                               <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="434.0" prefWidth="794.0">
                                        <children>
-                                          <TextField fx:id="popCollection" layoutX="34.0" layoutY="35.0" prefHeight="26.0" prefWidth="730.0" />
+                                          <ListView fx:id="popListView" layoutX="297.0" layoutY="96.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="20.0" />
+                                          <AnchorPane layoutY="384.0" prefHeight="44.0" prefWidth="794.0">
+                                             <children>
+                                                <Button fx:id="popQueueBtn" layoutX="14.0" layoutY="11.0" mnemonicParsing="false" onAction="#popAddToQueue" text="Add to Queue" />
+                                                <Button fx:id="popLkeBtn" layoutX="665.0" layoutY="9.0" mnemonicParsing="false" onAction="#popLiking" text="Like" />
+                                                <Button fx:id="popDislikeBtn" layoutX="728.0" layoutY="9.0" mnemonicParsing="false" onAction="#popDisliking" text="Dislike" />
+                                             </children>
+                                          </AnchorPane>
                                        </children></AnchorPane>
                               </content>
                             </Tab>
@@ -31,7 +39,14 @@
                               <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
-                                          <TextField fx:id="rnbCollection" layoutX="26.0" layoutY="27.0" prefHeight="26.0" prefWidth="730.0" />
+                                          <ListView fx:id="rnbListView" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="20.0" />
+                                          <AnchorPane layoutY="384.0" prefHeight="44.0" prefWidth="794.0">
+                                             <children>
+                                                <Button fx:id="rnbQueueBtn" layoutX="14.0" layoutY="11.0" mnemonicParsing="false" onAction="#rnbAddToQueue" text="Add to Queue" />
+                                                <Button fx:id="rnbLkeBtn" layoutX="665.0" layoutY="9.0" mnemonicParsing="false" onAction="#rnbLiking" text="Like" />
+                                                <Button fx:id="rnbDislikeBtn" layoutX="728.0" layoutY="9.0" mnemonicParsing="false" onAction="#rnbDisliking" text="Dislike" />
+                                             </children>
+                                          </AnchorPane>
                                        </children></AnchorPane>
                               </content>
                             </Tab>
@@ -39,7 +54,14 @@
                               <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
-                                          <TextField fx:id="indieCollection" layoutX="32.0" layoutY="26.0" prefHeight="26.0" prefWidth="730.0" />
+                                          <ListView fx:id="indieListView" layoutX="82.0" layoutY="50.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="20.0" />
+                                          <AnchorPane layoutY="384.0" prefHeight="44.0" prefWidth="794.0">
+                                             <children>
+                                                <Button fx:id="indieQueueBtn" layoutX="14.0" layoutY="11.0" mnemonicParsing="false" onAction="#indieAddToQueue" text="Add to Queue" />
+                                                <Button fx:id="indieLkeBtn" layoutX="665.0" layoutY="9.0" mnemonicParsing="false" onAction="#indieLiking" text="Like" />
+                                                <Button fx:id="indieDislikeBtn" layoutX="728.0" layoutY="9.0" mnemonicParsing="false" onAction="#indieDisliking" text="Dislike" />
+                                             </children>
+                                          </AnchorPane>
                                        </children></AnchorPane>
                               </content>
                             </Tab>
@@ -47,7 +69,14 @@
                               <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
-                                          <TextField fx:id="rockCollection" layoutX="32.0" layoutY="30.0" prefHeight="26.0" prefWidth="730.0" />
+                                          <ListView fx:id="rockListView" layoutX="289.0" layoutY="88.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="20.0" />
+                                          <AnchorPane layoutY="384.0" prefHeight="44.0" prefWidth="794.0">
+                                             <children>
+                                                <Button fx:id="rockQueueBtn" layoutX="14.0" layoutY="11.0" mnemonicParsing="false" onAction="#rockAddToQueue" text="Add to Queue" />
+                                                <Button fx:id="rockLkeBtn" layoutX="665.0" layoutY="9.0" mnemonicParsing="false" onAction="#rockLiking" text="Like" />
+                                                <Button fx:id="rockDislikeBtn" layoutX="728.0" layoutY="9.0" mnemonicParsing="false" onAction="#rockDisliking" text="Dislike" />
+                                             </children>
+                                          </AnchorPane>
                                        </children></AnchorPane>
                               </content>
                             </Tab>
@@ -55,7 +84,14 @@
                               <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
-                                          <TextField fx:id="epopCollection" layoutX="32.0" layoutY="38.0" prefHeight="26.0" prefWidth="730.0" />
+                                          <ListView fx:id="epopListView" layoutX="280.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="20.0" />
+                                          <AnchorPane layoutY="384.0" prefHeight="44.0" prefWidth="794.0">
+                                             <children>
+                                                <Button fx:id="epopQueueBtn" layoutX="14.0" layoutY="11.0" mnemonicParsing="false" onAction="#epopAddToQueue" text="Add to Queue" />
+                                                <Button fx:id="epopLkeBtn" layoutX="665.0" layoutY="9.0" mnemonicParsing="false" onAction="#epopLiking" text="Like" />
+                                                <Button fx:id="epopDislikeBtn" layoutX="728.0" layoutY="9.0" mnemonicParsing="false" onAction="#epopDisliking" text="Dislike" />
+                                             </children>
+                                          </AnchorPane>
                                        </children></AnchorPane>
                               </content>
                             </Tab>
@@ -63,15 +99,29 @@
                               <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
-                                          <TextField fx:id="hiphopCollection" layoutX="32.0" layoutY="40.0" prefHeight="26.0" prefWidth="730.0" />
+                                          <ListView fx:id="hiphopListView" layoutX="190.0" layoutY="146.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="20.0" />
+                                          <AnchorPane layoutY="384.0" prefHeight="44.0" prefWidth="794.0">
+                                             <children>
+                                                <Button fx:id="hiphopQueueBtn" layoutX="14.0" layoutY="11.0" mnemonicParsing="false" onAction="#hiphopAddToQueue" text="Add to Queue" />
+                                                <Button fx:id="hiphopLkeBtn" layoutX="665.0" layoutY="9.0" mnemonicParsing="false" onAction="#hiphopLiking" text="Like" />
+                                                <Button fx:id="hiphopDislikeBtn" layoutX="728.0" layoutY="9.0" mnemonicParsing="false" onAction="#hiphopDisliking" text="Dislike" />
+                                             </children>
+                                          </AnchorPane>
                                        </children></AnchorPane>
                               </content>
                             </Tab>
                             <Tab text="Electronic">
                               <content>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="430.0" prefWidth="794.0">
                                        <children>
-                                          <TextField fx:id="elecCollection" layoutX="32.0" layoutY="37.0" prefHeight="26.0" prefWidth="730.0" />
+                                          <ListView fx:id="elecListView" layoutX="322.0" layoutY="109.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="20.0" />
+                                          <AnchorPane layoutY="387.0" prefHeight="44.0" prefWidth="794.0">
+                                             <children>
+                                                <Button fx:id="elecQueueBtn" layoutX="14.0" layoutY="11.0" mnemonicParsing="false" onAction="#elecAddToQueue" text="Add to Queue" />
+                                                <Button fx:id="elecLkeBtn" layoutX="665.0" layoutY="9.0" mnemonicParsing="false" onAction="#elecLiking" text="Like" />
+                                                <Button fx:id="elecDislikeBtn" layoutX="728.0" layoutY="9.0" mnemonicParsing="false" onAction="#elecDisliking" text="Dislike" />
+                                             </children>
+                                          </AnchorPane>
                                        </children></AnchorPane>
                               </content>
                             </Tab>
@@ -93,7 +143,14 @@
                         </AnchorPane>
                         <AnchorPane layoutY="78.0" prefHeight="386.0" prefWidth="794.0">
                            <children>
-                              <TextField fx:id="artistResult" layoutX="58.0" layoutY="105.0" prefHeight="26.0" prefWidth="677.0" />
+                              <ListView fx:id="artistResultListView" layoutX="205.0" layoutY="62.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="25.0" />
+                              <AnchorPane layoutY="336.0" prefHeight="44.0" prefWidth="794.0">
+                                 <children>
+                                    <Button fx:id="artistQueueBtn" layoutX="14.0" layoutY="11.0" mnemonicParsing="false" onAction="#artistAddToQueue" text="Add to Queue" />
+                                    <Button fx:id="artistLikeBtn" layoutX="665.0" layoutY="9.0" mnemonicParsing="false" onAction="#artistLiking" text="Like" />
+                                    <Button fx:id="artistDislikeBtn" layoutX="728.0" layoutY="9.0" mnemonicParsing="false" onAction="#artistDisliking" text="Dislike" />
+                                 </children>
+                              </AnchorPane>
                            </children></AnchorPane>
                      </children></AnchorPane>
             </content>
@@ -108,7 +165,14 @@
                               <Button fx:id="searchAlbumBtn" layoutX="677.0" layoutY="27.0" mnemonicParsing="false" onAction="#searchAlbum" text="Search" />
                            </children>
                         </AnchorPane>
-                        <TextField fx:id="albumResult" layoutX="58.0" layoutY="114.0" prefHeight="26.0" prefWidth="677.0" />
+                        <ListView fx:id="albumResultListView" layoutX="242.0" layoutY="97.0" prefHeight="317.0" prefWidth="744.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="100.0" />
+                        <AnchorPane layoutY="414.0" prefHeight="44.0" prefWidth="794.0">
+                           <children>
+                              <Button fx:id="albumQueueBtn" layoutX="14.0" layoutY="11.0" mnemonicParsing="false" onAction="#albumAddToQueue" text="Add to Queue" />
+                              <Button fx:id="albumLikeBtn" layoutX="665.0" layoutY="9.0" mnemonicParsing="false" onAction="#albumLiking" text="Like" />
+                              <Button fx:id="albumDislikeBtn" layoutX="728.0" layoutY="9.0" mnemonicParsing="false" onAction="#albumDisliking" text="Dislike" />
+                           </children>
+                        </AnchorPane>
                      </children></AnchorPane>
             </content>
           </Tab>

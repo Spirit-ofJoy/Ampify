@@ -1,5 +1,7 @@
 package Responses;
 
+import constants.Constant;
+
 import java.io.Serializable;
 
 //Response of login request
@@ -13,7 +15,7 @@ public class LoginResponse extends Response implements Serializable {
 
 
     public LoginResponse(String id) {              //Login serialized response if User not found
-        this.respType = "LOGIN_CHECK";
+        this.respType = String.valueOf(Constant.LOGIN_CHECK);
         this.userID = id;
     }
 

@@ -1,5 +1,7 @@
 package Requests;
 
+import constants.Constant;
+
 import java.io.Serializable;
 
 //Requests to give personalized recommendations
@@ -9,7 +11,7 @@ public class RecommendsRequest extends Request implements Serializable {
     int i=0;
 
     public RecommendsRequest(String a) {
-        this.reqType = "PERSONAL_RECOMMENDS";
+        this.reqType = String.valueOf(Constant.PERSONAL_RECOMMENDS);
         this.userID = a;
     }
 

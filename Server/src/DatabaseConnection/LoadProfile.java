@@ -2,7 +2,7 @@ package DatabaseConnection;
 
 import Responses.RecommendsResponse;
 import Responses.TopHitsResponse;
-import main.SongInfo;
+import utility.SongInfo;
 
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;

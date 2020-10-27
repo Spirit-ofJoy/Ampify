@@ -73,12 +73,17 @@
                   <Insets bottom="5.0" top="5.0" />
                </FlowPane.margin>
             </Button>
-            <Button fx:id="historyLoader" mnemonicParsing="false" prefHeight="26.0" prefWidth="125.0" text="My History">
+            <Button fx:id="historyLoader" mnemonicParsing="false" onAction="#loadHistoryPage" prefHeight="26.0" prefWidth="125.0" text="My History">
                <FlowPane.margin>
                   <Insets bottom="5.0" top="5.0" />
                </FlowPane.margin>
             </Button>
-            <Button fx:id="playlistLoader" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="26.0" prefWidth="125.0" text="My Playlists">
+            <Button fx:id="playlistLoader" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#loadPlaylistPage" prefHeight="26.0" prefWidth="125.0" text="My Playlists">
+               <FlowPane.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </FlowPane.margin>
+            </Button>
+            <Button fx:id="groupLoader" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="26.0" prefWidth="125.0" text="My Groups">
                <FlowPane.margin>
                   <Insets bottom="5.0" top="5.0" />
                </FlowPane.margin>

@@ -1,6 +1,7 @@
 package Responses;
 
-import main.SongInfo;
+import constants.Constant;
+import utility.SongInfo;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ public class BrowseResponse extends Response implements Serializable {
 
 
     public BrowseResponse(ArrayList<SongInfo> popList, ArrayList<SongInfo> rnbList, ArrayList<SongInfo> indieList, ArrayList<SongInfo> rockList, ArrayList<SongInfo> epopList, ArrayList<SongInfo> hiphopList, ArrayList<SongInfo> elecList){
-        this.respType = "SONG_BROWSE";
+        this.respType = String.valueOf(Constant.SONG_BROWSE);
         this.popCollection = popList;
         this.elecCollection = elecList;
         this.epopCollection = epopList;

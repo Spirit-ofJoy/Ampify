@@ -1,4 +1,4 @@
-package main;
+package utility;
 
 import java.util.ArrayList;
 import java.util.TreeSet;
@@ -11,8 +11,8 @@ public class ActiveProfile {
 
     //Relevant collection of ids are stored in TreeSets
     public ArrayList<String> History = new ArrayList<String>();
-    public ArrayList<String> Liked = new ArrayList<String>();
-    public ArrayList<String> Disliked = new ArrayList<String>();
+    public TreeSet<String> Liked = new TreeSet<String>();
+    public TreeSet<String> Disliked = new TreeSet<String>();
     public ArrayList<String> Playlists = new ArrayList<String>();
 
     //Singleton Object

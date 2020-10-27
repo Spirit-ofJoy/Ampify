@@ -1,5 +1,7 @@
 package Requests;
 
+import constants.Constant;
+
 import java.io.Serializable;
 
 public class SongSearchRequest extends Request implements Serializable {
@@ -7,7 +9,7 @@ public class SongSearchRequest extends Request implements Serializable {
     private String searchKey;
 
     public SongSearchRequest(String type, String key) {
-        this.reqType = "SONG_SEARCH";
+        this.reqType = String.valueOf(Constant.SONG_SEARCH);
         this.searchType = type;
         this.searchKey = key;
     }

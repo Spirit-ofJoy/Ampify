@@ -1,7 +1,7 @@
 package DatabaseConnection;
 
 import Responses.SongSearchResponse;
-import main.SongInfo;
+import utility.SongInfo;
 
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -52,8 +52,53 @@ public class SearchSongs extends DatabaseConnect{
             e.printStackTrace();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+        } finally {
+            try {
+                //Closes connection to avoid any database tampering
+                connection.close();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
         }
         //In case no viable list found
         return null;
     }
+
+
+    public static ArrayList<String> getSongNames(ArrayList<String> songList) {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            connection = DriverManager.getConnection(getSqlPath(), getSqlName(), getSqlPaswd());
+
+            String searchQuery = "SELECT Name FROM songs WHERE SONG_ID = ?";
+            PreparedStatement searchPreStat = connection.prepareStatement(searchQuery);
+
+            ArrayList<String> searchedQueryList = new ArrayList<String>();
+
+            for(String temp : songList) {
+                searchPreStat.setString(1, temp);
+                ResultSet resultSet = searchPreStat.executeQuery();
+                resultSet.next();
+
+                searchedQueryList.add(resultSet.getString("Name"));
+            }
+
+            return searchedQueryList;
+
+        }  catch (ClassNotFoundException e) {
+             e.printStackTrace();
+        }  catch (SQLException throwables) {
+                throwables.printStackTrace();
+        }  finally {
+            try {
+                //Closes connection to avoid any database tampering
+                connection.close();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
+        //In case no viable list found
+        return null;
+    }
+
 }

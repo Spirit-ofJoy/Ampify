@@ -1,7 +1,7 @@
 package DatabaseConnection;
 
 import Responses.BrowseResponse;
-import main.SongInfo;
+import utility.SongInfo;
 
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;

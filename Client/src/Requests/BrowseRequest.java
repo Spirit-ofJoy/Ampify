@@ -1,11 +1,13 @@
 package Requests;
 
+import constants.Constant;
+
 import java.io.Serializable;
 
 public class BrowseRequest extends Request implements Serializable {
 
     public BrowseRequest() {
-        this.reqType = "SONG_BROWSE";
+        this.reqType = String.valueOf(Constant.SONG_BROWSE);
     }
 
     @Override

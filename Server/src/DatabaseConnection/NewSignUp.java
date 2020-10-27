@@ -1,6 +1,7 @@
 package DatabaseConnection;
 
 import Responses.SignUpResponse;
+import constants.Constant;
 
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -44,14 +45,14 @@ public class NewSignUp extends DatabaseConnect {
             userInteractPrepStat.setString(4, prefArtist);
             userInteractPrepStat.execute();
 
-            return(new SignUpResponse("SUCCESS"));
+            return(new SignUpResponse(String.valueOf(Constant.SUCCESS)));
 
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
-            return(new SignUpResponse("FAILURE"));
+            return(new SignUpResponse(String.valueOf(Constant.FAILURE)));
         } catch (SQLException throwables) {
             throwables.printStackTrace();
-            return(new SignUpResponse("FAILURE"));
+            return(new SignUpResponse(String.valueOf(Constant.FAILURE)));
         } finally {
             try {
                 //Closes connection to avoid any database tampering

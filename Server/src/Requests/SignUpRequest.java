@@ -1,5 +1,7 @@
 package Requests;
 
+import constants.Constant;
+
 public class SignUpRequest extends Request{
 
     private String username;
@@ -9,7 +11,7 @@ public class SignUpRequest extends Request{
     private String preferenceArtists;
 
     public SignUpRequest(String uname, String paswd, String prefLang, String prefGenre, String prefArtist) {
-        this.reqType = "SIGNUP_START";
+        this.reqType = String.valueOf(Constant.SIGNUP_START);
         this.username = uname;
         this.password = paswd;
         this.preferenceLanguage = prefLang;

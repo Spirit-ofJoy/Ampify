@@ -10,6 +10,8 @@ public enum Constant {
     PERSONAL_RECOMMENDS,
     SONG_BROWSE,
     SONG_SEARCH,
+    HISTORY_INFO,
+    PERSONAL_PLAYLISTS_SET,
 
     //Types of execution state
     FAILURE,
