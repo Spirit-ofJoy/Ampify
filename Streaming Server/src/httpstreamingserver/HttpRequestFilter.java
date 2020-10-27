@@ -1,10 +1,10 @@
 package httpstreamingserver;
 
-import java.io.IOException;
-import java.net.URI;
-
 import com.sun.net.httpserver.Filter;
 import com.sun.net.httpserver.HttpExchange;
+
+import java.io.IOException;
+import java.net.URI;
 
 
 @SuppressWarnings("restriction")
@@ -20,7 +20,7 @@ public class HttpRequestFilter extends Filter {
     private static final String AND_DELIMITER = "&";
     private static final String EQUAL_DELIMITER = "=";
 
-    private static final String DESTINATION_FOLDER = "D:/Music/Ampify Data/songs/";
+    private static final String DESTINATION_FOLDER = "assets/songs/";
 
     @Override
     public String description() {
@@ -56,7 +56,7 @@ public class HttpRequestFilter extends Filter {
                     String[] param = qParam.split(EQUAL_DELIMITER);
                     if (param.length > 0) {
                         for (int i = 0; i < param.length; i++) {
-                            if (SONG_NAME.equalsIgnoreCase(param[NAME_IDX])) {
+                            if (SONG_NAME.equals(param[NAME_IDX])) {
                                 song = param[VALUE_IDX];// song name stored
                             }
                         }

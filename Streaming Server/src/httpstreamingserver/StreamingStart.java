@@ -1,13 +1,9 @@
 package httpstreamingserver;
 
-import httpstreamingserver.HttpRequestFilter;
-import httpstreamingserver.HttpRequestHandler;
-import httpstreamingserver.HttpStreamingServer;
-
 public class StreamingStart {
 
     private static final String CONTEXT = "/ampify";
-    private static final int PORT = 8000;
+    private static final int PORT = 8800;
 
     public static void main(String[] args) throws Exception {
 
@@ -24,7 +20,8 @@ public class StreamingStart {
          */
 
          /*
-             STREAM       http://localhost:8000/ampify?song=SONG_NAME.mp3
+             STREAM       http://localhost:8800/ampify?song=SONG_NAME.mp3
+             2iUXsYOEPhVqEBwsqP70rE
          */
     }
 }
