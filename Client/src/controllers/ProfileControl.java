@@ -110,14 +110,7 @@ public class ProfileControl implements Initializable {
         Stage historyStage = (Stage) historyLoader.getScene().getWindow();
         historyStage.setScene(historyScene);
         historyStage.show();
-        /*
-        Parent historyRoot = FXMLLoader.load(getClass().getResource("/resources/history.fxml"));
-        Scene historyScene = new Scene(historyRoot);
-        Stage historyStage = new Stage();
-        historyStage.setScene(historyScene);
-        historyStage.setTitle("History");
-        historyStage.show();
-         */
+
     }
 
     public void loadPlaylistPage() throws IOException {

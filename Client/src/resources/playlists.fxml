@@ -21,13 +21,14 @@
                         <AnchorPane layoutY="362.0" prefHeight="59.0" prefWidth="614.0">
                            <children>
                               <Button fx:id="personalAddQueueBtn" layoutX="14.0" layoutY="17.0" mnemonicParsing="false" onAction="#personalAddToQueue" text="Add All to Queue" />
+                              <Button fx:id="modifyPlaylistBtn" layoutX="239.0" layoutY="17.0" mnemonicParsing="false" onAction="#modifyPlaylist" text="Modify Current Playlist" />
                            </children>
                         </AnchorPane>
                      </children>
                   </AnchorPane>
                </content>
           </Tab>
-          <Tab text="Global Playlists">
+          <Tab text="Create Playlists">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
             </content>

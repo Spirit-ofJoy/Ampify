@@ -10,13 +10,15 @@ public class Playlist implements Serializable {
     private String name;
     private String owner;
     private boolean visibility;
+    public String currViewer;
     private ArrayList<String> songID = new ArrayList<String>();
     public ArrayList<String> songNames;
 
-    public Playlist(String pID, String pName, String pOwner, String sIdsIncluded, int visible) {
+    public Playlist(String pID, String pName, String pOwner, String sIdsIncluded, int visible, String viewedBy) {
         this.playlistID = pID;
         this.name = pName;
         this.owner = pOwner;
+        this.currViewer = viewedBy;
 
         if(visible==1){ visibility = true; }
         else { visibility = false; }

@@ -44,7 +44,8 @@ public class HandleClient implements Runnable {
                 if(incomingRequest.getReqType().equals(String.valueOf(Constant.SIGNUP_START))) {
                     SignUpRequest signUpRequest = (SignUpRequest) incomingRequest;
                     SignUpResponse signUpResponse = NewSignUp.createAccount(signUpRequest.getUsername(), signUpRequest.getPassword(),
-                            signUpRequest.getPreferenceLanguage(), signUpRequest.getPreferenceGenre(), signUpRequest.getPreferenceArtists());
+                            signUpRequest.getPreferenceLanguage(), signUpRequest.getPreferenceGenre(),
+                            signUpRequest.getPreferenceArtists());
 
                     //Sign Up request processed and eligible response sent
                     objectOutputStream.writeObject(signUpResponse);
@@ -88,7 +89,8 @@ public class HandleClient implements Runnable {
                 //executes to give apt songs for searched category
                 else if(incomingRequest.getReqType().equals(String.valueOf(Constant.SONG_SEARCH))) {
                     SongSearchRequest songSearchRequest = (SongSearchRequest) incomingRequest;
-                    SongSearchResponse searchResult = SearchSongs.getSearchedSongs(songSearchRequest.getSearchType(), songSearchRequest.getSearchKey());
+                    SongSearchResponse searchResult = SearchSongs.getSearchedSongs(songSearchRequest.getSearchType(),
+                            songSearchRequest.getSearchKey());
 
                     //Send back selection based on search result
                     objectOutputStream.writeObject(searchResult);
@@ -111,6 +113,12 @@ public class HandleClient implements Runnable {
                     //Send back names of songs on history
                     objectOutputStream.writeObject(new PersonalPlaylistsResponse(playlistsResult));
                     objectOutputStream.flush();
+                }
+                //Update existing Playlist
+                else if(incomingRequest.getReqType().equals(String.valueOf(Constant.UPDATE_PLAYLIST))) {
+                    UpdatePlaylistRequest updatePlaylistRequest = (UpdatePlaylistRequest) incomingRequest;
+                    PlaylistPick.updatingPlaylist(updatePlaylistRequest.getSongsList(), updatePlaylistRequest.getUserViewer(),
+                            updatePlaylistRequest.getPlaylistID());
                 }
 
             } catch (EOFException e) {

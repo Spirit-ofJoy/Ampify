@@ -27,6 +27,7 @@ public class PlaylistsControl implements Initializable {
     public Button backButton;
     public Button personalAddQueueBtn;
     public ListView personalPlaylistsListView;
+    public Button modifyPlaylistBtn;
 
     private ActiveProfile currProfile = ActiveProfile.getProfile();
     private ArrayList<Playlist> personalPlaylists = new ArrayList<Playlist>();
@@ -95,20 +96,26 @@ public class PlaylistsControl implements Initializable {
             System.out.println(personalPlaylists.get(index).getSongID().get(i));
         }
     }
-/*
-    public void liking() {
-        //Adding to liked songs
+
+    public void modifyPlaylist() throws IOException {
+
+        //Setting up next scene
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/resources/playlistUpdate.fxml"));
+        Parent modifyPlaylistRoot = loader.load();
+
+        Scene modifyPlaylistScene = new Scene(modifyPlaylistRoot);
+
+        //Passing info to new scene
         int index = personalPlaylistsListView.getSelectionModel().getSelectedIndex();
-        System.out.println(personalPlaylists.get(index).getName());
+        PlaylistUpdateControl updateController = loader.getController();
+        updateController.getSelectedPlaylist(personalPlaylists.get(index));
+
+        Stage modifyPlaylistStage = new Stage();
+        modifyPlaylistStage.setScene(modifyPlaylistScene);
+        modifyPlaylistStage.setTitle("Modify Playlist");
+        modifyPlaylistStage.show();
+
     }
-
-    public void disliking() {
-        //Adding to disliked songs
-        int index = personalPlaylistsListView.getSelectionModel().getSelectedIndex();
-        System.out.println(personalPlaylists.get(index).getName());
-    }
-
-
- */
 
 }

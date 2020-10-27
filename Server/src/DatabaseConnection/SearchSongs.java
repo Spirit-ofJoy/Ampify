@@ -18,18 +18,29 @@ public class SearchSongs extends DatabaseConnect{
 
             String searchQuery = null;
             //Query all relevant details relevant to search
+            //Songs searched in case of Browse_Songs.Artist_Search
             if(type.equals("Artist")) {
                 searchQuery= "SELECT songs.SONG_ID, songs.Name, songs.Genre, songs.Language, artists.Artist_Name, " +
                         "albums.Album_Name, songs.Upload_time FROM songs JOIN artists ON songs.ARTIST_ID = artists.ARTIST_ID " +
                         "JOIN albums ON songs.ALBUM_ID = albums.ALBUM_ID WHERE artists.Artist_Name LIKE ? ";
             }
+            //Songs searched in case of Browse_Songs.Album_Search
             else if(type.equals("Album")) {
                 searchQuery= "SELECT songs.SONG_ID, songs.Name, songs.Genre, songs.Language, artists.Artist_Name, " +
                         "albums.Album_Name, songs.Upload_time FROM songs JOIN artists ON songs.ARTIST_ID = artists.ARTIST_ID " +
                         "JOIN albums ON songs.ALBUM_ID = albums.ALBUM_ID WHERE albums.Album_Name LIKE ? ";
             }
+            //Songs searched in case of Browse_Songs.Album_Search
+            else if(type.equals("All_Songs")) {
+                searchQuery= "SELECT songs.SONG_ID, songs.Name, songs.Genre, songs.Language, artists.Artist_Name, " +
+                        "albums.Album_Name, songs.Upload_time FROM songs JOIN artists ON songs.ARTIST_ID = artists.ARTIST_ID " +
+                        "JOIN albums ON songs.ALBUM_ID = albums.ALBUM_ID ORDER BY songs.Name ASC";
+            }
+
             PreparedStatement preStat = connection.prepareStatement(searchQuery);
-            preStat.setString(1, "%" + searchKey + "%");
+            if(type.equals("Artist")||type.equals("Album")) {
+                preStat.setString(1, "%" + searchKey + "%");
+            }
 
             //Corresponding result set
             ResultSet searchResult = preStat.executeQuery();
