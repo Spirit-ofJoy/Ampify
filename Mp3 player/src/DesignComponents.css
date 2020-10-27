@@ -1,0 +1,8 @@
+.TextField {
+    -fx-font-family: "Arial Black";
+    -fx-background-color: #ADD8e6;
+    -fx-color : #2f85a7
+}
+.button:hover {
+    -fx-background-color: rgb(109, 103, 103);
+}
