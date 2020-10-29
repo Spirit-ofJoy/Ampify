@@ -1,6 +1,8 @@
 package main;
 
 
+import HTTPserver.StreamingStart;
+
 import java.io.EOFException;
 import java.io.IOException;
 import java.net.BindException;
@@ -18,6 +20,12 @@ public class ServerMain {
 
         ServerSocket serverSocket = null;  //Server Socket
         Socket clientSocket ;               //Reference for new incoming client Socket to pass into HandleClient
+
+        try {
+            StreamingStart.startHttpServer();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         try {
             System.out.println("[SERVER] Started and waiting....");
