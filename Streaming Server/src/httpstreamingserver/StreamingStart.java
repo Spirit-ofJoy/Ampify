@@ -21,7 +21,6 @@ public class StreamingStart {
 
          /*
              STREAM       http://localhost:8800/ampify?song=SONG_NAME.mp3
-             2iUXsYOEPhVqEBwsqP70rE
          */
     }
 }

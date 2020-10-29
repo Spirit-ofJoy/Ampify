@@ -22,4 +22,13 @@ public class functions {
         return URL;
     }
 
+    public static void causeDelay(){
+        int a =3000;
+        for(int i=0;i<a;i++){
+            for(int j=0;j<a;j++){
+                for(int k=0;k<=0;k++)
+                    System.out.print("");
+            }
+        }
+    }
 }

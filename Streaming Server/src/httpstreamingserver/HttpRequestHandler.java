@@ -30,19 +30,26 @@ public class HttpRequestHandler implements HttpHandler {
         File file = new File(response);
 
         exchange.getResponseHeaders().put("Content-Type", Collections.singletonList(("audio/mpeg"))); //for a audio file
+        exchange.getResponseHeaders().put("Accept-Ranges", Collections.singletonList("bytes"));
+        exchange.getResponseHeaders().put("Content-Length", Collections.singletonList(String.valueOf(file.length())));
+        exchange.getResponseHeaders().put("Allow", Collections.singletonList("GET"));
+        exchange.getResponseHeaders().put("IM", Collections.singletonList("feed"));
 
         exchange.sendResponseHeaders(HTTP_OK_STATUS, file.length());        // Set the response header status and length
 
         FileInputStream stream = new FileInputStream(file);                   // Opening a input stream to read the file
         OutputStream os = exchange.getResponseBody();
-        byte[] buff = new byte[1024];                          // Creating a small buffer to hold bytes as you read them
+        byte[] buff = new byte[1024];                           // Creating a small buffer to hold bytes as we read them
         int read = 0;
 
-        while((read = stream.read(buff)) > 0) {               // sending bytes to the client
+        /*while((read = stream.read(buff)) > 0) {                // sending bytes to the client
             os.write(buff, 0, read);
         }
 
-        os.close();                                           // Closing the streams
+        os.close();                                            // Closing the streams
         stream.close();
+
+         */
+        stream.transferTo(os);
     }
 }
