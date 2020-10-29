@@ -31,7 +31,6 @@ public class HistoryControl implements Initializable {
     private ArrayList<String> currHistoryIds = new ArrayList<String>();
     private synchronized void setHistorySongID() {
         String temp;
-
         for(int i = 0; i< currHistory.size(); i++) {
              temp = currHistory.get(i).substring(7);
              currHistoryIds.add(temp);

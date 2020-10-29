@@ -18,11 +18,14 @@ import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 import utility.ActiveProfile;
 import main.ClientMain;
+import utility.MoodSelection;
 import utility.SongInfo;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 public class ProfileControl implements Initializable {
@@ -32,6 +35,7 @@ public class ProfileControl implements Initializable {
 
     //FXML elements
     public Label userGreeting;
+    public Label moodTitleLabel;
     public ListView mostViewedListView;
     public ListView recommendsListView;
     public ListView moodListView;
@@ -74,13 +78,15 @@ public class ProfileControl implements Initializable {
         }
         newReleasesCollection.add(Song);
     }
-    private ArrayList<SongInfo> moodCollection = new ArrayList<SongInfo>();
-    private synchronized void addToMoodCollection(SongInfo Song) {
-        if(currProfile.Liked.contains(Song.getSongID())){
-            Song.setLiked(true);
+
+    //Mood Collection
+    private ArrayList<String> moodCollectionNames = new ArrayList<String>();
+    private synchronized void addToMoodCollectionNames(ArrayList<String> moodSongs) {
+        for(int i=0; i<moodSongs.size(); i++){
+            moodCollectionNames.add(moodSongs.get(i));
         }
-        moodCollection.add(Song);
     }
+    private ArrayList<String> moodCollectionIds = new ArrayList<String>();
 
     public Button browseLoader;
     public Button historyLoader;
@@ -97,6 +103,24 @@ public class ProfileControl implements Initializable {
         Thread LoadProfileThread = new Thread(new LoadProfileProcess());
         LoadProfileThread.start();
 
+        //Changes display according to time portion
+        String currentTime = new SimpleDateFormat("HH:mm").format(new Date());  //Current Time
+        //Midnight
+        if(currentTime.compareTo("06:00")<0){
+            moodTitleLabel.setText(moodTitleLabel.getText()+" Midnight");
+        }
+        //Morning
+        else if(currentTime.compareTo("12:00")<0){
+            moodTitleLabel.setText(moodTitleLabel.getText()+" Dawn");
+        }
+        //Midday
+        else if(currentTime.compareTo("18:00")<0){
+            moodTitleLabel.setText(moodTitleLabel.getText()+" Mid-day");
+        }
+        //Evening
+        else if(currentTime.compareTo("24:00")<0){
+            moodTitleLabel.setText(moodTitleLabel.getText()+" Dusk");
+        }
 
     }
 
@@ -145,6 +169,9 @@ public class ProfileControl implements Initializable {
                     addToNewReleasesCollection(temp);
                 }
 
+                //Gets Mood based recommends
+                addToMoodCollectionNames(MoodSelection.getMoodRecommends());
+
                 Platform.runLater(() -> {
 
                     //Update GUI for Most Viewed songs Playlist to load on Profile
@@ -164,11 +191,24 @@ public class ProfileControl implements Initializable {
                         }
                     }
 
+                    //Update GUI for Mood based recommends
+                    if(moodCollectionNames.size()<5) {
+                        for (int i = 0; i < moodCollectionNames.size(); i++) {
+                            moodListView.getItems().add(moodCollectionNames.get(i));
+                        }
+                    }
+                    else {
+                        for (int i = 0; i < 5; i++) {
+                            moodListView.getItems().add(moodCollectionNames.get(i));
+                        }
+                    }
+
                     //Update GUI for Newly Released songs Playlist to load on Profile
                     for (int i = 0; i < newReleasesCollection.size(); i++) {
                         newReleasesListView.getItems().add(newReleasesCollection.get(i).getSongDescription() +"\n" +newReleasesCollection.get(i).getUploadTime());
-
                     }
+
+                    moodCollectionIds = MoodSelection.moodRecommends;
                 });
 
             } catch (IOException e) {
@@ -225,6 +265,10 @@ public class ProfileControl implements Initializable {
         int index =  newReleasesListView.getSelectionModel().getSelectedIndex();
         System.out.println(newReleasesCollection.get(index).getSongID());
     }
+    public void moodAddToQueue() {
+        int index =  moodListView.getSelectionModel().getSelectedIndex();
+        System.out.println(moodCollectionIds.get(index));
+    }
 
     //Liking
     public void mostViewedLiking() {
@@ -239,8 +283,12 @@ public class ProfileControl implements Initializable {
         int index =  newReleasesListView.getSelectionModel().getSelectedIndex();
         System.out.println(newReleasesCollection.get(index).getSongID());
     }
+    public void moodLiking() {
+        int index =  moodListView.getSelectionModel().getSelectedIndex();
+        System.out.println(moodCollectionIds.get(index));
+    }
 
-    //Disliking
+    //Unliking
     public void mostViewedUnliking() {
         int index =  mostViewedListView.getSelectionModel().getSelectedIndex();
         System.out.println(topHitsCollection.get(index).getSongID());
@@ -252,6 +300,10 @@ public class ProfileControl implements Initializable {
     public void newReleasesUnliking() {
         int index =  newReleasesListView.getSelectionModel().getSelectedIndex();
         System.out.println(newReleasesCollection.get(index).getSongID());
+    }
+    public void moodUnliking() {
+        int index =  moodListView.getSelectionModel().getSelectedIndex();
+        System.out.println(moodCollectionIds.get(index));
     }
 
 

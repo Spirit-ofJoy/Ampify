@@ -21,10 +21,7 @@ public class LoadProfile extends DatabaseConnect{
             connection = DriverManager.getConnection(getSqlPath(), getSqlName(), getSqlPaswd());
 
             //Query all relevant details that may be used in display
-            String query = "SELECT songs.SONG_ID, songs.Name, songs.Genre, songs.Language, artists.Artist_Name, " +
-                "albums.Album_Name, songs.Upload_time FROM songs JOIN artists ON songs.ARTIST_ID = artists.ARTIST_ID " +
-                "JOIN albums ON songs.ALBUM_ID = albums.ALBUM_ID WHERE songs.ALBUM_ID = albums.ALBUM_ID " +
-                "ORDER BY (Total_Views) DESC limit 5";
+            String query = "SELECT songs.SONG_ID, songs.Name, songs.Genre, songs.Language, artists.Artist_Name, albums.Album_Name, songs.Upload_time FROM songs JOIN artists ON songs.ARTIST_ID = artists.ARTIST_ID JOIN albums ON songs.ALBUM_ID = albums.ALBUM_ID WHERE songs.ALBUM_ID = albums.ALBUM_ID ORDER BY (Total_Views) DESC limit 5";
 
             PreparedStatement preStat = connection.prepareStatement(query);
 
