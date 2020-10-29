@@ -41,7 +41,7 @@
          <children>
             <Button fx:id="addQueueBtn" layoutX="14.0" layoutY="11.0" mnemonicParsing="false" onAction="#addToQueue" text="Add to Queue" />
             <Button fx:id="likeBtn" layoutX="481.0" layoutY="10.0" mnemonicParsing="false" onAction="#liking" text="Like" />
-            <Button fx:id="dislikeBtn" layoutX="534.0" layoutY="10.0" mnemonicParsing="false" onAction="#disliking" text="Dislike" />
+            <Button fx:id="unlikeBtn" layoutX="534.0" layoutY="10.0" mnemonicParsing="false" onAction="#unliking" text="Unlike" />
          </children>
       </AnchorPane>
    </bottom>

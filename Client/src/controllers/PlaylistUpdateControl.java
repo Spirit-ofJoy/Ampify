@@ -34,12 +34,6 @@ public class PlaylistUpdateControl implements Initializable {
     private Playlist currentPlaylist;
     private String temp = "";
 
- /*
-    public PlaylistUpdateControl() {
-
-    }
-
- */
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

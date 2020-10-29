@@ -41,7 +41,7 @@
       <AnchorPane prefHeight="46.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
             <Button fx:id="addToPlaylistBtn" layoutX="136.0" layoutY="10.0" mnemonicParsing="false" onAction="#addToPlaylist" text="Add to Playlist" />
-            <Button fx:id="removeFromPlaylistBtn" layoutX="436.0" layoutY="10.0" mnemonicParsing="false" onAction="#removeFromPlaylist" text="Remove Songs" />
+            <Button fx:id="removeFromPlaylistBtn" layoutX="436.0" layoutY="10.0" mnemonicParsing="false" onAction="#removeFromPlaylist" text="Remove Song" />
          </children>
       </AnchorPane>
    </bottom>

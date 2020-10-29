@@ -1,5 +1,6 @@
 package DatabaseConnection;
 
+import Responses.NewReleasesResponse;
 import Responses.RecommendsResponse;
 import Responses.TopHitsResponse;
 import utility.SongInfo;
@@ -10,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.TreeSet;
 
 public class LoadProfile extends DatabaseConnect{
 
@@ -22,7 +24,7 @@ public class LoadProfile extends DatabaseConnect{
             String query = "SELECT songs.SONG_ID, songs.Name, songs.Genre, songs.Language, artists.Artist_Name, " +
                 "albums.Album_Name, songs.Upload_time FROM songs JOIN artists ON songs.ARTIST_ID = artists.ARTIST_ID " +
                 "JOIN albums ON songs.ALBUM_ID = albums.ALBUM_ID WHERE songs.ALBUM_ID = albums.ALBUM_ID " +
-                "ORDER BY (Total_Views+Views_2+Views_1) DESC limit 5";
+                "ORDER BY (Total_Views) DESC limit 5";
 
             PreparedStatement preStat = connection.prepareStatement(query);
 
@@ -59,7 +61,8 @@ public class LoadProfile extends DatabaseConnect{
         return null;
     }
 
-    public static RecommendsResponse getRecommends(String uid) {
+
+    public static RecommendsResponse getRecommends(String uid, TreeSet likedSongs) {
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -76,35 +79,71 @@ public class LoadProfile extends DatabaseConnect{
             String GenreResult = result1.getString("Pref_genre");
             String ArtistResult = result1.getString("Pref_artist");
 
-            String[] prefLang = langResult.split("-");
-            String[] prefGenre = GenreResult.split("-");
-            String[] prefArtist = ArtistResult.split("-");
+            String[] prefLang = null;
+            String[] prefGenre = null;
+            String[] prefArtist = null;
 
-            //Preparing SQL Statement to sort out according to preferences
-            String mainQuery = "SELECT songs.SONG_ID, songs.Name, songs.Genre, songs.Language, artists.Artist_Name, albums.Album_Name, " +
-                    "songs.Upload_time FROM songs JOIN artists ON songs.ARTIST_ID = artists.ARTIST_ID " +
-                    "JOIN albums ON songs.ALBUM_ID = albums.ALBUM_ID WHERE (1=2 ";
+            if (langResult!=null) {
+                prefLang = langResult.split("-");
+            }
+            if (GenreResult!= null) {
+                prefGenre = GenreResult.split("-");
+            }
+            if (ArtistResult!= null) {
+                prefArtist = ArtistResult.split("-");
+            }
 
-            //Dynamic SQL prepared
+            String likedArtist = "";
+            String likedAlbum = "";
+
+            //Get Album, Genre and Artist info of a liked song
+            if(!(likedSongs.isEmpty())) {
+                String query2 = "SELECT  ARTIST_ID, ALBUM_ID FROM songs WHERE SONG_ID = ?";
+                PreparedStatement preStat2 = connection.prepareStatement(query2);
+                ArrayList<String> likedSongsList = new ArrayList<>(likedSongs);
+                Collections.shuffle(likedSongsList);
+                preStat2.setString(1, likedSongsList.get(0));
+                ResultSet result2 = preStat2.executeQuery();
+                result2.next();
+
+                likedArtist = result2.getString("ARTIST_ID");
+                likedAlbum = result2.getString("ALBUM_ID");
+            }
+
+            String mainQuery = "";
             int i = 0, j = 0, k = 0;
 
-            while (i < prefLang.length) {
-                mainQuery += "OR songs.Language = ? ";
-                i++;
-            }
-            mainQuery += ") AND ((1=2 ";
+            if (prefLang!=null && (prefGenre!=null||prefArtist!=null)) {
+                //Preparing SQL Statement to sort out according to preferences
+                mainQuery += "SELECT songs.SONG_ID, songs.Name, songs.Genre, songs.Language, artists.Artist_Name, albums.Album_Name, songs.Upload_time FROM songs JOIN artists ON songs.ARTIST_ID = artists.ARTIST_ID JOIN albums ON songs.ALBUM_ID = albums.ALBUM_ID WHERE (1=2 ";
 
-            while (j < prefGenre.length) {
-                mainQuery += "OR songs.Genre = ? ";
-                j++;
-            }
-            mainQuery += ") OR (1=2 ";
+                //Dynamic SQL prepared
+                while (i < prefLang.length) {
+                    mainQuery += "OR songs.Language = ? ";
+                    i++;
+                }
+                mainQuery += ") AND ((1=2 ";
 
-            while (k < prefArtist.length) {
-                mainQuery += "OR songs.ARTIST_ID = ? ";
-                k++;
+                while (j < prefGenre.length) {
+                    mainQuery += "OR songs.Genre = ? ";
+                    j++;
+                }
+                mainQuery += ") OR (1=2 ";
+
+                while (k < prefArtist.length) {
+                    mainQuery += "OR songs.ARTIST_ID = ? ";
+                    k++;
+                }
+                mainQuery += ")) ";
             }
-            mainQuery += ")) ";
+            else {
+                mainQuery = "SELECT songs.SONG_ID, songs.Name, songs.Genre, songs.Language, artists.Artist_Name, albums.Album_Name, songs.Upload_time FROM songs JOIN artists ON songs.ARTIST_ID = artists.ARTIST_ID JOIN albums ON songs.ALBUM_ID = albums.ALBUM_ID WHERE 1=2 ";
+            }
+
+            //Adds Recommends Based on likes
+            if(!(likedSongs.isEmpty())){
+                mainQuery += "UNION SELECT songs.SONG_ID, songs.Name, songs.Genre, songs.Language, artists.Artist_Name, albums.Album_Name, songs.Upload_time FROM songs JOIN artists ON songs.ARTIST_ID = artists.ARTIST_ID JOIN albums ON songs.ALBUM_ID = albums.ALBUM_ID WHERE songs.ARTIST_ID = ? OR songs.ALBUM_ID = ?";
+            }
 
             PreparedStatement preStatMain = connection.prepareStatement(mainQuery);
 
@@ -121,6 +160,11 @@ public class LoadProfile extends DatabaseConnect{
             while (itr <= k + i + j) {
                 preStatMain.setString(itr, prefArtist[itr - (1 + i + j)]);
                 itr++;
+            }
+            if(!(likedSongs.isEmpty())){
+                preStatMain.setString(itr, likedArtist);
+                itr++;
+                preStatMain.setString(itr, likedAlbum);
             }
 
             //SQL statement executed and corresponding result set obtained
@@ -141,6 +185,49 @@ public class LoadProfile extends DatabaseConnect{
 
             RecommendsResponse response = new RecommendsResponse(recommendations);
             return response;
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            try {
+                //Closes connection to avoid any database tampering
+                connection.close();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
+        //Return null in case an exception stops normal functioning
+        return null;
+    }
+
+    public static NewReleasesResponse getNewReleases() {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            connection = DriverManager.getConnection(getSqlPath(), getSqlName(), getSqlPaswd());
+
+            //Query all relevant details that may be used in display
+            String query = "SELECT songs.SONG_ID, songs.Name, songs.Genre, songs.Language, artists.Artist_Name, albums.Album_Name, songs.Upload_time FROM songs JOIN artists ON songs.ARTIST_ID = artists.ARTIST_ID JOIN albums ON songs.ALBUM_ID = albums.ALBUM_ID WHERE songs.ALBUM_ID = albums.ALBUM_ID ORDER BY Upload_time DESC limit 5";
+
+            PreparedStatement preStat = connection.prepareStatement(query);
+
+            //SQL statement executed and corresponding result set obtained
+            ResultSet result = preStat.executeQuery();
+
+            //Response for client returned to HandleClient
+            ArrayList<SongInfo> newList = new ArrayList<SongInfo>();
+            SongInfo temp;
+            while (result.next()) {
+                temp = new SongInfo(result.getString("SONG_ID"), result.getString("Name"),
+                        result.getString("Genre"), result.getString("Language"), result.getString("Artist_Name"),
+                        result.getString("Album_Name"), result.getString("Upload_time"));
+
+                newList.add(temp);
+            }
+
+            NewReleasesResponse response = new NewReleasesResponse(newList);
+            return response;
+
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SQLException throwables) {

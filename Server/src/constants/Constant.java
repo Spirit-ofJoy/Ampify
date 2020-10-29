@@ -7,12 +7,15 @@ public enum Constant {
     SIGNUP_START,
     LOGIN_CHECK,
     TOP_HITS_LIST,
+    NEW_RELEASES_LIST,
     PERSONAL_RECOMMENDS,
     SONG_BROWSE,
     SONG_SEARCH,
     HISTORY_INFO,
     PERSONAL_PLAYLISTS_SET,
     UPDATE_PLAYLIST,
+    CREATE_PLAYLIST,
+
 
     //Types of execution state
     FAILURE,

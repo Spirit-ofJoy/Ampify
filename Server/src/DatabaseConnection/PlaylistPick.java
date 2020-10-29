@@ -56,13 +56,65 @@ public class PlaylistPick extends DatabaseConnect{
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(getSqlPath(), getSqlName(), getSqlPaswd());
 
-            String searchQuery = "UPDATE playlists SET Songs_incl = ? WHERE (Viewer = ? AND PLAYLIST_ID = ?)";
-            PreparedStatement updatePreStat = connection.prepareStatement(searchQuery);
+            String updateQuery = "UPDATE playlists SET Songs_incl = ? WHERE (Viewer = ? AND PLAYLIST_ID = ?)";
+            PreparedStatement updatePreStat = connection.prepareStatement(updateQuery);
 
             updatePreStat.setString(1, songsList);
             updatePreStat.setString(2, viewerID);
             updatePreStat.setString(3, playlistID);
             updatePreStat.execute();
+
+        }  catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }  catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }  finally {
+            try {
+                //Closes connection to avoid any database tampering
+                connection.close();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
+    }
+
+    public static void creatingPlaylist(String songsList, String ownerID, String playlistName, int visibility) {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            connection = DriverManager.getConnection(getSqlPath(), getSqlName(), getSqlPaswd());
+
+            //Finding Indexing value
+            String indexQuery = "SELECT COUNT(*) FROM playlists;";
+            PreparedStatement indexPreStat = connection.prepareStatement(indexQuery);
+            ResultSet indexResultSet = indexPreStat.executeQuery();
+            indexResultSet.next();
+            int index = indexResultSet.getInt(1);
+            index++;
+
+            //Finding New Playlist ID value
+            String pidQuery = "SELECT COUNT(DISTINCT PLAYLIST_ID) FROM playlists;";
+            PreparedStatement pidPreStat = connection.prepareStatement(pidQuery);
+            ResultSet pidResultSet = pidPreStat.executeQuery();
+            pidResultSet.next();
+            String playlistCnt = pidResultSet.getString(1);
+            int playlistCount = Integer.parseInt(playlistCnt);
+            playlistCount = playlistCount +1;
+            playlistCnt = String.format("%03d", playlistCount);
+            String playlistID = "U#"+playlistCnt;
+
+
+            //Create Playlist in Database
+            String insertionQuery = "INSERT INTO playlists (Indexing, PLAYLIST_ID, Playlist_Name, Owner, Songs_incl, Viewer, Visibility) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            PreparedStatement insertionPreStat = connection.prepareStatement(insertionQuery);
+
+            insertionPreStat.setInt(1, index);
+            insertionPreStat.setString(2, playlistID);
+            insertionPreStat.setString(3, playlistName);
+            insertionPreStat.setString(4, ownerID);
+            insertionPreStat.setString(5, songsList);
+            insertionPreStat.setString(6, ownerID);
+            insertionPreStat.setString(7, String.valueOf(visibility));
+            insertionPreStat.execute();
 
         }  catch (ClassNotFoundException e) {
             e.printStackTrace();

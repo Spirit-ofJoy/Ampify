@@ -12,14 +12,13 @@ public class ActiveProfile {
     //Relevant collection of ids are stored in TreeSets
     public ArrayList<String> History = new ArrayList<String>();
     public TreeSet<String> Liked = new TreeSet<String>();
-    public TreeSet<String> Disliked = new TreeSet<String>();
     public ArrayList<String> Playlists = new ArrayList<String>();
 
     //Singleton Object
     private static ActiveProfile activeProfile = null;
 
     //Constructor call
-    private ActiveProfile(String uname, String uid, String hist, String like, String dislike, String playlist){
+    private ActiveProfile(String uname, String uid, String hist, String like, String playlist){
         userID = uid;
         username = uname;
 
@@ -31,11 +30,6 @@ public class ActiveProfile {
         if(like !=null){
             for (String temp: like.split("-")){
                 Liked.add(temp);
-            }
-        }
-        if(dislike !=null){
-            for (String temp: dislike.split("-")){
-                Disliked.add(temp);
             }
         }
         if(playlist !=null){
@@ -51,8 +45,8 @@ public class ActiveProfile {
     }
 
     //Return profile after it's creation
-    public static ActiveProfile getProfile(String uname, String uid, String hist, String like, String dislike, String playlist) {
-        activeProfile = new ActiveProfile(uname, uid, hist, like, dislike, playlist);
+    public static ActiveProfile getProfile(String uname, String uid, String hist, String like, String playlist) {
+        activeProfile = new ActiveProfile(uname, uid, hist, like, playlist);
         return activeProfile;
     }
 

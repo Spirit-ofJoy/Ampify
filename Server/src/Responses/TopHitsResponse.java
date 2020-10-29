@@ -4,7 +4,6 @@ import constants.Constant;
 import utility.SongInfo;
 
 import java.io.Serializable;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 

@@ -12,8 +12,14 @@ public class Playlist implements Serializable {
     private boolean visibility;
     public String currViewer;
     private ArrayList<String> songID = new ArrayList<String>();
-    public ArrayList<String> songNames;
+    public ArrayList<String> songNames = new ArrayList<String>();
 
+    //Used to create a temporary playlist that can later be created permanently
+    public Playlist(String pOwner) {
+        this.owner = pOwner;
+    }
+
+    //Used to pass information for an existing playlist
     public Playlist(String pID, String pName, String pOwner, String sIdsIncluded, int visible, String viewedBy) {
         this.playlistID = pID;
         this.name = pName;
@@ -47,5 +53,6 @@ public class Playlist implements Serializable {
     public String getPlaylistID() {
         return playlistID;
     }
+
 }
 

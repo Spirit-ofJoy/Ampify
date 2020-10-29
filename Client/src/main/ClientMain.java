@@ -29,7 +29,7 @@ public class ClientMain extends Application{
     public static ObjectOutputStream clientOutputStream;
     public static ObjectInputStream clientInputStream;
 
-    static {                                                                           //Static block implements before Main and establishes Main connection
+    static {                                                 //Static block implements before Main and establishes Main connection
         try {
             mySocket = new Socket("127.0.0.1", ServerPORT);
             System.out.println("[CLIENT] Server connection established.");

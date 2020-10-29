@@ -13,6 +13,8 @@ public class SongInfo implements Serializable {
     private String albumName;
     private String uploadTime;
 
+    private boolean Liked = false;
+
     public SongInfo(String sid, String sname, String gen, String lang, String artist, String album, String upload) {
         this.songID = sid;
         this.songName = sname;
@@ -52,6 +54,13 @@ public class SongInfo implements Serializable {
     }
 
     public String getSongDescription() {
-        return (this.songName +"\nby " +this.artistName );
+        String songDescr = this.songName +"\nby " +this.artistName ;
+        if(Liked) { songDescr += "                [Liked]"; }
+        return (songDescr);
     }
+
+    public void setLiked(boolean liked) {
+        this.Liked = liked;
+    }
+
 }

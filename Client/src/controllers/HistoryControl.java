@@ -23,10 +23,11 @@ public class HistoryControl implements Initializable {
     public Button backButton;
     public Button addQueueBtn;
     public Button likeBtn;
-    public Button dislikeBtn;
+    public Button unlikeBtn;
     public ListView historyListView;
 
-    private ArrayList<String> currHistory = ActiveProfile.getProfile().History;
+    private ActiveProfile currProfile = ActiveProfile.getProfile();
+    private ArrayList<String> currHistory = currProfile.History;
     private ArrayList<String> currHistoryIds = new ArrayList<String>();
     private synchronized void setHistorySongID() {
         String temp;
@@ -40,6 +41,15 @@ public class HistoryControl implements Initializable {
     private ArrayList<String> currHistoryNames = new ArrayList<String>();
     private synchronized void addToHistoryNames(String name) {
         currHistoryNames.add(name);
+    }
+
+    private synchronized void LikedUpdate() {
+        for(int i=0; i< currHistoryIds.size(); i++) {
+            if(currProfile.Liked.contains(currHistoryIds.get(i))) {
+                String likedSong = currHistoryNames.get(i) + "                [Liked]";
+                currHistoryNames.set(i, likedSong);
+            }
+        }
     }
 
     //Go back to profile
@@ -72,6 +82,8 @@ public class HistoryControl implements Initializable {
                         String temp = historyInfoResponse.historySongNames.get(i);
                         addToHistoryNames(temp);
                     }
+                    //Updates Like on history Display
+                    LikedUpdate();
 
                     //Display on GUI
                     Platform.runLater(() -> {
@@ -103,7 +115,7 @@ public class HistoryControl implements Initializable {
         System.out.println(currHistoryIds.get(currHistory.size()-(index+1)));
     }
 
-    public void disliking() {
+    public void unliking() {
         //Adding to disliked songs
         int index = historyListView.getSelectionModel().getSelectedIndex();
         System.out.println(currHistoryIds.get(currHistory.size()-(index+1)));

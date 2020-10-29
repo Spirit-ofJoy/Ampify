@@ -53,8 +53,7 @@ public class LoginControl {
 
                         //Making a profile for user found
                         ActiveProfile arbitary = ActiveProfile.getProfile(uname, incomingResponse.getUserID(),
-                                incomingResponse.getHistory(), incomingResponse.getLiked(),
-                                 incomingResponse.getDisliked(), incomingResponse.getPlaylists());
+                                incomingResponse.getHistory(), incomingResponse.getLiked(), incomingResponse.getPlaylists());
 
                         //Update GUI for button to load Profile
                         Platform.runLater(()-> { profileLoader.setVisible(true); } );

@@ -1,8 +1,13 @@
 package controllers;
 
 
+import Requests.CreatePlaylistRequest;
 import Requests.PersonalPlaylistsRequest;
+import Requests.SongSearchRequest;
 import Responses.PersonalPlaylistsResponse;
+import Responses.SongSearchResponse;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.TextField;
 import main.ClientMain;
 import utility.ActiveProfile;
 
@@ -15,6 +20,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 import utility.Playlist;
+import utility.SongInfo;
 
 
 import java.io.IOException;
@@ -24,6 +30,7 @@ import java.util.ResourceBundle;
 
 public class PlaylistsControl implements Initializable {
 
+    //------*------*------*------*------*------*Play Playlists Section*------*------*------*------*------*------//
     public Button backButton;
     public Button personalAddQueueBtn;
     public ListView personalPlaylistsListView;
@@ -33,6 +40,10 @@ public class PlaylistsControl implements Initializable {
     private ArrayList<Playlist> personalPlaylists = new ArrayList<Playlist>();
     private synchronized void addToPersonalPlaylists(Playlist songCollection) {
         personalPlaylists.add(songCollection);
+    }
+    private ArrayList<SongInfo> allSongsList = new ArrayList<SongInfo>();
+    private synchronized void addToSongsCollection(SongInfo Song) {
+        allSongsList.add(Song);
     }
 
 
@@ -65,8 +76,20 @@ public class PlaylistsControl implements Initializable {
                         addToPersonalPlaylists(playlistsResponse.personalPlaylists.get(i));
                     }
 
+                    //Get all songs in the database
+                    ClientMain.clientOutputStream.writeObject(new SongSearchRequest("All_Songs", "searchkey"));
+                    ClientMain.clientOutputStream.flush();                                                //Request sent
+                    SongSearchResponse incomingResponse;
+                    incomingResponse = (SongSearchResponse) ClientMain.clientInputStream.readObject();   //Response accepted
+
+                    for (int i = 0; i < incomingResponse.searchedSongs.size(); i++) {
+                        SongInfo temp = (SongInfo) incomingResponse.searchedSongs.get(i);
+                        addToSongsCollection(temp);
+                    }
+
                     //Display on GUI
                     Platform.runLater(() -> {
+                        //Update GUI to show viewable playlists
                         String display ;
                         for(int i = 0; i< playlistsResponse.personalPlaylists.size(); i++){
                             display = "❒" +personalPlaylists.get(i).getName();
@@ -76,6 +99,11 @@ public class PlaylistsControl implements Initializable {
                             }
 
                             personalPlaylistsListView.getItems().add(display);
+                        }
+
+                        //Update GUI for Searched songs to load
+                        for (int i = 0; i < allSongsList.size(); i++) {
+                            allSongsListView.getItems().add(allSongsList.get(i).getSongDescription());
                         }
                     });
 
@@ -115,6 +143,88 @@ public class PlaylistsControl implements Initializable {
         modifyPlaylistStage.setScene(modifyPlaylistScene);
         modifyPlaylistStage.setTitle("Modify Playlist");
         modifyPlaylistStage.show();
+
+    }
+
+    //------*------*------*------*------*------*Create Playlists Section*------*------*------*------*------*------//
+
+    public Button importPlaylistBtn;
+    public Button addToPlaylistBtn;
+    public Button removeFromPlaylistBtn;
+    public TextField newPlaylistName;
+    public CheckBox playlistPrivate;
+
+
+    public ListView allSongsListView;
+    public ListView currentSongsListView;
+
+    private Playlist newCreatedPlaylist = new Playlist(currProfile.getUserID());
+    private String temp = "";
+
+
+    public void addToPlaylist() {
+        int index =  allSongsListView.getSelectionModel().getSelectedIndex();
+
+        //Gets name and Song ID of selected song to add
+        String songName = allSongsList.get(index).getSongName();
+        String songID = allSongsList.get(index).getSongID();
+
+        //Add to current Client side playlist
+        newCreatedPlaylist.songNames.add(songName);
+        newCreatedPlaylist.getSongID().add(songID);
+
+        //Update display to the changes
+        currentSongsListView.getItems().clear();
+        for (int i=0; i< newCreatedPlaylist.songNames.size(); i++) {
+            currentSongsListView.getItems().add(newCreatedPlaylist.songNames.get(i));
+            System.out.println(newCreatedPlaylist.getSongID().get(i));
+        }
+    }
+
+    public void removeFromPlaylist() {
+        int index =  currentSongsListView.getSelectionModel().getSelectedIndex();
+
+        //Removes name and Song ID of selected song to add
+        newCreatedPlaylist.songNames.remove(index);
+        newCreatedPlaylist.getSongID().remove(index);
+
+        //Update display to the changes
+        currentSongsListView.getItems().clear();
+        for (int i=0; i< newCreatedPlaylist.songNames.size(); i++) {
+            currentSongsListView.getItems().add(newCreatedPlaylist.songNames.get(i));
+            System.out.println(newCreatedPlaylist.getSongID().get(i));
+        }
+
+    }
+
+    public void createCustomPlaylist() {
+        //Song ids used in playlist
+        for (int i=0; i< newCreatedPlaylist.songNames.size(); i++) {
+            temp += newCreatedPlaylist.getSongID().get(i) + "-";
+        }
+
+        //Custom playlist name
+        String playlistName = newPlaylistName.getText();
+        //Visibility of playlist
+        int visibility = 1;
+        if(playlistPrivate.isSelected()) {
+            visibility = 0;
+        }
+
+        int finalVisibility = visibility;
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    //Create new playlist and store on Server Database
+                    ClientMain.clientOutputStream.writeObject(new CreatePlaylistRequest(temp, currProfile.getUserID(),
+                            playlistName, finalVisibility));
+                    ClientMain.clientOutputStream.flush();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
 
     }
 

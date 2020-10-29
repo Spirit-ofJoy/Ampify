@@ -12,7 +12,11 @@ public class Playlist implements Serializable {
     private boolean visibility;
     public String currViewer;
     private ArrayList<String> songID = new ArrayList<String>();
-    public ArrayList<String> songNames;
+    public ArrayList<String> songNames = new ArrayList<String>();
+
+    public Playlist(String pOwner) {
+        this.owner = pOwner;
+    }
 
     public Playlist(String pID, String pName, String pOwner, String sIdsIncluded, int visible, String viewedBy) {
         this.playlistID = pID;

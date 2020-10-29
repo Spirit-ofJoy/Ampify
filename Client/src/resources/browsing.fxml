@@ -29,7 +29,7 @@
                                              <children>
                                                 <Button fx:id="popQueueBtn" layoutX="14.0" layoutY="11.0" mnemonicParsing="false" onAction="#popAddToQueue" text="Add to Queue" />
                                                 <Button fx:id="popLkeBtn" layoutX="665.0" layoutY="9.0" mnemonicParsing="false" onAction="#popLiking" text="Like" />
-                                                <Button fx:id="popDislikeBtn" layoutX="728.0" layoutY="9.0" mnemonicParsing="false" onAction="#popDisliking" text="Dislike" />
+                                                <Button fx:id="popUnlikeBtn" layoutX="728.0" layoutY="9.0" mnemonicParsing="false" onAction="#popUnliking" text="Unlike" />
                                              </children>
                                           </AnchorPane>
                                        </children></AnchorPane>
@@ -44,7 +44,7 @@
                                              <children>
                                                 <Button fx:id="rnbQueueBtn" layoutX="14.0" layoutY="11.0" mnemonicParsing="false" onAction="#rnbAddToQueue" text="Add to Queue" />
                                                 <Button fx:id="rnbLkeBtn" layoutX="665.0" layoutY="9.0" mnemonicParsing="false" onAction="#rnbLiking" text="Like" />
-                                                <Button fx:id="rnbDislikeBtn" layoutX="728.0" layoutY="9.0" mnemonicParsing="false" onAction="#rnbDisliking" text="Dislike" />
+                                                <Button fx:id="rnbUnlikeBtn" layoutX="728.0" layoutY="9.0" mnemonicParsing="false" onAction="#rnbUnliking" text="Unlike" />
                                              </children>
                                           </AnchorPane>
                                        </children></AnchorPane>
@@ -59,7 +59,7 @@
                                              <children>
                                                 <Button fx:id="indieQueueBtn" layoutX="14.0" layoutY="11.0" mnemonicParsing="false" onAction="#indieAddToQueue" text="Add to Queue" />
                                                 <Button fx:id="indieLkeBtn" layoutX="665.0" layoutY="9.0" mnemonicParsing="false" onAction="#indieLiking" text="Like" />
-                                                <Button fx:id="indieDislikeBtn" layoutX="728.0" layoutY="9.0" mnemonicParsing="false" onAction="#indieDisliking" text="Dislike" />
+                                                <Button fx:id="indieUnlikeBtn" layoutX="728.0" layoutY="9.0" mnemonicParsing="false" onAction="#indieUnliking" text="Unlike" />
                                              </children>
                                           </AnchorPane>
                                        </children></AnchorPane>
@@ -74,7 +74,7 @@
                                              <children>
                                                 <Button fx:id="rockQueueBtn" layoutX="14.0" layoutY="11.0" mnemonicParsing="false" onAction="#rockAddToQueue" text="Add to Queue" />
                                                 <Button fx:id="rockLkeBtn" layoutX="665.0" layoutY="9.0" mnemonicParsing="false" onAction="#rockLiking" text="Like" />
-                                                <Button fx:id="rockDislikeBtn" layoutX="728.0" layoutY="9.0" mnemonicParsing="false" onAction="#rockDisliking" text="Dislike" />
+                                                <Button fx:id="rockUnlikeBtn" layoutX="728.0" layoutY="9.0" mnemonicParsing="false" onAction="#rockUnliking" text="Unlike" />
                                              </children>
                                           </AnchorPane>
                                        </children></AnchorPane>
@@ -89,7 +89,7 @@
                                              <children>
                                                 <Button fx:id="epopQueueBtn" layoutX="14.0" layoutY="11.0" mnemonicParsing="false" onAction="#epopAddToQueue" text="Add to Queue" />
                                                 <Button fx:id="epopLkeBtn" layoutX="665.0" layoutY="9.0" mnemonicParsing="false" onAction="#epopLiking" text="Like" />
-                                                <Button fx:id="epopDislikeBtn" layoutX="728.0" layoutY="9.0" mnemonicParsing="false" onAction="#epopDisliking" text="Dislike" />
+                                                <Button fx:id="epopUnlikeBtn" layoutX="728.0" layoutY="9.0" mnemonicParsing="false" onAction="#epopUnliking" text="Unlike" />
                                              </children>
                                           </AnchorPane>
                                        </children></AnchorPane>
@@ -104,7 +104,7 @@
                                              <children>
                                                 <Button fx:id="hiphopQueueBtn" layoutX="14.0" layoutY="11.0" mnemonicParsing="false" onAction="#hiphopAddToQueue" text="Add to Queue" />
                                                 <Button fx:id="hiphopLkeBtn" layoutX="665.0" layoutY="9.0" mnemonicParsing="false" onAction="#hiphopLiking" text="Like" />
-                                                <Button fx:id="hiphopDislikeBtn" layoutX="728.0" layoutY="9.0" mnemonicParsing="false" onAction="#hiphopDisliking" text="Dislike" />
+                                                <Button fx:id="hiphopUnlikeBtn" layoutX="728.0" layoutY="9.0" mnemonicParsing="false" onAction="#hiphopUnliking" text="Unlike" />
                                              </children>
                                           </AnchorPane>
                                        </children></AnchorPane>
@@ -119,7 +119,7 @@
                                              <children>
                                                 <Button fx:id="elecQueueBtn" layoutX="14.0" layoutY="11.0" mnemonicParsing="false" onAction="#elecAddToQueue" text="Add to Queue" />
                                                 <Button fx:id="elecLkeBtn" layoutX="665.0" layoutY="9.0" mnemonicParsing="false" onAction="#elecLiking" text="Like" />
-                                                <Button fx:id="elecDislikeBtn" layoutX="728.0" layoutY="9.0" mnemonicParsing="false" onAction="#elecDisliking" text="Dislike" />
+                                                <Button fx:id="elecUnlikeBtn" layoutX="728.0" layoutY="9.0" mnemonicParsing="false" onAction="#elecUnliking" text="Unlike" />
                                              </children>
                                           </AnchorPane>
                                        </children></AnchorPane>
@@ -148,7 +148,7 @@
                                  <children>
                                     <Button fx:id="artistQueueBtn" layoutX="14.0" layoutY="11.0" mnemonicParsing="false" onAction="#artistAddToQueue" text="Add to Queue" />
                                     <Button fx:id="artistLikeBtn" layoutX="665.0" layoutY="9.0" mnemonicParsing="false" onAction="#artistLiking" text="Like" />
-                                    <Button fx:id="artistDislikeBtn" layoutX="728.0" layoutY="9.0" mnemonicParsing="false" onAction="#artistDisliking" text="Dislike" />
+                                    <Button fx:id="artistUnlikeBtn" layoutX="728.0" layoutY="9.0" mnemonicParsing="false" onAction="#artistUnliking" text="Unlike" />
                                  </children>
                               </AnchorPane>
                            </children></AnchorPane>
@@ -170,7 +170,7 @@
                            <children>
                               <Button fx:id="albumQueueBtn" layoutX="14.0" layoutY="11.0" mnemonicParsing="false" onAction="#albumAddToQueue" text="Add to Queue" />
                               <Button fx:id="albumLikeBtn" layoutX="665.0" layoutY="9.0" mnemonicParsing="false" onAction="#albumLiking" text="Like" />
-                              <Button fx:id="albumDislikeBtn" layoutX="728.0" layoutY="9.0" mnemonicParsing="false" onAction="#albumDisliking" text="Dislike" />
+                              <Button fx:id="albumUnlikeBtn" layoutX="728.0" layoutY="9.0" mnemonicParsing="false" onAction="#albumUnliking" text="Unlike" />
                            </children>
                         </AnchorPane>
                      </children></AnchorPane>

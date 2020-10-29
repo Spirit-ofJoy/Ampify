@@ -40,38 +40,59 @@ public class BrowsingControl implements Initializable {
 
     //Keeping all data in a list of songs
     private ArrayList<SongInfo> popList = new ArrayList<SongInfo>();
-    private synchronized void addToPopCollection(SongInfo popSong) {
-        popList.add(popSong);
+    private synchronized void addToPopCollection(SongInfo Song) {
+        if(currProfile.Liked.contains(Song.getSongID())){
+            Song.setLiked(true);
+        }
+        popList.add(Song);
     }
 
     private ArrayList<SongInfo> rnbList = new ArrayList<SongInfo>();
-    private synchronized void addToRnBCollection(SongInfo popSong) {
-        rnbList.add(popSong);
+    private synchronized void addToRnBCollection(SongInfo Song) {
+        if(currProfile.Liked.contains(Song.getSongID())){
+            Song.setLiked(true);
+        }
+        rnbList.add(Song);
     }
 
     private ArrayList<SongInfo> indieList = new ArrayList<SongInfo>();
-    private synchronized void addToIndieCollection(SongInfo popSong) {
-        indieList.add(popSong);
+    private synchronized void addToIndieCollection(SongInfo Song) {
+        if(currProfile.Liked.contains(Song.getSongID())){
+            Song.setLiked(true);
+        }
+        indieList.add(Song);
     }
 
     private ArrayList<SongInfo> rockList = new ArrayList<SongInfo>();
-    private synchronized void addToRockCollection(SongInfo popSong) {
-        rockList.add(popSong);
+    private synchronized void addToRockCollection(SongInfo Song) {
+        if(currProfile.Liked.contains(Song.getSongID())){
+            Song.setLiked(true);
+        }
+        rockList.add(Song);
     }
 
     private ArrayList<SongInfo> epopList = new ArrayList<SongInfo>();
-    private synchronized void addToEPopCollection(SongInfo popSong) {
-        epopList.add(popSong);
+    private synchronized void addToEPopCollection(SongInfo Song) {
+        if(currProfile.Liked.contains(Song.getSongID())){
+            Song.setLiked(true);
+        }
+        epopList.add(Song);
     }
 
     private ArrayList<SongInfo> hiphopList = new ArrayList<SongInfo>();
-    private synchronized void addToHipHopCollection(SongInfo popSong) {
-        hiphopList.add(popSong);
+    private synchronized void addToHipHopCollection(SongInfo Song) {
+        if(currProfile.Liked.contains(Song.getSongID())){
+            Song.setLiked(true);
+        }
+        hiphopList.add(Song);
     }
 
     private ArrayList<SongInfo> elecList = new ArrayList<SongInfo>();
-    private synchronized void addToElecCollection(SongInfo popSong) {
-        elecList.add(popSong);
+    private synchronized void addToElecCollection(SongInfo Song) {
+        if(currProfile.Liked.contains(Song.getSongID())){
+            Song.setLiked(true);
+        }
+        elecList.add(Song);
     }
 
     //Go back to profile
@@ -248,31 +269,31 @@ public class BrowsingControl implements Initializable {
     }
 
     //Adding to Disliked songs
-    public void popDisliking() {
+    public void popUnliking() {
         int index =  popListView.getSelectionModel().getSelectedIndex();
         System.out.println(popList.get(index).getSongID());
     }
-    public void rnbDisliking() {
+    public void rnbUnliking() {
         int index =  rnbListView.getSelectionModel().getSelectedIndex();
         System.out.println(rnbList.get(index).getSongID());
     }
-    public void indieDisliking() {
+    public void indieUnliking() {
         int index =  indieListView.getSelectionModel().getSelectedIndex();
         System.out.println(indieList.get(index).getSongID());
     }
-    public void rockDisliking() {
+    public void rockUnliking() {
         int index =  rockListView.getSelectionModel().getSelectedIndex();
         System.out.println(rockList.get(index).getSongID());
     }
-    public void epopDisliking() {
+    public void epopUnliking() {
         int index =  epopListView.getSelectionModel().getSelectedIndex();
         System.out.println(epopList.get(index).getSongID());
     }
-    public void hiphopDisliking() {
+    public void hiphopUnliking() {
         int index =  hiphopListView.getSelectionModel().getSelectedIndex();
         System.out.println(hiphopList.get(index).getSongID());
     }
-    public void elecDisliking() {
+    public void elecUnliking() {
         int index =  elecListView.getSelectionModel().getSelectedIndex();
         System.out.println(elecList.get(index).getSongID());
     }
@@ -284,10 +305,13 @@ public class BrowsingControl implements Initializable {
     public ListView artistResultListView;
     public Button artistQueueBtn;
     public Button artistLikeBtn;
-    public Button artistDislikeBtn;
+    public Button artistUnlikeBtn;
 
     private ArrayList<SongInfo> artistSearchList = new ArrayList<SongInfo>();
     private synchronized void addToArtistSearchList(SongInfo Song) {
+        if(currProfile.Liked.contains(Song.getSongID())){
+            Song.setLiked(true);
+        }
         artistSearchList.add(Song);
     }
     private synchronized void clearArtistSearchList() {
@@ -348,7 +372,7 @@ public class BrowsingControl implements Initializable {
         int index =  artistResultListView.getSelectionModel().getSelectedIndex();
         System.out.println(artistSearchList.get(index).getSongID());
     }
-    public void artistDisliking() {
+    public void artistUnliking() {
         int index =  artistResultListView.getSelectionModel().getSelectedIndex();
         System.out.println(artistSearchList.get(index).getSongID());
     }
@@ -360,10 +384,13 @@ public class BrowsingControl implements Initializable {
     public ListView albumResultListView;
     public Button albumQueueBtn;
     public Button albumLikeBtn;
-    public Button albumDislikeBtn;
+    public Button albumUnlikeBtn;
 
     private ArrayList<SongInfo> albumSearchList = new ArrayList<SongInfo>();
     private synchronized void addToAlbumSearchList(SongInfo Song) {
+        if(currProfile.Liked.contains(Song.getSongID())){
+            Song.setLiked(true);
+        }
         albumSearchList.add(Song);
     }
     private synchronized void clearAlbumSearchList() {
@@ -424,7 +451,7 @@ public class BrowsingControl implements Initializable {
         int index =  albumResultListView.getSelectionModel().getSelectedIndex();
         System.out.println(albumSearchList.get(index).getSongID());
     }
-    public void albumDisliking() {
+    public void albumUnliking() {
         int index =  albumResultListView.getSelectionModel().getSelectedIndex();
         System.out.println(albumSearchList.get(index).getSongID());
     }

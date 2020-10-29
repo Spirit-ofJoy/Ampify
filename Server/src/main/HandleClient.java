@@ -50,7 +50,6 @@ public class HandleClient implements Runnable {
                     //Sign Up request processed and eligible response sent
                     objectOutputStream.writeObject(signUpResponse);
                     objectOutputStream.flush();
-
                 }
                 //executes if Request type is of login
                 else if( incomingRequest.getReqType().equals(String.valueOf(Constant.LOGIN_CHECK))) {
@@ -72,10 +71,18 @@ public class HandleClient implements Runnable {
                 //executes to load and provide personalized recommendations
                 else if(incomingRequest.getReqType().equals(String.valueOf(Constant.PERSONAL_RECOMMENDS))) {
                     RecommendsRequest recommendsRequest = (RecommendsRequest) incomingRequest;
-                    RecommendsResponse personalRecommends = LoadProfile.getRecommends(recommendsRequest.getUserID());
+                    RecommendsResponse personalRecommends = LoadProfile.getRecommends(recommendsRequest.getUserID(), recommendsRequest.getLikedSongs());
 
                     //Send back personalized selection
                     objectOutputStream.writeObject(personalRecommends);
+                    objectOutputStream.flush();
+                }
+                //executes if Request is made for the new songs based on upload time
+                else if(incomingRequest.getReqType().equals(String.valueOf(Constant.NEW_RELEASES_LIST))) {
+                    NewReleasesResponse newReleasesResponse = LoadProfile.getNewReleases();
+
+                    //Send back the newly released songs
+                    objectOutputStream.writeObject(newReleasesResponse);
                     objectOutputStream.flush();
                 }
                 //executes to load Browsing section of songs
@@ -117,8 +124,16 @@ public class HandleClient implements Runnable {
                 //Update existing Playlist
                 else if(incomingRequest.getReqType().equals(String.valueOf(Constant.UPDATE_PLAYLIST))) {
                     UpdatePlaylistRequest updatePlaylistRequest = (UpdatePlaylistRequest) incomingRequest;
+
                     PlaylistPick.updatingPlaylist(updatePlaylistRequest.getSongsList(), updatePlaylistRequest.getUserViewer(),
                             updatePlaylistRequest.getPlaylistID());
+                }
+                //Create new Playlist
+                else if(incomingRequest.getReqType().equals(String.valueOf(Constant.CREATE_PLAYLIST))) {
+                    CreatePlaylistRequest createPlaylistRequest = (CreatePlaylistRequest) incomingRequest;
+
+                    PlaylistPick.creatingPlaylist(createPlaylistRequest.getSongsList(), createPlaylistRequest.getOwnerID(),
+                            createPlaylistRequest.getPlaylistName(), createPlaylistRequest.getVisibility());
                 }
 
             } catch (EOFException e) {
