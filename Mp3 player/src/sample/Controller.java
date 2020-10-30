@@ -12,6 +12,7 @@ import javafx.beans.property.Property;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.MapChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -312,6 +313,19 @@ public class Controller<e> implements Initializable {
                     }
                 }
                 
+            }
+        });
+
+        /**
+         * Here we set the title of the main pane as  ( "Title"   from   Album   by   Artist )
+         */
+        mp3player.getMedia().getMetadata().addListener(new MapChangeListener<String, Object>() {
+            @Override
+            public void onChanged(Change<? extends String, ?> change) {
+                String Title = (String)mp3player.getMedia().getMetadata().get("title");
+                String Album = (String)mp3player.getMedia().getMetadata().get("album");
+                String Artist = (String)mp3player.getMedia().getMetadata().get("artist");
+                songtxt.setText("\""+Title+"\""+"   from   "+Album+"   by   "+Artist);
             }
         });
 
