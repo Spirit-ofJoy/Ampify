@@ -194,6 +194,9 @@ public class Controller<e> implements Initializable {
     private String URL;
     public static String CURRENTLY_PLAYING = "S#017";
     public static int CURRENTLY_PLAYING_INDEX = 0;
+    public String metadata_song_name;
+    public static boolean change_again=false;
+
     String filepath;
     File file = new File("");
     Media media = null;
@@ -326,6 +329,7 @@ public class Controller<e> implements Initializable {
                 String Album = (String)mp3player.getMedia().getMetadata().get("album");
                 String Artist = (String)mp3player.getMedia().getMetadata().get("artist");
                 songtxt.setText("\""+Title+"\""+"   from   "+Album+"   by   "+Artist);
+                metadata_song_name=Title;
             }
         });
 
@@ -640,7 +644,12 @@ public class Controller<e> implements Initializable {
     @FXML
     public void save_song(ActionEvent actionEvent) throws IOException {
         JOptionPane.showMessageDialog(null,"Current Song is being downloaded in "+DESTINATION_DOWNLOAD_FOLDER);
-        new Thread(download_song).start(); // A thread that downloads song in Background without disturbing the GUI.
+        String save_as=null;
+        //save_as = functions.reverse(metadata_song_name);
+        //System.out.println(save_as);
+        //new Thread(download_song).start(); // A thread that downloads song in Background without disturbing the GUI.
+        DownloadSong download_song = new DownloadSong(CURRENTLY_PLAYING,save_as);
+        download_song.start();
     }
 
     /**
@@ -938,17 +947,22 @@ public class Controller<e> implements Initializable {
         play_previous();
     }
 
-    /**
-     * A task @download_song to download the @CURRENTLY_PLAYING song in @DESTINATION_FOLDER
-     */
+    /*
+     * This was previously being used to download songs. But because of bugs it's limitations, it has now been scrapped and now we
+     *                                              are using a better Service Approach
+     *
+     *
+     *
+     *                      //A task @download_song to download the @CURRENTLY_PLAYING song in @DESTINATION_FOLDER
     Task download_song = new Task() {
         @Override
         protected Void call() throws Exception {
-            Download_Encrypt_Decrypt.encrypt_and_download_song(CURRENTLY_PLAYING);//This method decrypt the song
+            Download_Encrypt_Decrypt.encrypt_and_download_song(CURRENTLY_PLAYING,metadata_song_name);//This method decrypt the song
             return null;
         }
 
     };
+     */
 
     /**
      * @param duration Input is in the form of milliseconds.

@@ -31,4 +31,16 @@ public class functions {
             }
         }
     }
+
+    public static String reverse(String input)
+    {
+        // getBytes() method to convert string into bytes[].
+        byte[] strAsByteArray = input.getBytes();
+        byte[] result = new byte[strAsByteArray.length];
+        // Storing result in reverse order into the
+        for (int i = 0; i < strAsByteArray.length; i++)
+            result[i] = strAsByteArray[strAsByteArray.length - i - 1];
+
+        return new String(result);
+    }
 }

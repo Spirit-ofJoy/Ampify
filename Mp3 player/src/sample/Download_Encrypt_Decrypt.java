@@ -17,11 +17,12 @@ public class Download_Encrypt_Decrypt {
 
     //here we download the songs and make them inaccessable to the users through other media players
     /**
-     * @param song_name without song format
+     * @param song_name without song format as stored in the server ( as S#001 )
+     * @param save_as this name is how the song will be save in the user file data. Easy for user and us to choose between the songs.
      * @throws IOException
      * save the specified song in the @DESTINATION_DOWNLOAD_FOLDER
      */
-    public static void encrypt_and_download_song(String song_name) throws IOException {
+    public static void encrypt_and_download_song(String song_name, String save_as) throws IOException {
 
         String name_while_downloading =  use_song_name(song_name);
         String URL = useURL(query_url,name_while_downloading);
@@ -67,6 +68,7 @@ public class Download_Encrypt_Decrypt {
         //writing the inaccessable file
         try(OutputStream outputStream = new FileOutputStream(DESTINATION_DOWNLOAD_FOLDER+song_name+FILE_EXTENSION)) {
             encrypted_song.writeTo(outputStream);
+            outputStream.close();
         }
     }
 
@@ -123,7 +125,7 @@ public class Download_Encrypt_Decrypt {
     //Files.createDirectories(Paths.get("/Your/Path/Here"));
 
     public static void main(String[] args) throws FileNotFoundException, IOException {
-        encrypt_and_download_song("S#003");
+        encrypt_and_download_song("S#003","LOL");
         decrypt_downloaded_song(DESTINATION_DOWNLOAD_FOLDER+"S#003.mp3");
 
     }
