@@ -316,7 +316,7 @@ public class Controller<e> implements Initializable {
             }
         });
 
-        /**
+        /*
          * Here we set the title of the main pane as  ( "Title"   from   Album   by   Artist )
          */
         mp3player.getMedia().getMetadata().addListener(new MapChangeListener<String, Object>() {
