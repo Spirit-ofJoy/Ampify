@@ -7,6 +7,7 @@ import Responses.NewReleasesResponse;
 import Responses.RecommendsResponse;
 import Responses.TopHitsResponse;
 
+import ampify_player.Song_Queue;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -92,7 +93,6 @@ public class ProfileControl implements Initializable {
     public Button historyLoader;
     public Button playlistLoader;
     public Button groupLoader;
-
 
 
     @Override
@@ -251,23 +251,34 @@ public class ProfileControl implements Initializable {
         playlistsStage.show();
     }
 
+    public void loadGroupsPage() throws IOException {
+        System.out.println("[CLIENT] Group Page invoked.");
+
+        Parent groupRoot = FXMLLoader.load(getClass().getResource("/resources/groups.fxml"));
+        Scene groupScene = new Scene(groupRoot);
+        Stage groupStage = (Stage) groupLoader.getScene().getWindow();
+        groupStage.setScene(groupScene);
+        groupStage.show();
+
+    }
+
     //UI elements to interact with various list of Songs
     //Adding to Queue
     public void mostViewedAddToQueue() {
         int index =  mostViewedListView.getSelectionModel().getSelectedIndex();
-        System.out.println(topHitsCollection.get(index).getSongID());
+        Song_Queue.addToQueue(topHitsCollection.get(index).getSongID(), topHitsCollection.get(index).getSongName());
     }
     public void recommendsAddToQueue() {
         int index =  recommendsListView.getSelectionModel().getSelectedIndex();
-        System.out.println(recommendsCollection.get(index).getSongID());
+        Song_Queue.addToQueue(recommendsCollection.get(index).getSongID(), recommendsCollection.get(index).getSongName());
     }
     public void newReleasesAddToQueue() {
         int index =  newReleasesListView.getSelectionModel().getSelectedIndex();
-        System.out.println(newReleasesCollection.get(index).getSongID());
+        Song_Queue.addToQueue(newReleasesCollection.get(index).getSongID(), newReleasesCollection.get(index).getSongName());
     }
     public void moodAddToQueue() {
         int index =  moodListView.getSelectionModel().getSelectedIndex();
-        System.out.println(moodCollectionIds.get(index));
+        Song_Queue.addToQueue(moodCollectionIds.get(index), moodCollectionNames.get(index));
     }
 
     //Liking
@@ -307,6 +318,24 @@ public class ProfileControl implements Initializable {
     }
 
 
+    //Opens online player
+    public void loadMP3Player() throws IOException {
+        System.out.println("[CLIENT] Player invoked.");
+
+        //Setting up Player scene
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/resources/ampifyPlayer.fxml"));
+        Parent playerRoot = loader.load();
+
+        Scene playerScene = new Scene(playerRoot, 1000,750);
+
+        Stage playerStage = new Stage();
+        playerStage.setScene(playerScene);
+        playerScene.getStylesheets().add("/resources/DesignComponents.css");
+        playerStage.setTitle("Ampify Player");
+        playerStage.show();
+
+    }
 
 
 }

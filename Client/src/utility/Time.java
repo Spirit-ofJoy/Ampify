@@ -10,7 +10,7 @@ public class Time {
 
     public static String getCurrentTimeStamp() {
         Date date = new Date();
-        String s = dateFormat.format(date);
+        String s = "[" +dateFormat.format(date) +"]";
         return s;
     }
 

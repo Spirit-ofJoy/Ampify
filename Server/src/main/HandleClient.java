@@ -135,6 +135,11 @@ public class HandleClient implements Runnable {
                     PlaylistPick.creatingPlaylist(createPlaylistRequest.getSongsList(), createPlaylistRequest.getOwnerID(),
                             createPlaylistRequest.getPlaylistName(), createPlaylistRequest.getVisibility());
                 }
+                //Send back list of registered Users
+                else if ( incomingRequest.getReqType().equals(String.valueOf(Constant.USERS_LIST)) ) {
+                    UserListRequest userListRequest = (UserListRequest) incomingRequest;
+
+                }
 
             } catch (EOFException e) {
                 System.out.println("[SERVER] User disconnected or offline.");

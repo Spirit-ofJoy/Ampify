@@ -2,6 +2,7 @@ package controllers;
 
 import Requests.HistoryInfoRequest;
 import Responses.HistoryInfoResponse;
+import ampify_player.Song_Queue;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -105,7 +106,7 @@ public class HistoryControl implements Initializable {
     public void addToQueue() {
         //Adding to active Queue
         int index = historyListView.getSelectionModel().getSelectedIndex();
-        System.out.println(currHistoryIds.get(currHistory.size()-(index+1)));
+        Song_Queue.addToQueue(currHistoryIds.get(currHistory.size()-(index+1)), currHistoryNames.get(currHistory.size()-(index+1)));
     }
 
     public void liking() {

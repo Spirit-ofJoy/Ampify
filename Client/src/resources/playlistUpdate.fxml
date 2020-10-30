@@ -24,7 +24,6 @@
                         <Font name="Arial" size="14.0" />
                      </font>
                   </Label>
-                  <Button fx:id="backButton" alignment="CENTER_RIGHT" layoutX="20.0" layoutY="18.0" mnemonicParsing="false" text="Back" textAlignment="CENTER" />
                   <Button fx:id="updatePlaylistBtn" layoutX="467.0" layoutY="36.0" mnemonicParsing="false" onAction="#updateSelectedPlaylist" text="Update Playlist" />
                </children>
             </AnchorPane>

@@ -14,6 +14,7 @@ public enum Constant {
     PERSONAL_PLAYLISTS_SET,
     UPDATE_PLAYLIST,
     CREATE_PLAYLIST,
+    USERS_LIST,
 
     //Types of execution state
     FAILURE,

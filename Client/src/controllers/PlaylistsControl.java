@@ -6,6 +6,7 @@ import Requests.PersonalPlaylistsRequest;
 import Requests.SongSearchRequest;
 import Responses.PersonalPlaylistsResponse;
 import Responses.SongSearchResponse;
+import ampify_player.Song_Queue;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import main.ClientMain;
@@ -121,7 +122,7 @@ public class PlaylistsControl implements Initializable {
         //Adding to active Queue
         int index = personalPlaylistsListView.getSelectionModel().getSelectedIndex();
         for(int i=0; i< personalPlaylists.get(index).songNames.size(); i++) {
-            System.out.println(personalPlaylists.get(index).getSongID().get(i));
+            Song_Queue.addToQueue(personalPlaylists.get(index).getSongID().get(i), personalPlaylists.get(index).songNames.get(i));
         }
     }
 

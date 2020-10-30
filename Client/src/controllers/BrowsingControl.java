@@ -5,6 +5,7 @@ import Requests.SongSearchRequest;
 import Responses.BrowseResponse;
 
 import Responses.SongSearchResponse;
+import ampify_player.Song_Queue;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -211,31 +212,31 @@ public class BrowsingControl implements Initializable {
     //Adding to Queue
     public void popAddToQueue() {
         int index =  popListView.getSelectionModel().getSelectedIndex();
-        System.out.println(popList.get(index).getSongID());
+        Song_Queue.addToQueue(popList.get(index).getSongID(), popList.get(index).getSongName());
     }
     public void rnbAddToQueue() {
         int index =  rnbListView.getSelectionModel().getSelectedIndex();
-        System.out.println(rnbList.get(index).getSongID());
+        Song_Queue.addToQueue(rnbList.get(index).getSongID(), rnbList.get(index).getSongName());
     }
     public void indieAddToQueue() {
         int index =  indieListView.getSelectionModel().getSelectedIndex();
-        System.out.println(indieList.get(index).getSongID());
+        Song_Queue.addToQueue(indieList.get(index).getSongID(), indieList.get(index).getSongName());
     }
     public void rockAddToQueue() {
         int index =  rockListView.getSelectionModel().getSelectedIndex();
-        System.out.println(rockList.get(index).getSongID());
+        Song_Queue.addToQueue(rockList.get(index).getSongID(), rockList.get(index).getSongName());
     }
     public void epopAddToQueue() {
         int index =  epopListView.getSelectionModel().getSelectedIndex();
-        System.out.println(epopList.get(index).getSongID());
+        Song_Queue.addToQueue(epopList.get(index).getSongID(), epopList.get(index).getSongName());
     }
     public void hiphopAddToQueue() {
         int index =  hiphopListView.getSelectionModel().getSelectedIndex();
-        System.out.println(hiphopList.get(index).getSongID());
+        Song_Queue.addToQueue(hiphopList.get(index).getSongID(), hiphopList.get(index).getSongName());
     }
     public void elecAddToQueue() {
         int index =  elecListView.getSelectionModel().getSelectedIndex();
-        System.out.println(elecList.get(index).getSongID());
+        Song_Queue.addToQueue(elecList.get(index).getSongID(), elecList.get(index).getSongName());
     }
 
     //Adding to Liked songs
@@ -366,7 +367,7 @@ public class BrowsingControl implements Initializable {
     //Methods used in buttons on Artist browsing
     public void artistAddToQueue() {
         int index =  artistResultListView.getSelectionModel().getSelectedIndex();
-        System.out.println(artistSearchList.get(index).getSongID());
+        Song_Queue.addToQueue(artistSearchList.get(index).getSongID(), artistSearchList.get(index).getSongName());
     }
     public void artistLiking() {
         int index =  artistResultListView.getSelectionModel().getSelectedIndex();
@@ -445,7 +446,7 @@ public class BrowsingControl implements Initializable {
     //Methods used in buttons on Album browsing
     public void albumAddToQueue() {
         int index =  albumResultListView.getSelectionModel().getSelectedIndex();
-        System.out.println(albumSearchList.get(index).getSongID());
+        Song_Queue.addToQueue(albumSearchList.get(index).getSongID(), albumSearchList.get(index).getSongName());
     }
     public void albumLiking() {
         int index =  albumResultListView.getSelectionModel().getSelectedIndex();

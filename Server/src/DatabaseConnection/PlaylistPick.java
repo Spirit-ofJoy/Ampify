@@ -100,7 +100,7 @@ public class PlaylistPick extends DatabaseConnect{
             int playlistCount = Integer.parseInt(playlistCnt);
             playlistCount = playlistCount +1;
             playlistCnt = String.format("%03d", playlistCount);
-            String playlistID = "U#"+playlistCnt;
+            String playlistID = "P#"+playlistCnt;
 
 
             //Create Playlist in Database

@@ -97,6 +97,7 @@
                   <Font name="Arial" size="14.0" />
                </font>
             </Label>
+            <Button layoutX="679.0" layoutY="20.0" mnemonicParsing="false" onAction="#loadMP3Player" text="Ampify Player" />
          </children>
       </AnchorPane>
    </top>
@@ -121,7 +122,7 @@
                   <Insets bottom="5.0" top="5.0" />
                </FlowPane.margin>
             </Button>
-            <Button fx:id="groupLoader" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="26.0" prefWidth="125.0" text="My Groups">
+            <Button fx:id="groupLoader" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#loadGroupsPage" prefHeight="26.0" prefWidth="125.0" text="My Groups">
                <FlowPane.margin>
                   <Insets bottom="5.0" top="5.0" />
                </FlowPane.margin>

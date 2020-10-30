@@ -35,7 +35,11 @@ public class MoodSelection {
         }
 
         /*
-           The 4 different Time Sets are 00:00-06:00, 06:00-12:00, 12:00-18:00, 18:00-00:00
+           The 4 different Time Sets are
+           00:00-06:00 -> Midnight,
+           06:00-12:00 -> Dawn,
+           12:00-18:00 -> Midday,
+           18:00-00:00 -> Dusk
          */
         String currentTime = new SimpleDateFormat("HH:mm").format(new Date());  //Current Time
 
@@ -43,31 +47,39 @@ public class MoodSelection {
         if(currentTime.compareTo("06:00")<0){
             for(int i=0; i< historySongTime.size(); i++) {
                 if(historySongTime.get(i).compareTo("06:00")<0){
-                    moodSongsId.add(historySongID.get(i));
+                    if(!moodSongsId.contains(historySongID)){
+                        moodSongsId.add(historySongID.get(i));
+                    }
                 }
             }
         }
         //Morning
         else if(currentTime.compareTo("12:00")<0){
             for(int i=0; i< historySongTime.size(); i++) {
-                if(historySongTime.get(i).compareTo("12:00")<0){
-                    moodSongsId.add(historySongID.get(i));
+                if((historySongTime.get(i).compareTo("12:00")<0)&&(historySongTime.get(i).compareTo("06:00")>=0)){
+                    if(!moodSongsId.contains(historySongID)){
+                        moodSongsId.add(historySongID.get(i));
+                    }
                 }
             }
         }
         //Midday
         else if(currentTime.compareTo("18:00")<0){
             for(int i=0; i< historySongTime.size(); i++) {
-                if(historySongTime.get(i).compareTo("18:00")<0){
-                    moodSongsId.add(historySongID.get(i));
+                if((historySongTime.get(i).compareTo("18:00")<0)&&(historySongTime.get(i).compareTo("12:00")>=0)){
+                    if(!moodSongsId.contains(historySongID)){
+                        moodSongsId.add(historySongID.get(i));
+                    }
                 }
             }
         }
         //Evening
         else if(currentTime.compareTo("24:00")<0){
             for(int i=0; i< historySongTime.size(); i++) {
-                if(historySongTime.get(i).compareTo("24:00")<0){
-                    moodSongsId.add(historySongID.get(i));
+                if((historySongTime.get(i).compareTo("24:00")<0)&&(historySongTime.get(i).compareTo("18:00")>=0)){
+                    if(!moodSongsId.contains(historySongID)){
+                        moodSongsId.add(historySongID.get(i));
+                    }
                 }
             }
         }

@@ -3,7 +3,7 @@ package HTTPserver;
 public class StreamingStart {
 
     private static final String CONTEXT = "/ampify";
-    private static final int HTTP_PORT = 5437;
+    private static final int HTTP_PORT = 8800;
 
     public static void startHttpServer() throws Exception {
 
