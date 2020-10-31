@@ -66,7 +66,7 @@ public class Download_Encrypt_Decrypt {
         }
 
         //writing the inaccessable file
-        try(OutputStream outputStream = new FileOutputStream(DESTINATION_DOWNLOAD_FOLDER+song_name+FILE_EXTENSION)) {
+        try(OutputStream outputStream = new FileOutputStream(DESTINATION_DOWNLOAD_FOLDER+save_as+FILE_EXTENSION)) {
             encrypted_song.writeTo(outputStream);
             outputStream.close();
         }

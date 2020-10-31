@@ -27,7 +27,7 @@ CREATE TABLE `albums` (
   `ARTIST_ID` varchar(15) DEFAULT NULL,
   `Album_Name` varchar(30) NOT NULL,
   PRIMARY KEY (`ALBUM_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -51,7 +51,7 @@ CREATE TABLE `artists` (
   `ARTIST_ID` varchar(15) NOT NULL,
   `Artist_Name` varchar(30) NOT NULL,
   PRIMARY KEY (`ARTIST_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -80,7 +80,7 @@ CREATE TABLE `playlists` (
   `Viewer` varchar(30) DEFAULT NULL,
   `Visibility` tinyint(1) DEFAULT '1',
   PRIMARY KEY (`Indexing`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -112,7 +112,7 @@ CREATE TABLE `songs` (
   `Upload_time` varchar(20) DEFAULT NULL,
   `Lyric` varchar(260) DEFAULT NULL,
   PRIMARY KEY (`SONG_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -137,7 +137,7 @@ CREATE TABLE `user_groups` (
   `Grp_Name` varchar(50) NOT NULL,
   `Users_incl` varchar(250) DEFAULT NULL,
   PRIMARY KEY (`GROUP_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -166,7 +166,7 @@ CREATE TABLE `user_interact` (
   `Pref_genre` varchar(60) DEFAULT NULL,
   `Pref_artist` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`USERID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -192,7 +192,7 @@ CREATE TABLE `users` (
   `Password` varchar(60) NOT NULL,
   PRIMARY KEY (`USERID`),
   UNIQUE KEY `Uname` (`Uname`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

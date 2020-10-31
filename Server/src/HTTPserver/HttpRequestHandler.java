@@ -28,12 +28,42 @@ public class HttpRequestHandler implements HttpHandler {
         String response = exchange.getAttribute(PARAM_STRING).toString();
         System.out.println("[HTTP Server] Response: " + response);
         File file = new File(response);
+        String format = response.substring(response.length()-3);
 
-        exchange.getResponseHeaders().put("Content-Type", Collections.singletonList(("audio/mpeg"))); //for a audio file
-        exchange.getResponseHeaders().put("Accept-Ranges", Collections.singletonList("bytes"));
-        exchange.getResponseHeaders().put("Content-Length", Collections.singletonList(String.valueOf(file.length())));
-        exchange.getResponseHeaders().put("Allow", Collections.singletonList("GET"));
-        exchange.getResponseHeaders().put("IM", Collections.singletonList("feed"));
+        /*
+         * Changes the response headers of an audio file
+         */
+        if(format.equals("mp3")) {
+            exchange.getResponseHeaders().put("Content-Type", Collections.singletonList(("audio/mpeg"))); //for a audio file
+            exchange.getResponseHeaders().put("Accept-Ranges", Collections.singletonList("bytes"));
+            exchange.getResponseHeaders().put("Content-Length", Collections.singletonList(String.valueOf(file.length())));
+            exchange.getResponseHeaders().put("Allow", Collections.singletonList("GET"));
+            exchange.getResponseHeaders().put("IM", Collections.singletonList("feed"));
+        }
+
+        /*
+         * Changes the response headers of an srt/Subtitles/Lyrics file
+         */
+        if(format.equals("srt")) {
+            exchange.getResponseHeaders().put("Content-Type", Collections.singletonList(("text/srt"))); //for a srt file
+            exchange.getResponseHeaders().put("Accept-Ranges", Collections.singletonList("bytes"));
+            exchange.getResponseHeaders().put("Content-Length", Collections.singletonList(String.valueOf(file.length())));
+            exchange.getResponseHeaders().put("Allow", Collections.singletonList("GET"));
+            exchange.getResponseHeaders().put("IM", Collections.singletonList("feed"));
+        }
+
+        /*
+         * Changes the response headers of an Video file
+         *
+         * PS - This feature probably won't be used, but does it here matter though? NOPE
+         */
+        if(format.equals("mp4")) {
+            exchange.getResponseHeaders().put("Content-Type", Collections.singletonList(("video/mp4"))); //for a video file
+            exchange.getResponseHeaders().put("Accept-Ranges", Collections.singletonList("bytes"));
+            exchange.getResponseHeaders().put("Content-Length", Collections.singletonList(String.valueOf(file.length())));
+            exchange.getResponseHeaders().put("Allow", Collections.singletonList("GET"));
+            exchange.getResponseHeaders().put("IM", Collections.singletonList("feed"));
+        }
 
         exchange.sendResponseHeaders(HTTP_OK_STATUS, file.length());        // Set the response header status and length
 

@@ -653,7 +653,7 @@ public class Controller<e> implements Initializable {
         //save_as = functions.reverse(metadata_song_name);
         //System.out.println(save_as);
         //new Thread(download_song).start(); // A thread that downloads song in Background without disturbing the GUI.
-        DownloadSong download_song = new DownloadSong(CURRENTLY_PLAYING,save_as);
+        DownloadSong download_song = new DownloadSong(CURRENTLY_PLAYING,Song_Queue.nameQueue.get(CURRENTLY_PLAYING_INDEX));
         download_song.start();
     }
 
