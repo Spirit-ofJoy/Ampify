@@ -291,8 +291,17 @@ public class Controller<e> implements Initializable {
      * mp3 seeker maximum,
      * mp3 seeker Current position,
      * mp3 seek on mouse event
+     * And Lyrics synced with the music
      */
     public void song_properties(MediaPlayer mp3player) {
+
+        //here we start the thread for downloading SRT files if they do not already exist on user side
+        File srtpresent = new File(BUFFER_FOLDER+CURRENTLY_PLAYING+".srt");
+        if(!srtpresent.exists()){
+            downloadSRT srt = new downloadSRT(CURRENTLY_PLAYING);
+            srt.start();//downloadSRT thread starts
+        }
+
         /*
          * Here we are setting up the test fields Like Elapsed Duration and Total Duration.
          * Also, using that elapsed time data, we are calculating where should we change the song or restart the 
@@ -383,6 +392,32 @@ public class Controller<e> implements Initializable {
                 if (mp3seeker.isPressed()) {
                     double value = mp3seeker.getValue();
                     mp3player.seek(new Duration(value * 1000));
+                }
+            }
+        });
+
+        /*
+         * Setting the lyrics and syncronizing it.
+         */
+        mp3player.currentTimeProperty().addListener(new ChangeListener<Duration>() {
+            @Override
+            public void changed(ObservableValue<? extends Duration> observableValue, Duration duration, Duration t1) {
+                SRTInfo info = SRTReader.read(new File(BUFFER_FOLDER+CURRENTLY_PLAYING+".srt"));
+                SRT[] test = new SRT[info.info.size()];
+                for(int i=0;i<test.length;i++) {
+                    test[i] = info.info.get(i);
+                }
+                String[] starttimeenhancedarray = new String[test.length];
+                String[] endtimeenhancedarray = new String[test.length];
+                for(int i=0;i<starttimeenhancedarray.length;i++) {
+                    String starttime = String.valueOf(test[i].startTime);
+                    starttimeenhancedarray[i] = starttime.substring(14,19);
+                }
+                for (int i=0;i<test.length;i++) {
+                    Duration currentplayertime = mp3player.getCurrentTime();
+                    if (starttimeenhancedarray[i].equals(formatDuration(currentplayertime))) {
+                        lyricstxt.setText(String.valueOf(test[i].text));
+                    }
                 }
             }
         });

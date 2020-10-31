@@ -112,7 +112,7 @@ public class Download_Encrypt_Decrypt {
             decrypted.write(song_byte);
         }
 
-        System.out.println("Made the Song "+file.getName()+" accessable to the user temperorily in .buffer.mp3");
+        System.out.println("Made the Song "+file.getName()+" accessable to the user temperorily in .buffer.ampify");
 
         try(OutputStream outputStream = new FileOutputStream(song_buffer_location)) {
             decrypted.writeTo(outputStream);
@@ -120,6 +120,36 @@ public class Download_Encrypt_Decrypt {
             e.printStackTrace();
         }
     }
+
+    /**
+     * @param song_name without song format as stored in the server ( as S#001 ) and the srt is downloaded in
+     *                  @BUFFER_FOLDER
+     * @throws IOException
+     */
+    public static void download_srt(String song_name) throws IOException {
+
+        //setting up connection
+        String name_while_downloading = use_song_name(song_name);
+        String URL = query_url + name_while_downloading + ".srt";
+        URLConnection conn = new URL(URL).openConnection();
+        InputStream is = conn.getInputStream();
+        ByteArrayOutputStream downloaded_srt = new ByteArrayOutputStream();
+        //writing bytes on downloaded_srt ByteArrayOutputStream
+        byte[] buffer = new byte[4096];
+        int len;
+        while ((len = is.read(buffer)) > 0) {
+            downloaded_srt.write(buffer, 0, len);
+        }                                                                                         //downloaded the songs
+        if(downloaded_srt==null) return;
+
+
+        //saving the srt in buffer folder
+        try(OutputStream outputStream = new FileOutputStream(BUFFER_FOLDER+song_name+".srt")) {
+            downloaded_srt.writeTo(outputStream);
+        }
+
+    }
+
 
     //
     //Files.createDirectories(Paths.get("/Your/Path/Here"));

@@ -25,6 +25,7 @@ public class DownloadSong extends Service<String> {
     protected Task createTask() {
         return new Task<String>() {
             protected String call() throws Exception {
+
                 Download_Encrypt_Decrypt.encrypt_and_download_song(CURRENTLY_PLAYING,save_as);//This method decrypt the song
                 return null;
 
