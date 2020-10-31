@@ -45,8 +45,9 @@ public class GroupControl implements Initializable {
     public ListView groupUserListView;
 
     private ActiveProfile currProfile = ActiveProfile.getProfile();
-    private Group selectedGroup;
-    private synchronized void assignGroupSelection(Group group) {
+
+    public static Group selectedGroup;
+    private static synchronized void assignGroupSelection(Group group) {
         selectedGroup = group;
     }
 
@@ -150,9 +151,18 @@ public class GroupControl implements Initializable {
                     assignGroupSelection(incomingLoadGrpResponse.getGroupFound());
 
                     Platform.runLater(()-> {
-                        System.out.println(selectedGroup.getGroupId());
-                        for (int i=0; i<selectedGroup.getGroupMembers().size(); i++)
-                            System.out.println(selectedGroup.getGroupMembers().get(i));
+
+                        Parent groupViewRoot = null;
+                        try {
+                            groupViewRoot = FXMLLoader.load(getClass().getResource("/resources/groupView.fxml"));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        Scene groupViewScene = new Scene(groupViewRoot);
+                        Stage groupViewStage = (Stage) joinGroupBtn.getScene().getWindow();
+                        groupViewStage.setScene(groupViewScene);
+                        groupViewStage.show();
+
                     });
                 } catch (IOException | ClassNotFoundException e) {
                     e.printStackTrace();

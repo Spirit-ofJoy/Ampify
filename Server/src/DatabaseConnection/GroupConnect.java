@@ -1,5 +1,6 @@
 package DatabaseConnection;
 
+import Responses.LoadGroupChatResponse;
 import Responses.LoadGroupResponse;
 import Responses.PersonalGroupsResponse;
 import Responses.UserListResponse;
@@ -74,7 +75,7 @@ public class GroupConnect extends DatabaseConnect{
             insertionPreStat.execute();
 
             //Create group's playlist
-            PlaylistPick.creatingPlaylist("", groupID, groupName+"'s Playlist", 0);
+            PlaylistPick.creatingPlaylist(null, groupID, groupName+"'s Playlist", 0);
 
         }  catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -129,6 +130,7 @@ public class GroupConnect extends DatabaseConnect{
         return null;
     }
 
+
     public static LoadGroupResponse getGroupInfo(String grpId) {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -145,7 +147,6 @@ public class GroupConnect extends DatabaseConnect{
             String membersString = resultSet.getString("Users_incl");
             for (String temp: membersString.split("-")){
                 memberId.add(temp);
-                System.out.println(temp);
             }
 
             String searchUsernameQuery = "SELECT Uname FROM users WHERE USERID = ?";
@@ -179,6 +180,64 @@ public class GroupConnect extends DatabaseConnect{
         return null;
 
     }
+
+
+    public static LoadGroupChatResponse gettingGroupChat(String groupId) {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            connection = DriverManager.getConnection(getSqlPath(), getSqlName(), getSqlPaswd());
+
+            String gchatQuery = "SELECT * FROM user_groups WHERE GROUP_ID = ?";
+            PreparedStatement gchatPreStat = connection.prepareStatement(gchatQuery);
+            gchatPreStat.setString(1, groupId);
+            ResultSet resultSet = gchatPreStat.executeQuery();
+            resultSet.next();
+
+            String chat = resultSet.getString("GrpMsgs");
+            return new LoadGroupChatResponse(chat);
+
+        }  catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }  catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }  finally {
+            try {
+                //Closes connection to avoid any database tampering
+                connection.close();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
+        return null;
+    }
+
+    public static void saveChat(String message, String groupId) {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            connection = DriverManager.getConnection(getSqlPath(), getSqlName(), getSqlPaswd());
+
+            String gchatQuery = "UPDATE user_groups SET GrpMsgs = CONCAT(GrpMsgs, ?) WHERE GROUP_ID = ?";
+            PreparedStatement gchatPreStat = connection.prepareStatement(gchatQuery);
+            gchatPreStat.setString(1, message);
+            gchatPreStat.setString(2, groupId);
+            gchatPreStat.execute();
+
+
+        }  catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }  catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }  finally {
+            try {
+                //Closes connection to avoid any database tampering
+                connection.close();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
+    }
+
+
 }
 
 
