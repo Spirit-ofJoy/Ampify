@@ -19,6 +19,7 @@ import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 import utility.ActiveProfile;
 import main.ClientMain;
+import utility.CommonElements;
 import utility.MoodSelection;
 import utility.SongInfo;
 
@@ -284,37 +285,37 @@ public class ProfileControl implements Initializable {
     //Liking
     public void mostViewedLiking() {
         int index =  mostViewedListView.getSelectionModel().getSelectedIndex();
-        System.out.println(topHitsCollection.get(index).getSongID());
+        CommonElements.like(topHitsCollection.get(index).getSongID());
     }
     public void recommendsLiking() {
         int index =  recommendsListView.getSelectionModel().getSelectedIndex();
-        System.out.println(recommendsCollection.get(index).getSongID());
+        CommonElements.like(recommendsCollection.get(index).getSongID());
     }
     public void newReleasesLiking() {
         int index =  newReleasesListView.getSelectionModel().getSelectedIndex();
-        System.out.println(newReleasesCollection.get(index).getSongID());
+        CommonElements.like(newReleasesCollection.get(index).getSongID());
     }
     public void moodLiking() {
         int index =  moodListView.getSelectionModel().getSelectedIndex();
-        System.out.println(moodCollectionIds.get(index));
+        CommonElements.like(moodCollectionIds.get(index));
     }
 
     //Unliking
     public void mostViewedUnliking() {
         int index =  mostViewedListView.getSelectionModel().getSelectedIndex();
-        System.out.println(topHitsCollection.get(index).getSongID());
+        CommonElements.unlike(topHitsCollection.get(index).getSongID());
     }
     public void recommendsUnliking() {
         int index =  recommendsListView.getSelectionModel().getSelectedIndex();
-        System.out.println(recommendsCollection.get(index).getSongID());
+        CommonElements.unlike(recommendsCollection.get(index).getSongID());
     }
     public void newReleasesUnliking() {
         int index =  newReleasesListView.getSelectionModel().getSelectedIndex();
-        System.out.println(newReleasesCollection.get(index).getSongID());
+        CommonElements.unlike(newReleasesCollection.get(index).getSongID());
     }
     public void moodUnliking() {
         int index =  moodListView.getSelectionModel().getSelectedIndex();
-        System.out.println(moodCollectionIds.get(index));
+        CommonElements.unlike(moodCollectionIds.get(index));
     }
 
 

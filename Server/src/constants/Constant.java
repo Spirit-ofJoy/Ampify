@@ -19,6 +19,7 @@ public enum Constant {
     IMPORT_PLAYLIST,
     USERS_LIST,
     SONG_PLAYED,
+    SONG_LIKED,
     CREATE_GROUP,
     PERSONAL_GROUPS_SET,
     LOAD_GROUP,

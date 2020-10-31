@@ -159,6 +159,11 @@ public class HandleClient implements Runnable {
                     SearchSongs.updateSongPlayed(songPlayedRequest.getUserId(), songPlayedRequest.getHistoryString(),
                             songPlayedRequest.getSongId());
                 }
+                //Records and changes database for a song liked
+                else if ( incomingRequest.getReqType().equals(String.valueOf(Constant.SONG_LIKED)) ) {
+                    LikedRequest likedRequest = (LikedRequest) incomingRequest;
+                    SearchSongs.updateSongLiked(likedRequest.getUser(), likedRequest.getLikedSongs());
+                }
                 //Executes a request to create a new group
                 else if ( incomingRequest.getReqType().equals(String.valueOf(Constant.CREATE_GROUP))) {
                     CreateGroupRequest createGroupRequest = (CreateGroupRequest) incomingRequest;
