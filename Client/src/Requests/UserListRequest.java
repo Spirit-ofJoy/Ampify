@@ -3,11 +3,9 @@ package Requests;
 import constants.Constant;
 
 public class UserListRequest extends Request{
-    private String userId;
 
-    public UserListRequest(String uid) {
+    public UserListRequest() {
         this.reqType = String.valueOf(Constant.USERS_LIST);
-        this.userId = uid;
     }
 
     @Override

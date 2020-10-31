@@ -130,5 +130,42 @@ public class PlaylistPick extends DatabaseConnect{
         }
     }
 
+    public static Playlist getGroupPlaylist(String gid) {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            connection = DriverManager.getConnection(getSqlPath(), getSqlName(), getSqlPaswd());
+
+            String searchQuery = "SELECT PLAYLIST_ID, Playlist_Name, Owner, Songs_incl, Visibility FROM playlists WHERE Owner = ?";
+            PreparedStatement searchPreStat = connection.prepareStatement(searchQuery);
+
+            searchPreStat.setString(1, gid);
+            ResultSet resultSet = searchPreStat.executeQuery();
+            resultSet.next();
+
+            Playlist grpPlaylist = new Playlist( resultSet.getString("PLAYLIST_ID"), resultSet.getString("Playlist_Name"),
+                    resultSet.getString("Owner"), resultSet.getString("Songs_incl"),
+                    Integer.parseInt(resultSet.getString("Visibility")), gid );
+
+            ArrayList<String> temp = SearchSongs.getSongNames(grpPlaylist.getSongID());
+            grpPlaylist.songNames = temp;
+
+            return grpPlaylist;
+
+        }  catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }  catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }  finally {
+            try {
+                //Closes connection to avoid any database tampering
+                connection.close();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
+        //In case no viable list found
+        return null;
+    }
+
 
 }

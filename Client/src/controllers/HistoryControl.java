@@ -9,15 +9,16 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import utility.ActiveProfile;
 import main.ClientMain;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class HistoryControl implements Initializable {
 
@@ -26,6 +27,7 @@ public class HistoryControl implements Initializable {
     public Button likeBtn;
     public Button unlikeBtn;
     public ListView historyListView;
+    public Label mostFreqSong;
 
     private ActiveProfile currProfile = ActiveProfile.getProfile();
     private ArrayList<String> currHistory = currProfile.History;
@@ -63,6 +65,42 @@ public class HistoryControl implements Initializable {
         profileStage.show();
     }
 
+
+    private static String mostFrequent(ArrayList<String> Names) {
+        ArrayList<String> songNames = new ArrayList<String>();
+
+        for (String temp : Names) {
+            songNames.add(temp);
+        }
+
+        Collections.sort(songNames);
+
+        int max_count = 1;
+        String mostFreq = songNames.get(0);
+        int curr_count = 1;
+
+        for (int i = 1; i < songNames.size(); i++) {
+            if (songNames.get(i).equals(songNames.get(i - 1))) {
+                curr_count++;
+            } else {
+                if (curr_count > max_count) {
+                    max_count = curr_count;
+                    mostFreq = songNames.get(i - 1);
+                }
+                curr_count = 1;
+            }
+        }
+
+        if (curr_count > max_count) {
+            max_count = curr_count;
+            mostFreq = songNames.get(songNames.size()-1);
+        }
+
+        return mostFreq;
+    }
+
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -90,6 +128,7 @@ public class HistoryControl implements Initializable {
                         for(int i = currHistory.size()-1; i>= 0; i--) {
                             historyListView.getItems().add(currHistoryNames.get(i));
                         }
+                        mostFreqSong.setText(mostFrequent(currHistoryNames));
                     });
 
                 } catch (IOException e) {

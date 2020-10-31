@@ -112,4 +112,36 @@ public class SearchSongs extends DatabaseConnect{
         return null;
     }
 
+    //Update database for song played
+    public static void updateSongPlayed(String userid, String historyList, String song) {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            connection = DriverManager.getConnection(getSqlPath(), getSqlName(), getSqlPaswd());
+
+            //Updates View Count
+            String updateViewQuery = "UPDATE songs SET Total_Views = Total_Views+1 WHERE SONG_ID = ?";
+            PreparedStatement updateViewPreStat = connection.prepareStatement(updateViewQuery);
+            updateViewPreStat.setString(1, song);
+            updateViewPreStat.execute();
+
+            //Updates History
+            String updateHistoryQuery = "UPDATE user_interact SET History = ? WHERE USERID = ?";
+            PreparedStatement updateHistoryPreStat = connection.prepareStatement(updateHistoryQuery);
+            updateHistoryPreStat.setString(1, historyList);
+            updateHistoryPreStat.setString(2, userid);
+            updateHistoryPreStat.execute();
+
+        }  catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }  catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }  finally {
+            try {
+                //Closes connection to avoid any database tampering
+                connection.close();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
+    }
 }

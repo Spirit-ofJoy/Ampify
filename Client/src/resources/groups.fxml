@@ -21,7 +21,7 @@
                         <ListView fx:id="groupsListView" prefHeight="310.0" prefWidth="600.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="20.0" />
                         <AnchorPane layoutY="362.0" prefHeight="59.0" prefWidth="614.0">
                            <children>
-                              <Button fx:id="joinGroupBtn" layoutX="270.0" layoutY="17.0" mnemonicParsing="false" text="Join Group" />
+                              <Button fx:id="joinGroupBtn" layoutX="270.0" layoutY="17.0" mnemonicParsing="false" onAction="#openGroup" text="Join Group" />
                            </children>
                         </AnchorPane>
                      </children>
@@ -34,10 +34,11 @@
                      <children>
                         <TextField fx:id="newGrpNameFld" layoutX="14.0" layoutY="14.0" prefHeight="26.0" prefWidth="582.0" promptText="Enter Group Name" />
                         <ListView fx:id="allUsersListView" layoutY="91.0" prefHeight="254.0" prefWidth="575.0" AnchorPane.bottomAnchor="90.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="275.0" AnchorPane.topAnchor="70.0" />
-                        <ListView fx:id="groupUserListView" prefHeight="310.0" prefWidth="600.0" AnchorPane.bottomAnchor="90.0" AnchorPane.leftAnchor="350.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="70.0" />
-                        <Button layoutX="142.0" layoutY="346.0" mnemonicParsing="false" text="Add User" AnchorPane.bottomAnchor="50.0" />
-                        <Button layoutX="434.0" layoutY="346.0" mnemonicParsing="false" text="Remove User" />
-                        <Button layoutX="508.0" layoutY="382.0" mnemonicParsing="false" text="Create Group" />
+                        <ListView fx:id="groupUserListView" prefHeight="310.0" prefWidth="600.0" AnchorPane.bottomAnchor="90.0" AnchorPane.leftAnchor="350.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="90.0" />
+                        <Button layoutX="142.0" layoutY="346.0" mnemonicParsing="false" onAction="#addToGroup" text="Add User" AnchorPane.bottomAnchor="50.0" />
+                        <Button layoutX="434.0" layoutY="346.0" mnemonicParsing="false" onAction="#removeFromGroup" text="Remove User" />
+                        <Button layoutX="508.0" layoutY="382.0" mnemonicParsing="false" onAction="#createGroup" text="Create Group" />
+                        <Label layoutX="375.0" layoutY="70.0" text="You will already be a part of this new group" AnchorPane.bottomAnchor="334.0" AnchorPane.leftAnchor="350.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="70.0" />
                      </children>
                   </AnchorPane>
                </content>

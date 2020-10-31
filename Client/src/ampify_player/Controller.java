@@ -55,6 +55,7 @@ import java.util.*;
 import static ampify_player.Constants.*;
 import static ampify_player.functions.*;
 import ampify_player.Song_Queue;
+import utility.CommonElements;
 
 public class Controller<e> implements Initializable {
 
@@ -215,6 +216,11 @@ public class Controller<e> implements Initializable {
 
         Controller.CURRENTLY_PLAYING = playSong;//we set the CURRENTLY_PLAYING SONG
         URL = useURL(query_url, use_song_name(CURRENTLY_PLAYING));//preparing an Http query for requesting the song
+
+        //Records playing is song is unrepeated
+        if (!is_repeat) {
+            CommonElements.songPlayed(playSong);
+        }
 
         mp3player = null;//emptying the mp3player
 

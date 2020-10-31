@@ -117,7 +117,6 @@ public class HandleClient implements Runnable {
                     PersonalPlaylistsRequest playlistsRequest = (PersonalPlaylistsRequest) incomingRequest;
                     ArrayList<Playlist> playlistsResult = PlaylistPick.getPersonalPlaylist(playlistsRequest.getUserID());
 
-                    //Send back names of songs on history
                     objectOutputStream.writeObject(new PersonalPlaylistsResponse(playlistsResult));
                     objectOutputStream.flush();
                 }
@@ -138,7 +137,34 @@ public class HandleClient implements Runnable {
                 //Send back list of registered Users
                 else if ( incomingRequest.getReqType().equals(String.valueOf(Constant.USERS_LIST)) ) {
                     UserListRequest userListRequest = (UserListRequest) incomingRequest;
+                    objectOutputStream.writeObject(GroupConnect.getUsers());
+                }
+                //Records and changes database for a song played
+                else if ( incomingRequest.getReqType().equals(String.valueOf(Constant.SONG_PLAYED)) ) {
+                    SongPlayedRequest songPlayedRequest = (SongPlayedRequest) incomingRequest;
+                    SearchSongs.updateSongPlayed(songPlayedRequest.getUserId(), songPlayedRequest.getHistoryString(),
+                            songPlayedRequest.getSongId());
+                }
+                //Executes a request to create a new group
+                else if ( incomingRequest.getReqType().equals(String.valueOf(Constant.CREATE_GROUP))) {
+                    CreateGroupRequest createGroupRequest = (CreateGroupRequest) incomingRequest;
+                    GroupConnect.creatingGroup(createGroupRequest.getUsersList(), createGroupRequest.getGrpName());
+                }
+                //executes to give groups to display for a user
+                else if(incomingRequest.getReqType().equals(String.valueOf(Constant.PERSONAL_GROUPS_SET))) {
+                    PersonalGroupsRequest groupsRequest = (PersonalGroupsRequest) incomingRequest;
 
+                    //Send back names of groups
+                    objectOutputStream.writeObject(GroupConnect.getPersonalGroups(groupsRequest.getUserID()));
+                    objectOutputStream.flush();
+                }
+                //Gives Group info to Client
+                else if(incomingRequest.getReqType().equals(String.valueOf(Constant.LOAD_GROUP))) {
+                    LoadGroupRequest loadGroupRequest = (LoadGroupRequest) incomingRequest;
+
+                    //Send back group's info
+                    objectOutputStream.writeObject(GroupConnect.getGroupInfo(loadGroupRequest.getGrpId()));
+                    objectOutputStream.flush();
                 }
 
             } catch (EOFException e) {
