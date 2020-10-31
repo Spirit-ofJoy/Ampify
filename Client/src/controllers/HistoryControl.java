@@ -15,6 +15,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import utility.ActiveProfile;
 import main.ClientMain;
+import utility.CommonElements;
 
 import java.io.IOException;
 import java.net.URL;
@@ -151,13 +152,13 @@ public class HistoryControl implements Initializable {
     public void liking() {
         //Adding to liked songs
         int index = historyListView.getSelectionModel().getSelectedIndex();
-        System.out.println(currHistoryIds.get(currHistory.size()-(index+1)));
+        CommonElements.like(currHistoryIds.get(currHistory.size()-(index+1)));
     }
 
     public void unliking() {
         //Adding to disliked songs
         int index = historyListView.getSelectionModel().getSelectedIndex();
-        System.out.println(currHistoryIds.get(currHistory.size()-(index+1)));
+        CommonElements.unlike(currHistoryIds.get(currHistory.size()-(index+1)));
     }
 
 }

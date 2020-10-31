@@ -47,7 +47,7 @@ public class MoodSelection {
         if(currentTime.compareTo("06:00")<0){
             for(int i=0; i< historySongTime.size(); i++) {
                 if(historySongTime.get(i).compareTo("06:00")<0){
-                    if(!moodSongsId.contains(historySongID)){
+                    if(!moodSongsId.contains(historySongID.get(i))){
                         moodSongsId.add(historySongID.get(i));
                     }
                 }
@@ -57,7 +57,7 @@ public class MoodSelection {
         else if(currentTime.compareTo("12:00")<0){
             for(int i=0; i< historySongTime.size(); i++) {
                 if((historySongTime.get(i).compareTo("12:00")<0)&&(historySongTime.get(i).compareTo("06:00")>=0)){
-                    if(!moodSongsId.contains(historySongID)){
+                    if(!moodSongsId.contains(historySongID.get(i))){
                         moodSongsId.add(historySongID.get(i));
                     }
                 }
@@ -67,7 +67,7 @@ public class MoodSelection {
         else if(currentTime.compareTo("18:00")<0){
             for(int i=0; i< historySongTime.size(); i++) {
                 if((historySongTime.get(i).compareTo("18:00")<0)&&(historySongTime.get(i).compareTo("12:00")>=0)){
-                    if(!moodSongsId.contains(historySongID)){
+                    if(!moodSongsId.contains(historySongID.get(i))){
                         moodSongsId.add(historySongID.get(i));
                     }
                 }
@@ -77,7 +77,7 @@ public class MoodSelection {
         else if(currentTime.compareTo("24:00")<0){
             for(int i=0; i< historySongTime.size(); i++) {
                 if((historySongTime.get(i).compareTo("24:00")<0)&&(historySongTime.get(i).compareTo("18:00")>=0)){
-                    if(!moodSongsId.contains(historySongID)){
+                    if(!moodSongsId.contains(historySongID.get(i))){
                         moodSongsId.add(historySongID.get(i));
                     }
                 }

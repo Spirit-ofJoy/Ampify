@@ -41,8 +41,8 @@
                                  <children>
                                     <AnchorPane layoutX="14.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="102.0" prefWidth="614.0">
                                        <children>
-                                          <Button fx:id="importPlaylistBtn" layoutX="494.0" layoutY="19.0" mnemonicParsing="false" text="Import Playlist" AnchorPane.rightAnchor="25.0" />
-                                          <TextField fx:id="sharedPlaylistCodeFld" layoutY="18.0" prefHeight="26.0" prefWidth="489.0" promptText="Enter Playlist Code" AnchorPane.leftAnchor="6.0" />
+                                          <Button fx:id="importPlaylistBtn" layoutX="494.0" layoutY="19.0" mnemonicParsing="false" onAction="#importPlaylist" text="Import Playlist" AnchorPane.rightAnchor="25.0" />
+                                          <TextField fx:id="importPlaylistTextFld" layoutY="18.0" prefHeight="26.0" prefWidth="489.0" promptText="Enter Playlist Code" AnchorPane.leftAnchor="6.0" />
                                           <TextField fx:id="newPlaylistName" layoutX="4.0" layoutY="75.0" prefHeight="26.0" prefWidth="590.0" promptText="New Playlist Name" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="20.0" />
                                           <Label layoutX="296.0" layoutY="51.0" text="OR">
                                              <font>
@@ -89,8 +89,8 @@
                         <ListView fx:id="sharePlaylistsListView" prefHeight="310.0" prefWidth="600.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="20.0" />
                         <AnchorPane layoutY="362.0" prefHeight="59.0" prefWidth="614.0">
                            <children>
-                              <Button fx:id="generateCodeBtn" layoutX="14.0" layoutY="17.0" mnemonicParsing="false" text="Generate Code" AnchorPane.leftAnchor="15.0" />
-                              <TextField layoutX="123.0" layoutY="17.0" prefHeight="26.0" prefWidth="476.0" AnchorPane.rightAnchor="15.0" />
+                              <Button fx:id="generateCodeBtn" layoutX="14.0" layoutY="17.0" mnemonicParsing="false" onAction="#generateCode" text="Generate Code" AnchorPane.leftAnchor="15.0" />
+                              <TextField fx:id="playlistCodeTextFld" layoutX="123.0" layoutY="17.0" prefHeight="26.0" prefWidth="476.0" promptText="Playlist Code Generated here" AnchorPane.rightAnchor="15.0" />
                            </children>
                         </AnchorPane>
                      </children>

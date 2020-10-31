@@ -17,6 +17,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import utility.ActiveProfile;
 import main.ClientMain;
+import utility.CommonElements;
 import utility.SongInfo;
 
 import java.io.IOException;
@@ -242,61 +243,61 @@ public class BrowsingControl implements Initializable {
     //Adding to Liked songs
     public void popLiking() {
         int index =  popListView.getSelectionModel().getSelectedIndex();
-        System.out.println(popList.get(index).getSongID());
+        CommonElements.like(popList.get(index).getSongID());
     }
     public void rnbLiking() {
         int index =  rnbListView.getSelectionModel().getSelectedIndex();
-        System.out.println(rnbList.get(index).getSongID());
+        CommonElements.like(rnbList.get(index).getSongID());
     }
     public void indieLiking() {
         int index =  indieListView.getSelectionModel().getSelectedIndex();
-        System.out.println(indieList.get(index).getSongID());
+        CommonElements.like(indieList.get(index).getSongID());
     }
     public void rockLiking() {
         int index =  rockListView.getSelectionModel().getSelectedIndex();
-        System.out.println(rockList.get(index).getSongID());
+        CommonElements.like(rockList.get(index).getSongID());
     }
     public void epopLiking() {
         int index =  epopListView.getSelectionModel().getSelectedIndex();
-        System.out.println(epopList.get(index).getSongID());
+        CommonElements.like(epopList.get(index).getSongID());
     }
     public void hiphopLiking() {
         int index =  hiphopListView.getSelectionModel().getSelectedIndex();
-        System.out.println(hiphopList.get(index).getSongID());
+        CommonElements.like(hiphopList.get(index).getSongID());
     }
     public void elecLiking() {
         int index =  elecListView.getSelectionModel().getSelectedIndex();
-        System.out.println(elecList.get(index).getSongID());
+        CommonElements.like(elecList.get(index).getSongID());
     }
 
     //Adding to Disliked songs
     public void popUnliking() {
         int index =  popListView.getSelectionModel().getSelectedIndex();
-        System.out.println(popList.get(index).getSongID());
+        CommonElements.unlike(popList.get(index).getSongID());
     }
     public void rnbUnliking() {
         int index =  rnbListView.getSelectionModel().getSelectedIndex();
-        System.out.println(rnbList.get(index).getSongID());
+        CommonElements.unlike(rnbList.get(index).getSongID());
     }
     public void indieUnliking() {
         int index =  indieListView.getSelectionModel().getSelectedIndex();
-        System.out.println(indieList.get(index).getSongID());
+        CommonElements.unlike(indieList.get(index).getSongID());
     }
     public void rockUnliking() {
         int index =  rockListView.getSelectionModel().getSelectedIndex();
-        System.out.println(rockList.get(index).getSongID());
+        CommonElements.unlike(rockList.get(index).getSongID());
     }
     public void epopUnliking() {
         int index =  epopListView.getSelectionModel().getSelectedIndex();
-        System.out.println(epopList.get(index).getSongID());
+        CommonElements.unlike(epopList.get(index).getSongID());
     }
     public void hiphopUnliking() {
         int index =  hiphopListView.getSelectionModel().getSelectedIndex();
-        System.out.println(hiphopList.get(index).getSongID());
+        CommonElements.unlike(hiphopList.get(index).getSongID());
     }
     public void elecUnliking() {
         int index =  elecListView.getSelectionModel().getSelectedIndex();
-        System.out.println(elecList.get(index).getSongID());
+        CommonElements.unlike(elecList.get(index).getSongID());
     }
 
 
@@ -371,11 +372,11 @@ public class BrowsingControl implements Initializable {
     }
     public void artistLiking() {
         int index =  artistResultListView.getSelectionModel().getSelectedIndex();
-        System.out.println(artistSearchList.get(index).getSongID());
+        CommonElements.like(artistSearchList.get(index).getSongID());
     }
     public void artistUnliking() {
         int index =  artistResultListView.getSelectionModel().getSelectedIndex();
-        System.out.println(artistSearchList.get(index).getSongID());
+        CommonElements.unlike(artistSearchList.get(index).getSongID());
     }
 
 
@@ -450,11 +451,11 @@ public class BrowsingControl implements Initializable {
     }
     public void albumLiking() {
         int index =  albumResultListView.getSelectionModel().getSelectedIndex();
-        System.out.println(albumSearchList.get(index).getSongID());
+        CommonElements.like(albumSearchList.get(index).getSongID());
     }
     public void albumUnliking() {
         int index =  albumResultListView.getSelectionModel().getSelectedIndex();
-        System.out.println(albumSearchList.get(index).getSongID());
+        CommonElements.unlike(albumSearchList.get(index).getSongID());
     }
 
 }

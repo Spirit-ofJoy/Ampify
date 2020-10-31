@@ -134,6 +134,20 @@ public class HandleClient implements Runnable {
                     PlaylistPick.creatingPlaylist(createPlaylistRequest.getSongsList(), createPlaylistRequest.getOwnerID(),
                             createPlaylistRequest.getPlaylistName(), createPlaylistRequest.getVisibility());
                 }
+                //Show shareable playlists
+                else if(incomingRequest.getReqType().equals(String.valueOf(Constant.SHARE_PLAYLISTS_SET))) {
+                    ShareablePlaylistsRequest playlistsRequest = (ShareablePlaylistsRequest) incomingRequest;
+                    ArrayList<Playlist> playlistsResult = PlaylistPick.getShareablePlaylist(playlistsRequest.getUserID());
+
+                    objectOutputStream.writeObject(new ShareablePlaylistsResponse(playlistsResult));
+                    objectOutputStream.flush();
+                }
+                //Import Playlist
+                else if(incomingRequest.getReqType().equals(String.valueOf(Constant.IMPORT_PLAYLIST))) {
+                    ImportPlaylistRequest importPlaylistRequest = (ImportPlaylistRequest) incomingRequest;
+
+                    PlaylistPick.importingPlaylist(importPlaylistRequest.getPlaylistID(), importPlaylistRequest.getUserID());
+                }
                 //Send back list of registered Users
                 else if ( incomingRequest.getReqType().equals(String.valueOf(Constant.USERS_LIST)) ) {
                     UserListRequest userListRequest = (UserListRequest) incomingRequest;
@@ -144,6 +158,11 @@ public class HandleClient implements Runnable {
                     SongPlayedRequest songPlayedRequest = (SongPlayedRequest) incomingRequest;
                     SearchSongs.updateSongPlayed(songPlayedRequest.getUserId(), songPlayedRequest.getHistoryString(),
                             songPlayedRequest.getSongId());
+                }
+                //Records and changes database for a song liked
+                else if ( incomingRequest.getReqType().equals(String.valueOf(Constant.SONG_LIKED)) ) {
+                    LikedRequest likedRequest = (LikedRequest) incomingRequest;
+                    SearchSongs.updateSongLiked(likedRequest.getUser(), likedRequest.getLikedSongs());
                 }
                 //Executes a request to create a new group
                 else if ( incomingRequest.getReqType().equals(String.valueOf(Constant.CREATE_GROUP))) {

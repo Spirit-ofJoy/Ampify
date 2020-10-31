@@ -1,10 +1,9 @@
 package controllers;
 
 
-import Requests.CreatePlaylistRequest;
-import Requests.PersonalPlaylistsRequest;
-import Requests.SongSearchRequest;
+import Requests.*;
 import Responses.PersonalPlaylistsResponse;
+import Responses.ShareablePlaylistsResponse;
 import Responses.SongSearchResponse;
 import ampify_player.Song_Queue;
 import javafx.scene.control.CheckBox;
@@ -42,10 +41,6 @@ public class PlaylistsControl implements Initializable {
     private synchronized void addToPersonalPlaylists(Playlist songCollection) {
         personalPlaylists.add(songCollection);
     }
-    private ArrayList<SongInfo> allSongsList = new ArrayList<SongInfo>();
-    private synchronized void addToSongsCollection(SongInfo Song) {
-        allSongsList.add(Song);
-    }
 
 
     //Go back to profile
@@ -62,6 +57,8 @@ public class PlaylistsControl implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        playlistCodeTextFld.setEditable(false);
 
         new Thread(new Runnable() {
             @Override
@@ -88,6 +85,16 @@ public class PlaylistsControl implements Initializable {
                         addToSongsCollection(temp);
                     }
 
+                    //Get sharable playlists
+                    ClientMain.clientOutputStream.writeObject(new ShareablePlaylistsRequest(currProfile.getUserID()));
+                    ClientMain.clientOutputStream.flush();
+                    ShareablePlaylistsResponse shareablePlaylistsResponse = (ShareablePlaylistsResponse) ClientMain.clientInputStream.readObject();
+
+                    //Store in local arraylist
+                    for(int i=0; i< shareablePlaylistsResponse.sharePlaylists.size(); i++) {
+                        addToSharePlaylists(shareablePlaylistsResponse.sharePlaylists.get(i));
+                    }
+
                     //Display on GUI
                     Platform.runLater(() -> {
                         //Update GUI to show viewable playlists
@@ -105,6 +112,17 @@ public class PlaylistsControl implements Initializable {
                         //Update GUI for Searched songs to load
                         for (int i = 0; i < allSongsList.size(); i++) {
                             allSongsListView.getItems().add(allSongsList.get(i).getSongDescription());
+                        }
+
+                        //Update GUI to show shareable playlists
+                        for(int i = 0; i< shareablePlaylistsResponse.sharePlaylists.size(); i++){
+                            display = "❒" +sharePlaylists.get(i).getName();
+
+                            for(int j=0; j< sharePlaylists.get(i).songNames.size(); j++) {
+                                display +="\n    » " +sharePlaylists.get(i).songNames.get(j);
+                            }
+
+                            sharePlaylistsListView.getItems().add(display);
                         }
                     });
 
@@ -153,6 +171,7 @@ public class PlaylistsControl implements Initializable {
     public Button addToPlaylistBtn;
     public Button removeFromPlaylistBtn;
     public TextField newPlaylistName;
+    public TextField importPlaylistTextFld;
     public CheckBox playlistPrivate;
 
 
@@ -161,6 +180,33 @@ public class PlaylistsControl implements Initializable {
 
     private Playlist newCreatedPlaylist = new Playlist(currProfile.getUserID());
     private String temp = "";
+    private ArrayList<SongInfo> allSongsList = new ArrayList<SongInfo>();
+    private synchronized void addToSongsCollection(SongInfo Song) {
+        allSongsList.add(Song);
+    }
+
+
+    public void importPlaylist() {
+        String code = importPlaylistTextFld.getText();
+
+        if(code.substring(0, 22).equals("ampify/share_playlist/")) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        //Create new playlist and store on Server Database
+                        ClientMain.clientOutputStream.writeObject(new ImportPlaylistRequest(currProfile.getUserID(), code.substring(22)));
+                        ClientMain.clientOutputStream.flush();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }).start();
+        }else {
+            importPlaylistTextFld.setText("Invalid code");
+        }
+    }
+
 
 
     public void addToPlaylist() {
@@ -228,5 +274,21 @@ public class PlaylistsControl implements Initializable {
         }).start();
 
     }
+
+    //------*------*------*------*------*------*Share Playlists Section*------*------*------*------*------*------//
+    public TextField playlistCodeTextFld;
+    public ListView sharePlaylistsListView;
+
+    private ArrayList<Playlist> sharePlaylists = new ArrayList<Playlist>();
+    private synchronized void addToSharePlaylists(Playlist songPlaylist) {
+        sharePlaylists.add(songPlaylist);
+    }
+
+    public void generateCode() {
+        int index = sharePlaylistsListView.getSelectionModel().getSelectedIndex();
+        String code = "ampify/share_playlist/" + sharePlaylists.get(index).getPlaylistID();
+        playlistCodeTextFld.setText(code);
+    }
+
 
 }
