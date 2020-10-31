@@ -2,7 +2,9 @@ package DatabaseConnection;
 
 import Responses.LoginResponse;
 import constants.Constant;
+import utility.PasswordEncryptor;
 
+import java.security.NoSuchAlgorithmException;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,7 +22,7 @@ public class NewLogin extends DatabaseConnect{
             String query = "SELECT USERID FROM users WHERE Uname = ? AND Password = ?";
             PreparedStatement preStat = connection.prepareStatement(query);
             preStat.setString(1, uname);
-            preStat.setString(2, paswd);
+            preStat.setString(2, PasswordEncryptor.encryptText(paswd));
             ResultSet result = preStat.executeQuery();
 
 
@@ -51,6 +53,8 @@ public class NewLogin extends DatabaseConnect{
             e.printStackTrace();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
         } finally {
             try {
                 //Closes connection to avoid any database tampering

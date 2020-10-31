@@ -166,6 +166,16 @@ public class HandleClient implements Runnable {
                     objectOutputStream.writeObject(GroupConnect.getGroupInfo(loadGroupRequest.getGrpId()));
                     objectOutputStream.flush();
                 }
+                //Gives back Group chat for a particular group
+                else if(incomingRequest.getReqType().equals(String.valueOf(Constant.LOAD_GROUP_CHATS))) {
+                    LoadGroupChatRequest loadGroupChatRequest = (LoadGroupChatRequest) incomingRequest;
+                    objectOutputStream.writeObject(GroupConnect.gettingGroupChat(loadGroupChatRequest.getGroupId()));
+                }
+                //Stores Chat Received
+                else if(incomingRequest.getReqType().equals(String.valueOf(Constant.CHAT_SEND))) {
+                    SendChatRequest chatRequest = (SendChatRequest) incomingRequest;
+                    GroupConnect.saveChat(chatRequest.getChatMsg(), chatRequest.getGroupId());
+                }
 
             } catch (EOFException e) {
                 System.out.println("[SERVER] User disconnected or offline.");

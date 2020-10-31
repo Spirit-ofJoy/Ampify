@@ -20,6 +20,8 @@ public enum Constant {
     CREATE_GROUP,
     PERSONAL_GROUPS_SET,
     LOAD_GROUP,
+    LOAD_GROUP_CHATS,
+    CHAT_SEND,
 
 
     //Types of execution state

@@ -27,8 +27,10 @@ public class Playlist implements Serializable {
         if(visible==1){ visibility = true; }
         else { visibility = false; }
 
-        for (String temp: sIdsIncluded.split("-")){
-            this.songID.add(temp);
+        if(sIdsIncluded!=null) {
+            for (String temp : sIdsIncluded.split("-")) {
+                this.songID.add(temp);
+            }
         }
     }
 

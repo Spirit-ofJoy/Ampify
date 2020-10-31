@@ -1,4 +1,4 @@
-package Encryptor;
+package utility;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -16,17 +16,5 @@ public class PasswordEncryptor {
             }
             return stringBuffer.toString();
     }
-    public static void main(String args[]) {
-        Scanner input = new Scanner(System.in);
-        System.out.println("Enter the piece of text that you want to hash : ");
-        String password = input.nextLine();
-        String encryptedpassword = null;
-        try {
-            encryptedpassword = encryptText(password);
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-        System.out.println("Entered Text : "+password);
-        System.out.println("Hashed password : "+encryptedpassword);
-    }
+
 }
