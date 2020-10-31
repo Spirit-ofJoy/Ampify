@@ -134,6 +134,20 @@ public class HandleClient implements Runnable {
                     PlaylistPick.creatingPlaylist(createPlaylistRequest.getSongsList(), createPlaylistRequest.getOwnerID(),
                             createPlaylistRequest.getPlaylistName(), createPlaylistRequest.getVisibility());
                 }
+                //Show shareable playlists
+                else if(incomingRequest.getReqType().equals(String.valueOf(Constant.SHARE_PLAYLISTS_SET))) {
+                    ShareablePlaylistsRequest playlistsRequest = (ShareablePlaylistsRequest) incomingRequest;
+                    ArrayList<Playlist> playlistsResult = PlaylistPick.getShareablePlaylist(playlistsRequest.getUserID());
+
+                    objectOutputStream.writeObject(new ShareablePlaylistsResponse(playlistsResult));
+                    objectOutputStream.flush();
+                }
+                //Import Playlist
+                else if(incomingRequest.getReqType().equals(String.valueOf(Constant.IMPORT_PLAYLIST))) {
+                    ImportPlaylistRequest importPlaylistRequest = (ImportPlaylistRequest) incomingRequest;
+
+                    PlaylistPick.importingPlaylist(importPlaylistRequest.getPlaylistID(), importPlaylistRequest.getUserID());
+                }
                 //Send back list of registered Users
                 else if ( incomingRequest.getReqType().equals(String.valueOf(Constant.USERS_LIST)) ) {
                     UserListRequest userListRequest = (UserListRequest) incomingRequest;
