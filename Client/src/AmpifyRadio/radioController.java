@@ -16,6 +16,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.stage.WindowEvent;
 import javafx.util.Duration;
 
 import java.io.*;
@@ -129,6 +130,9 @@ public class radioController {
             }
         });
 
+        /**
+         * Volume Slider active
+         */
         VolumeSlider.valueProperty().addListener(new InvalidationListener() {
             @Override
             public void invalidated(Observable observable) {
@@ -139,12 +143,18 @@ public class radioController {
     }
 
 
+    /**
+     * Load Radio Button loads radio mp3
+     */
     @FXML
     public void loadRadio(ActionEvent actionEvent) throws InterruptedException, IOException {
         setRadioData();
         startStreaming(song,Duration.millis(0));
     }
 
+    /**
+     * seeks to the currentl y position
+     */
     void startplaying() {
         double seekto = System.currentTimeMillis();
         player_time = new Duration(seekto);
@@ -152,6 +162,9 @@ public class radioController {
         mp3player.play();
     }
 
+    /**
+     * @param actionEvent Starts radio
+     */
     public void startRadio(ActionEvent actionEvent) {
         startplaying();
     }
@@ -161,7 +174,7 @@ public class radioController {
      * @throws IOException
      */
     public void setRadioData() throws IOException {
-        URLConnection conn = new URL("http://localhost:8000/ampify?radio=radio1").openConnection();
+        URLConnection conn = new URL(query_url_radio_server+"radio1").openConnection();
         InputStream is = conn.getInputStream();
         byte[] currently_playing_radio_data = new byte[128];
         is.read(currently_playing_radio_data);
@@ -183,13 +196,14 @@ public class radioController {
     }
 
     public void stopRadio(ActionEvent actionEvent) throws IOException, InterruptedException {
-        stopPlayback();
         setRadioData();
+        stopPlayback();
         startStreaming(song,Duration.millis(0));
 
     }
 
     void play_next() throws InterruptedException, IOException {
+            stopPlayback();
             setRadioData();
             startStreaming(song,Duration.millis(0));
             startplaying();

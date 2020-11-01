@@ -18,6 +18,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import utility.ActiveProfile;
 import main.ClientMain;
 import utility.CommonElements;
@@ -354,6 +355,11 @@ public class ProfileControl implements Initializable {
         playerStage.setScene(playerScene);
         playerStage.setTitle("Live Radio");
         playerStage.show();
+
+        playerStage.addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, event -> {
+            playerStage.close();
+        });
+
     }
 
 }
