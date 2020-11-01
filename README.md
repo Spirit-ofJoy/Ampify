@@ -25,8 +25,7 @@ Ampify is a Java-based music playing/streaming application. An Avishkar, Softabl
 3. Display all local music and play them.
 4. Sync lyrics display with music playback.
 5. Recommend a user new music based on his likes and basic feature #2.
-6. Recommend a user songs based on his previously played music at the similar time
-of the day.
+6. Recommend a user songs based on his previously played music at the similar time of the day.
 7. Display trending songs and rankings based on user play count.
 8. Create a shareable playlist and share it with other users.
 10. Downloaded music should not be accessible by local file system.
@@ -37,6 +36,9 @@ of the day.
 * JavaFX-sdk-15
 * Jfoenix-9.0.10
 * MySQL-connector-java-8.0.21
+* JLayer-1.0.1
+* Mp3-spi-1.9.5
+* Tritonus Share
 
 <a name="contributor"></a>
 
