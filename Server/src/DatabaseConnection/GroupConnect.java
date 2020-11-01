@@ -67,11 +67,12 @@ public class GroupConnect extends DatabaseConnect{
             String groupID = "G#"+grpCnt;
 
             //Create group in Database
-            String insertionQuery = "INSERT INTO user_groups (GROUP_ID, Grp_Name, Users_incl) VALUES (?, ?, ?)";
+            String insertionQuery = "INSERT INTO user_groups (GROUP_ID, Grp_Name, Users_incl, GrpMsgs) VALUES (?, ?, ?, ?)";
             PreparedStatement insertionPreStat = connection.prepareStatement(insertionQuery);
             insertionPreStat.setString(1, groupID);
             insertionPreStat.setString(2, groupName);
             insertionPreStat.setString(3, usersList);
+            insertionPreStat.setString(4, "[CHAT STARTED]%n%");
             insertionPreStat.execute();
 
             //Create group's playlist

@@ -38,10 +38,13 @@ public class GroupViewControl implements Initializable {
         groupChats = chat.replaceAll("%n%", "\n");
     }
 
+    private Thread autoUpdate;
+
     //Go back to groups
     public void backToGroups() throws IOException {
         System.out.println("[CLIENT] Group Page invoked.");
 
+        autoUpdate.stop();
         Parent groupsRoot = FXMLLoader.load(getClass().getResource("/resources/groups.fxml"));
         Scene groupsScene = new Scene(groupsRoot);
         Stage groupsStage = (Stage) backButton.getScene().getWindow();
@@ -65,6 +68,10 @@ public class GroupViewControl implements Initializable {
         membersListView.setMouseTransparent(true);
         chatsTextArea.setEditable(false);
         getMessages();
+
+        GroupViewControlAutoUpdate viewUpdate = new GroupViewControlAutoUpdate(GroupViewControl.this);
+        autoUpdate = new Thread(viewUpdate);
+        autoUpdate.start();
 
     }
 
@@ -115,7 +122,8 @@ public class GroupViewControl implements Initializable {
         }
     }
 
-    public void sendChat() {
+    public void sendChat() throws InterruptedException {
+        autoUpdate.sleep(1000);
         String msg = "[" + activeProfile.getUsername() +"] : ";
         msg+= chatMsgTextFld.getText();
         msg+= "%n%";

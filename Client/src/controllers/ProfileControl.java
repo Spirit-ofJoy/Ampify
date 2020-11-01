@@ -144,11 +144,17 @@ public class ProfileControl implements Initializable {
                 TopHitsResponse serverTopHitsResponse;
                 serverTopHitsResponse = (TopHitsResponse) ClientMain.clientInputStream.readObject();
 
-                //Request for Personalized Recommendations playlist sent and response received
-                ClientMain.clientOutputStream.writeObject(new RecommendsRequest(currProfile.getUserID(), currProfile.Liked));
-                ClientMain.clientOutputStream.flush();
-                RecommendsResponse serverRecommendsResponse;
-                serverRecommendsResponse = (RecommendsResponse) ClientMain.clientInputStream.readObject();
+                RecommendsResponse serverRecommendsResponse = null;
+                try {
+                    //Request for Personalized Recommendations playlist sent and response received
+                    ClientMain.clientOutputStream.writeObject(new RecommendsRequest(currProfile.getUserID(), currProfile.Liked));
+                    ClientMain.clientOutputStream.flush();
+                    serverRecommendsResponse = (RecommendsResponse) ClientMain.clientInputStream.readObject();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
 
                 //Request for New Releases playlist sent and response received
                 ClientMain.clientOutputStream.writeObject(new NewReleasesRequest());
@@ -164,9 +170,13 @@ public class ProfileControl implements Initializable {
                     addToTopHitsCollection(temp);
                 }
 
-                for (int i = 0; i < serverRecommendsResponse.recommendations.size(); i++) {
-                    temp = (SongInfo) serverRecommendsResponse.recommendations.get(i);
-                    addToRecommendsCollection(temp);
+                try {
+                    for (int i = 0; i < serverRecommendsResponse.recommendations.size(); i++) {
+                        temp = (SongInfo) serverRecommendsResponse.recommendations.get(i);
+                        addToRecommendsCollection(temp);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
 
                 for (int i = 0; i < newReleasesResponse.newSongsList.size(); i++) {
@@ -174,8 +184,14 @@ public class ProfileControl implements Initializable {
                     addToNewReleasesCollection(temp);
                 }
 
-                //Gets Mood based recommends
-                addToMoodCollectionNames(MoodSelection.getMoodRecommends());
+                try {
+                    //Gets Mood based recommends
+                    addToMoodCollectionNames(MoodSelection.getMoodRecommends());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
 
                 Platform.runLater(() -> {
 

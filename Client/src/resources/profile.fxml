@@ -70,8 +70,8 @@
             <AnchorPane layoutX="509.0" layoutY="334.0" prefHeight="113.0" prefWidth="111.0">
                <children>
                   <Button fx:id="moodQueueBtn" layoutX="10.0" layoutY="7.0" mnemonicParsing="false" onAction="#moodAddToQueue" text="Add to Queue" />
-                  <Button fx:id="moodLikeBtn" layoutX="12.0" layoutY="44.0" mnemonicParsing="false" onAction="#moodLiking" text="Like" />
-                  <Button fx:id="moodUnlikeBtn" layoutX="12.0" layoutY="80.0" mnemonicParsing="false" onAction="#moodUnliking" text="Unlike" />
+                  <Button fx:id="moodLikeBtn" layoutX="12.0" layoutY="44.0" mnemonicParsing="false" onAction="#moodLiking" text="Like" visible="false" />
+                  <Button fx:id="moodUnlikeBtn" layoutX="12.0" layoutY="80.0" mnemonicParsing="false" onAction="#moodUnliking" text="Unlike" visible="false" />
                </children>
             </AnchorPane>
             <AnchorPane layoutX="509.0" layoutY="466.0" prefHeight="113.0" prefWidth="111.0">
