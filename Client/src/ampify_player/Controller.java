@@ -203,6 +203,7 @@ public class Controller<e> implements Initializable {
     private Duration seekPosition = Duration.millis(0);
     boolean queue_playing = false;
     boolean is_repeat = false;
+    boolean is_shuffle = false;
 
 
     /**
@@ -324,6 +325,9 @@ public class Controller<e> implements Initializable {
                 if(totalDuration.lessThan(elapsedDuration.add(new Duration(50)))) {
                     if(is_repeat){ //repeating the song of @is_repeat is True.
                         try { repeat_song(); } catch (InterruptedException e) { e.printStackTrace();}
+                    }
+                    else if(is_shuffle) {
+                        try { play_shuffle(); } catch  (InterruptedException e) { e.printStackTrace(); }
                     }
                     else{ // else playing the next song in the queue
                         try { play_next(); } catch (InterruptedException e) { e.printStackTrace(); }
@@ -494,6 +498,16 @@ public class Controller<e> implements Initializable {
         }
     }
 
+    void play_shuffle() throws InterruptedException {
+        Random random = new Random();
+        int randomShuffle = Math.abs(random.nextInt());
+        CURRENTLY_PLAYING_INDEX = randomShuffle%Song_Queue.queue.size();
+        System.out.println(CURRENTLY_PLAYING_INDEX);
+        String playnow=Song_Queue.queue.get(CURRENTLY_PLAYING_INDEX);//getting the next song in the queue
+        startStreaming(playnow, Duration.millis(0));                 //started playback
+        CURRENTLY_PLAYING=playnow;
+    }
+
     /**
      * Plays the previous song in the queue.
      * @throws InterruptedException
@@ -632,6 +646,18 @@ public class Controller<e> implements Initializable {
         } else {
             repeatBtn.setGraphic(new ImageView(new Image(new FileInputStream(ASSETS_LOCATION + "baseline_repeat_white_18dp.png"))));
             is_repeat=false;
+        }
+    }
+
+    @FXML
+    void shuffle(ActionEvent event) throws FileNotFoundException {
+        if (!is_shuffle) {
+            shuffleBtn.setGraphic(new ImageView(new Image(new FileInputStream(ASSETS_LOCATION + "baseline_shuffle_green_18dp.png"))));
+            is_shuffle=true;
+
+        } else {
+            shuffleBtn.setGraphic(new ImageView(new Image(new FileInputStream(ASSETS_LOCATION + "baseline_shuffle_white_18dp.png"))));
+            is_shuffle=false;
         }
     }
 
