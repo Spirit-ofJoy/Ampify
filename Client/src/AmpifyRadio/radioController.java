@@ -1,5 +1,7 @@
 package AmpifyRadio;
 
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.MapChangeListener;
@@ -9,13 +11,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -23,7 +26,6 @@ import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 
 import java.awt.*;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
@@ -124,6 +126,14 @@ public class radioController {
                 String Album = (String)mp3player.getMedia().getMetadata().get("album");
                 String Artist = (String)mp3player.getMedia().getMetadata().get("artist");
                 Currently_Playing.setText("\""+Title+"\""+" from "+Album+" by "+Artist);
+            }
+        });
+
+        VolumeSlider.valueProperty().addListener(new InvalidationListener() {
+            @Override
+            public void invalidated(Observable observable) {
+                mp3player.setVolume(VolumeSlider.getValue()/100);
+
             }
         });
     }

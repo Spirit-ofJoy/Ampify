@@ -33,13 +33,19 @@ public class Song_Queue {
     /**
      * Auto Fills the Queue
      */
-    public static void autofill(){
-        String song="";
-        for(int index=10;index<=33;index++){
-            if(index%10!=0){
-                song = "S#0" + index + ".mp3";
-                addToQueue(song);
+    public static void autofill() {
+        String song = "";
+        for (int index = 1; index <= 33; index++) {
+            if (index % 10 != 0) {
+                if (index < 10) {
+                    song = "S#00" + index + ".mp3";
+                    addToQueue(song);
+                } else {
+                    song = "S#0" + index + ".mp3";
+                    addToQueue(song);
+                }
             }
+            System.out.println(song);
         }
     }
 

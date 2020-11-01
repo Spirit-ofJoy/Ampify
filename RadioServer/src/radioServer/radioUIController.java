@@ -1,5 +1,6 @@
 package radioServer;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
@@ -20,14 +21,16 @@ public class radioUIController {
 
     private static final String CONTEXT = "/ampify";
     private static final int PORT = 8000;
+    public Button auto_fill;
+    public ListView all_songs;
     Song_Queue queue = new Song_Queue();
 
     public void addtoqueue(ActionEvent actionEvent) {
-        queue.autofill();
-        
+        queue_songs.setItems((ObservableList<String>) Song_Queue.queue);
     }
 
     public void save(ActionEvent actionEvent) {
+        queue_songs.setItems((ObservableList<String>) Song_Queue.queue);
     }
 
     public void host_radio(ActionEvent actionEvent) throws IOException, UnsupportedAudioFileException {
@@ -40,5 +43,14 @@ public class radioUIController {
         httpServer.start();
         create_radio_file(create_songs_String());
         System.out.println("Server is started and listening on port " + PORT);
+    }
+
+    public void name_of_radio(ActionEvent actionEvent) {
+
+    }
+
+    public void auto_fill(ActionEvent actionEvent) {
+        queue.autofill();
+        queue_songs.setItems((ObservableList<String>) Song_Queue.queue);
     }
 }

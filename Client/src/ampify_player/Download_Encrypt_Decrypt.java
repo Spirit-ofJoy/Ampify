@@ -151,12 +151,4 @@ public class Download_Encrypt_Decrypt {
     }
 
 
-    //
-    //Files.createDirectories(Paths.get("/Your/Path/Here"));
-
-    public static void main(String[] args) throws FileNotFoundException, IOException {
-        encrypt_and_download_song("S#003","LOL");
-        decrypt_downloaded_song(DESTINATION_DOWNLOAD_FOLDER+"S#003.mp3");
-
-    }
 }
