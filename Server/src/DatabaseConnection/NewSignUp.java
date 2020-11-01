@@ -2,7 +2,9 @@ package DatabaseConnection;
 
 import Responses.SignUpResponse;
 import constants.Constant;
+import utility.PasswordEncryptor;
 
+import java.security.NoSuchAlgorithmException;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -33,7 +35,7 @@ public class NewSignUp extends DatabaseConnect {
             PreparedStatement userPrepStat = connection.prepareStatement(userQuery);
             userPrepStat.setString(1, userID);
             userPrepStat.setString(2, uname);
-            userPrepStat.setString(3, paswd);
+            userPrepStat.setString(3, PasswordEncryptor.encryptText(paswd));
             userPrepStat.execute();
 
             //Inserting values in users table
@@ -53,6 +55,8 @@ public class NewSignUp extends DatabaseConnect {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
             return(new SignUpResponse(String.valueOf(Constant.FAILURE)));
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
         } finally {
             try {
                 //Closes connection to avoid any database tampering
@@ -61,5 +65,6 @@ public class NewSignUp extends DatabaseConnect {
                 throwables.printStackTrace();
             }
         }
+        return null;
     }
 }
