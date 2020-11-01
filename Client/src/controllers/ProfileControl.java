@@ -9,6 +9,7 @@ import Responses.TopHitsResponse;
 
 import ampify_player.Song_Queue;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
@@ -17,6 +18,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import utility.ActiveProfile;
 import main.ClientMain;
 import utility.CommonElements;
@@ -31,6 +33,7 @@ import java.util.Date;
 import java.util.ResourceBundle;
 
 public class ProfileControl implements Initializable {
+
 
     //Get Profile connected
     ActiveProfile currProfile = ActiveProfile.getProfile();
@@ -124,6 +127,7 @@ public class ProfileControl implements Initializable {
         }
 
     }
+
 
     class LoadProfileProcess implements Runnable {
 
@@ -337,6 +341,25 @@ public class ProfileControl implements Initializable {
         playerStage.show();
 
     }
+    public void openRadio(ActionEvent actionEvent) throws IOException {
+        System.out.println("[CLIENT] Radio invoked.");
 
+        //Setting up Player scene
+        FXMLLoader loaderRadio = new FXMLLoader();
+        loaderRadio.setLocation(getClass().getResource("/resources/radio.fxml"));
+        Parent playerRoot = loaderRadio.load();
+
+        Scene playerScene = new Scene(playerRoot, 600,400);
+
+        Stage playerStage = new Stage();
+        playerStage.setScene(playerScene);
+        playerStage.setTitle("Live Radio");
+        playerStage.show();
+
+        playerStage.addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, event -> {
+            playerStage.close();
+        });
+
+    }
 
 }

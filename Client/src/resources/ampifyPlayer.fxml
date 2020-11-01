@@ -161,7 +161,7 @@
             </HBox>
             <HBox alignment="CENTER" layoutX="86.0" layoutY="104.0" prefHeight="208.0" prefWidth="757.0" spacing="40.0" AnchorPane.bottomAnchor="248.0" AnchorPane.leftAnchor="86.0" AnchorPane.rightAnchor="86.0" AnchorPane.topAnchor="104.0">
                <children>
-                  <JFXSlider fx:id="equalizerSlider1" max="12.0" min="-24.0" orientation="VERTICAL" showTickMarks="true" style="-fx-background-radius: 15; -fx-background-color: #222,#888,black; -fx-background-insets: 0, 1 0 0 1, 1; -fx-padding: 2 10;" value="-6.0" />
+                  <JFXSlider fx:id="equalizerSlider1" max="12.0" min="-24.0" orientation="VERTICAL" showTickMarks="true" style="-fx-background-radius: 15; -fx-background-color: #222,#888888,black; -fx-background-insets: 0, 1 0 0 1, 1; -fx-padding: 2 10;" value="-6.0" />
                   <JFXSlider fx:id="equalizerSlider2" max="12.0" min="-24.0" orientation="VERTICAL" showTickMarks="true" style="-fx-background-radius: 15; -fx-background-color: #222,#888,black; -fx-background-insets: 0, 1 0 0 1, 1; -fx-padding: 2 10;" value="-6.0" />
                   <JFXSlider fx:id="equalizerSlider3" layoutX="299.0" layoutY="10.0" max="12.0" min="-24.0" orientation="VERTICAL" showTickMarks="true" style="-fx-background-radius: 15; -fx-background-color: #222,#888,black; -fx-background-insets: 0, 1 0 0 1, 1; -fx-padding: 2 10;" value="-6.0" />
                   <JFXSlider fx:id="equalizerSlider4" layoutX="440.0" layoutY="10.0" max="12.0" min="-24.0" orientation="VERTICAL" showTickMarks="true" style="-fx-background-radius: 15; -fx-background-color: #222,#888,black; -fx-background-insets: 0, 1 0 0 1, 1; -fx-padding: 2 10;" value="-6.0" />
