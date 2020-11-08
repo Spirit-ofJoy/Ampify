@@ -18,7 +18,7 @@ public class BrowseResponse extends Response implements Serializable {
 
 
     public BrowseResponse(ArrayList<SongInfo> popList, ArrayList<SongInfo> rnbList, ArrayList<SongInfo> indieList, ArrayList<SongInfo> rockList, ArrayList<SongInfo> epopList, ArrayList<SongInfo> hiphopList, ArrayList<SongInfo> elecList){
-        this.respType = String.valueOf(Constant.SONG_BROWSE);
+        this.respType = (Constant.SONG_BROWSE);
         this.popCollection = popList;
         this.elecCollection = elecList;
         this.epopCollection = epopList;
@@ -29,7 +29,7 @@ public class BrowseResponse extends Response implements Serializable {
     }
 
     @Override
-    public String getRespType() {
+    public Constant getRespType() {
         return respType;
     }
 }

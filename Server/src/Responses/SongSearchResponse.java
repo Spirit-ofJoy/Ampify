@@ -10,12 +10,12 @@ public class SongSearchResponse extends Response implements Serializable {
     public ArrayList<SongInfo> searchedSongs;
 
     public SongSearchResponse(ArrayList<SongInfo> searchList) {
-        this.respType = String.valueOf(Constant.SONG_SEARCH);
+        this.respType = (Constant.SONG_SEARCH);
         this.searchedSongs = searchList;
     }
 
     @Override
-    public String getRespType() {
+    public Constant getRespType() {
         return respType;
     }
 }

@@ -6,11 +6,11 @@ public class ShareablePlaylistsRequest extends Request{
     private String userID;
 
     public ShareablePlaylistsRequest(String uid) {
-        reqType = String.valueOf(Constant.SHARE_PLAYLISTS_SET);
+        reqType = (Constant.SHARE_PLAYLISTS_SET);
         this.userID = uid;
     }
     @Override
-    public String getReqType() {
+    public Constant getReqType() {
         return reqType;
     }
 

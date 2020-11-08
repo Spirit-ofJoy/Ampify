@@ -10,12 +10,12 @@ public class HistoryInfoRequest extends Request implements Serializable {
     public ArrayList<String> historySongID = new ArrayList<String>();
 
     public HistoryInfoRequest(ArrayList<String> history){
-        this.reqType = String.valueOf(Constant.HISTORY_INFO);
+        this.reqType = (Constant.HISTORY_INFO);
         this.historySongID = history;
     }
 
     @Override
-    public String getReqType() {
+    public Constant getReqType() {
         return this.reqType;
     }
 }

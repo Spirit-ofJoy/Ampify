@@ -13,14 +13,14 @@ public class NewReleasesResponse extends Response implements Serializable {
     public ArrayList newSongsList = new ArrayList<SongInfo>();
 
     public NewReleasesResponse(ArrayList newRelease) throws SQLException {
-        respType = String.valueOf(Constant.NEW_RELEASES_LIST);
+        respType = (Constant.NEW_RELEASES_LIST);
 
         //Store relevant details in an array list for display
         this.newSongsList = newRelease;
     }
 
     @Override
-    public String getRespType() {
+    public Constant getRespType() {
         return this.respType;
     }
 

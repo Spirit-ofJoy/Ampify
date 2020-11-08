@@ -8,14 +8,14 @@ public class SongPlayedRequest extends Request{
     private String userId;
 
     public SongPlayedRequest(String uid, String history, String song) {
-        reqType = String.valueOf(Constant.SONG_PLAYED);
+        reqType = (Constant.SONG_PLAYED);
         this.songId = song;
         this.historyString = history;
         this.userId = uid;
     }
 
     @Override
-    public String getReqType() {
+    public Constant getReqType() {
         return reqType;
     }
 

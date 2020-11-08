@@ -12,13 +12,13 @@ public class RecommendsRequest extends Request implements Serializable {
     private TreeSet likedSongs;
 
     public RecommendsRequest(String uid, TreeSet like) {
-        this.reqType = String.valueOf(Constant.PERSONAL_RECOMMENDS);
+        this.reqType = (Constant.PERSONAL_RECOMMENDS);
         this.userID = uid;
         this.likedSongs = like;
     }
 
     @Override
-    public String getReqType() {
+    public Constant getReqType() {
         return reqType;
     }
 

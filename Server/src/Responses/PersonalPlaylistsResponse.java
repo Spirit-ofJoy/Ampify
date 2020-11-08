@@ -11,12 +11,12 @@ public class PersonalPlaylistsResponse extends Response implements Serializable 
     public ArrayList<Playlist> personalPlaylists;
 
     public PersonalPlaylistsResponse(ArrayList<Playlist> playlistsResult) {
-        this.respType = String.valueOf(Constant.PERSONAL_PLAYLISTS_SET);
+        this.respType = (Constant.PERSONAL_PLAYLISTS_SET);
         this.personalPlaylists = playlistsResult;
     }
 
     @Override
-    public String getRespType() {
+    public Constant getRespType() {
         return respType;
     }
 }

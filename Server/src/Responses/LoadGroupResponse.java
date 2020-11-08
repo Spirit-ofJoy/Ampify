@@ -7,12 +7,12 @@ public class LoadGroupResponse extends Response{
     private Group groupFound;
 
     public LoadGroupResponse(Group grp) {
-        this.respType = String.valueOf(Constant.LOAD_GROUP);
+        this.respType = (Constant.LOAD_GROUP);
         this.groupFound = grp;
     }
 
     @Override
-    public String getRespType() {
+    public Constant getRespType() {
         return respType;
     }
 

@@ -40,160 +40,204 @@ public class HandleClient implements Runnable {
             try {
                 Request incomingRequest = (Request) objectInputStream.readObject();
 
-                //executes if Request is for Signing Up
-                if(incomingRequest.getReqType().equals(String.valueOf(Constant.SIGNUP_START))) {
-                    SignUpRequest signUpRequest = (SignUpRequest) incomingRequest;
-                    SignUpResponse signUpResponse = NewSignUp.createAccount(signUpRequest.getUsername(), signUpRequest.getPassword(),
-                            signUpRequest.getPreferenceLanguage(), signUpRequest.getPreferenceGenre(),
-                            signUpRequest.getPreferenceArtists());
+                switch (incomingRequest.getReqType()) {
 
-                    //Sign Up request processed and eligible response sent
-                    objectOutputStream.writeObject(signUpResponse);
-                    objectOutputStream.flush();
-                }
-                //executes if Request type is of login
-                else if( incomingRequest.getReqType().equals(String.valueOf(Constant.LOGIN_CHECK))) {
-                    LoginRequest loginRequest = (LoginRequest) incomingRequest;
-                    LoginResponse loginResponse = NewLogin.checkLogin(loginRequest.getUsername(), loginRequest.getPassword());
+                    //executes if Request is for Signing Up
+                    case SIGNUP_START : {
+                        SignUpRequest signUpRequest = (SignUpRequest) incomingRequest;
+                        SignUpResponse signUpResponse = NewSignUp.createAccount(signUpRequest.getUsername(), signUpRequest.getPassword(),
+                                signUpRequest.getPreferenceLanguage(), signUpRequest.getPreferenceGenre(),
+                                signUpRequest.getPreferenceArtists());
 
-                    //Login request processed and response returned
-                    objectOutputStream.writeObject(loginResponse);
-                    objectOutputStream.flush();
-                }
-                //executes if Request is made for the top songs based on viewership
-                else if(incomingRequest.getReqType().equals(String.valueOf(Constant.TOP_HITS_LIST))) {
-                    TopHitsResponse mostViewed = LoadProfile.getMostViewed();
+                        //Sign Up request processed and eligible response sent
+                        objectOutputStream.writeObject(signUpResponse);
+                        objectOutputStream.flush();
+                        break;
+                    }
 
-                    //Send back the most viewed songs
-                    objectOutputStream.writeObject(mostViewed);
-                    objectOutputStream.flush();
-                }
-                //executes to load and provide personalized recommendations
-                else if(incomingRequest.getReqType().equals(String.valueOf(Constant.PERSONAL_RECOMMENDS))) {
-                    RecommendsRequest recommendsRequest = (RecommendsRequest) incomingRequest;
-                    RecommendsResponse personalRecommends = LoadProfile.getRecommends(recommendsRequest.getUserID(), recommendsRequest.getLikedSongs());
+                    //executes if Request type is of login
+                    case LOGIN_CHECK : {
+                        LoginRequest loginRequest = (LoginRequest) incomingRequest;
+                        LoginResponse loginResponse = NewLogin.checkLogin(loginRequest.getUsername(), loginRequest.getPassword());
 
-                    //Send back personalized selection
-                    objectOutputStream.writeObject(personalRecommends);
-                    objectOutputStream.flush();
-                }
-                //executes if Request is made for the new songs based on upload time
-                else if(incomingRequest.getReqType().equals(String.valueOf(Constant.NEW_RELEASES_LIST))) {
-                    NewReleasesResponse newReleasesResponse = LoadProfile.getNewReleases();
+                        //Login request processed and response returned
+                        objectOutputStream.writeObject(loginResponse);
+                        objectOutputStream.flush();
+                        break;
+                    }
 
-                    //Send back the newly released songs
-                    objectOutputStream.writeObject(newReleasesResponse);
-                    objectOutputStream.flush();
-                }
-                //executes to load Browsing section of songs
-                else if(incomingRequest.getReqType().equals(String.valueOf(Constant.SONG_BROWSE))) {
-                    BrowseResponse browseResponse = BrowseSongs.getSongs();
+                    //executes if Request is made for the top songs based on viewership
+                    case TOP_HITS_LIST : {
+                        TopHitsResponse mostViewed = LoadProfile.getMostViewed();
 
-                    //Send back filtered collection of songs
-                    objectOutputStream.writeObject(browseResponse);
-                    objectOutputStream.flush();
-                }
-                //executes to give apt songs for searched category
-                else if(incomingRequest.getReqType().equals(String.valueOf(Constant.SONG_SEARCH))) {
-                    SongSearchRequest songSearchRequest = (SongSearchRequest) incomingRequest;
-                    SongSearchResponse searchResult = SearchSongs.getSearchedSongs(songSearchRequest.getSearchType(),
-                            songSearchRequest.getSearchKey());
+                        //Send back the most viewed songs
+                        objectOutputStream.writeObject(mostViewed);
+                        objectOutputStream.flush();
+                        break;
+                    }
 
-                    //Send back selection based on search result
-                    objectOutputStream.writeObject(searchResult);
-                    objectOutputStream.flush();
-                }
-                //executes to give song-names to display on history
-                else if(incomingRequest.getReqType().equals(String.valueOf(Constant.HISTORY_INFO))) {
-                    HistoryInfoRequest historyInfoRequest = (HistoryInfoRequest) incomingRequest;
-                    ArrayList<String> historyResult = SearchSongs.getSongNames(historyInfoRequest.historySongID);
+                    //executes to load and provide personalized recommendations
+                    case PERSONAL_RECOMMENDS : {
+                        RecommendsRequest recommendsRequest = (RecommendsRequest) incomingRequest;
+                        RecommendsResponse personalRecommends = LoadProfile.getRecommends(recommendsRequest.getUserID(), recommendsRequest.getLikedSongs());
 
-                    //Send back names of songs on history
-                    objectOutputStream.writeObject(new HistoryInfoResponse(historyResult));
-                    objectOutputStream.flush();
-                }
-                //executes to give playlists to display for a user
-                else if(incomingRequest.getReqType().equals(String.valueOf(Constant.PERSONAL_PLAYLISTS_SET))) {
-                    PersonalPlaylistsRequest playlistsRequest = (PersonalPlaylistsRequest) incomingRequest;
-                    ArrayList<Playlist> playlistsResult = PlaylistPick.getPersonalPlaylist(playlistsRequest.getUserID());
+                        //Send back personalized selection
+                        objectOutputStream.writeObject(personalRecommends);
+                        objectOutputStream.flush();
+                        break;
+                    }
 
-                    objectOutputStream.writeObject(new PersonalPlaylistsResponse(playlistsResult));
-                    objectOutputStream.flush();
-                }
-                //Update existing Playlist
-                else if(incomingRequest.getReqType().equals(String.valueOf(Constant.UPDATE_PLAYLIST))) {
-                    UpdatePlaylistRequest updatePlaylistRequest = (UpdatePlaylistRequest) incomingRequest;
+                    //executes if Request is made for the new songs based on upload time
+                    case NEW_RELEASES_LIST : {
+                        NewReleasesResponse newReleasesResponse = LoadProfile.getNewReleases();
 
-                    PlaylistPick.updatingPlaylist(updatePlaylistRequest.getSongsList(), updatePlaylistRequest.getUserViewer(),
-                            updatePlaylistRequest.getPlaylistID());
-                }
-                //Create new Playlist
-                else if(incomingRequest.getReqType().equals(String.valueOf(Constant.CREATE_PLAYLIST))) {
-                    CreatePlaylistRequest createPlaylistRequest = (CreatePlaylistRequest) incomingRequest;
+                        //Send back the newly released songs
+                        objectOutputStream.writeObject(newReleasesResponse);
+                        objectOutputStream.flush();
+                        break;
+                    }
 
-                    PlaylistPick.creatingPlaylist(createPlaylistRequest.getSongsList(), createPlaylistRequest.getOwnerID(),
-                            createPlaylistRequest.getPlaylistName(), createPlaylistRequest.getVisibility());
-                }
-                //Show shareable playlists
-                else if(incomingRequest.getReqType().equals(String.valueOf(Constant.SHARE_PLAYLISTS_SET))) {
-                    ShareablePlaylistsRequest playlistsRequest = (ShareablePlaylistsRequest) incomingRequest;
-                    ArrayList<Playlist> playlistsResult = PlaylistPick.getShareablePlaylist(playlistsRequest.getUserID());
+                    //executes to load Browsing section of songs
+                    case SONG_BROWSE : {
+                        BrowseResponse browseResponse = BrowseSongs.getSongs();
 
-                    objectOutputStream.writeObject(new ShareablePlaylistsResponse(playlistsResult));
-                    objectOutputStream.flush();
-                }
-                //Import Playlist
-                else if(incomingRequest.getReqType().equals(String.valueOf(Constant.IMPORT_PLAYLIST))) {
-                    ImportPlaylistRequest importPlaylistRequest = (ImportPlaylistRequest) incomingRequest;
+                        //Send back filtered collection of songs
+                        objectOutputStream.writeObject(browseResponse);
+                        objectOutputStream.flush();
+                        break;
+                    }
 
-                    PlaylistPick.importingPlaylist(importPlaylistRequest.getPlaylistID(), importPlaylistRequest.getUserID());
-                }
-                //Send back list of registered Users
-                else if ( incomingRequest.getReqType().equals(String.valueOf(Constant.USERS_LIST)) ) {
-                    UserListRequest userListRequest = (UserListRequest) incomingRequest;
-                    objectOutputStream.writeObject(GroupConnect.getUsers());
-                }
-                //Records and changes database for a song played
-                else if ( incomingRequest.getReqType().equals(String.valueOf(Constant.SONG_PLAYED)) ) {
-                    SongPlayedRequest songPlayedRequest = (SongPlayedRequest) incomingRequest;
-                    SearchSongs.updateSongPlayed(songPlayedRequest.getUserId(), songPlayedRequest.getHistoryString(),
-                            songPlayedRequest.getSongId());
-                }
-                //Records and changes database for a song liked
-                else if ( incomingRequest.getReqType().equals(String.valueOf(Constant.SONG_LIKED)) ) {
-                    LikedRequest likedRequest = (LikedRequest) incomingRequest;
-                    SearchSongs.updateSongLiked(likedRequest.getUser(), likedRequest.getLikedSongs());
-                }
-                //Executes a request to create a new group
-                else if ( incomingRequest.getReqType().equals(String.valueOf(Constant.CREATE_GROUP))) {
-                    CreateGroupRequest createGroupRequest = (CreateGroupRequest) incomingRequest;
-                    GroupConnect.creatingGroup(createGroupRequest.getUsersList(), createGroupRequest.getGrpName());
-                }
-                //executes to give groups to display for a user
-                else if(incomingRequest.getReqType().equals(String.valueOf(Constant.PERSONAL_GROUPS_SET))) {
-                    PersonalGroupsRequest groupsRequest = (PersonalGroupsRequest) incomingRequest;
+                    //executes to give apt songs for searched category
+                    case SONG_SEARCH : {
+                        SongSearchRequest songSearchRequest = (SongSearchRequest) incomingRequest;
+                        SongSearchResponse searchResult = SearchSongs.getSearchedSongs(songSearchRequest.getSearchType(),
+                                songSearchRequest.getSearchKey());
 
-                    //Send back names of groups
-                    objectOutputStream.writeObject(GroupConnect.getPersonalGroups(groupsRequest.getUserID()));
-                    objectOutputStream.flush();
-                }
-                //Gives Group info to Client
-                else if(incomingRequest.getReqType().equals(String.valueOf(Constant.LOAD_GROUP))) {
-                    LoadGroupRequest loadGroupRequest = (LoadGroupRequest) incomingRequest;
+                        //Send back selection based on search result
+                        objectOutputStream.writeObject(searchResult);
+                        objectOutputStream.flush();
+                        break;
+                    }
 
-                    //Send back group's info
-                    objectOutputStream.writeObject(GroupConnect.getGroupInfo(loadGroupRequest.getGrpId()));
-                    objectOutputStream.flush();
-                }
-                //Gives back Group chat for a particular group
-                else if(incomingRequest.getReqType().equals(String.valueOf(Constant.LOAD_GROUP_CHATS))) {
-                    LoadGroupChatRequest loadGroupChatRequest = (LoadGroupChatRequest) incomingRequest;
-                    objectOutputStream.writeObject(GroupConnect.gettingGroupChat(loadGroupChatRequest.getGroupId()));
-                }
-                //Stores Chat Received
-                else if(incomingRequest.getReqType().equals(String.valueOf(Constant.CHAT_SEND))) {
-                    SendChatRequest chatRequest = (SendChatRequest) incomingRequest;
-                    GroupConnect.saveChat(chatRequest.getChatMsg(), chatRequest.getGroupId());
+                    //executes to give song-names to display on history
+                    case HISTORY_INFO : {
+                        HistoryInfoRequest historyInfoRequest = (HistoryInfoRequest) incomingRequest;
+                        ArrayList<String> historyResult = SearchSongs.getSongNames(historyInfoRequest.historySongID);
+
+                        //Send back names of songs on history
+                        objectOutputStream.writeObject(new HistoryInfoResponse(historyResult));
+                        objectOutputStream.flush();
+                        break;
+                    }
+
+                    //executes to give playlists to display for a user
+                    case PERSONAL_PLAYLISTS_SET : {
+                        PersonalPlaylistsRequest playlistsRequest = (PersonalPlaylistsRequest) incomingRequest;
+                        ArrayList<Playlist> playlistsResult = PlaylistPick.getPersonalPlaylist(playlistsRequest.getUserID());
+
+                        objectOutputStream.writeObject(new PersonalPlaylistsResponse(playlistsResult));
+                        objectOutputStream.flush();
+                        break;
+                    }
+
+                    //Update existing Playlist
+                    case UPDATE_PLAYLIST : {
+                        UpdatePlaylistRequest updatePlaylistRequest = (UpdatePlaylistRequest) incomingRequest;
+
+                        PlaylistPick.updatingPlaylist(updatePlaylistRequest.getSongsList(), updatePlaylistRequest.getUserViewer(),
+                                updatePlaylistRequest.getPlaylistID());
+                        break;
+                    }
+
+                    //Create new Playlist
+                    case CREATE_PLAYLIST : {
+                        CreatePlaylistRequest createPlaylistRequest = (CreatePlaylistRequest) incomingRequest;
+
+                        PlaylistPick.creatingPlaylist(createPlaylistRequest.getSongsList(), createPlaylistRequest.getOwnerID(),
+                                createPlaylistRequest.getPlaylistName(), createPlaylistRequest.getVisibility());
+                        break;
+                    }
+
+                    //Show shareable playlists
+                    case SHARE_PLAYLISTS_SET : {
+                        ShareablePlaylistsRequest playlistsRequest = (ShareablePlaylistsRequest) incomingRequest;
+                        ArrayList<Playlist> playlistsResult = PlaylistPick.getShareablePlaylist(playlistsRequest.getUserID());
+
+                        objectOutputStream.writeObject(new ShareablePlaylistsResponse(playlistsResult));
+                        objectOutputStream.flush();
+                        break;
+                    }
+
+                    //Import Playlist
+                    case IMPORT_PLAYLIST : {
+                        ImportPlaylistRequest importPlaylistRequest = (ImportPlaylistRequest) incomingRequest;
+                        PlaylistPick.importingPlaylist(importPlaylistRequest.getPlaylistID(), importPlaylistRequest.getUserID());
+                        break;
+                    }
+
+                    //Send back list of registered Users
+                    case USERS_LIST : {
+                        UserListRequest userListRequest = (UserListRequest) incomingRequest;
+                        objectOutputStream.writeObject(GroupConnect.getUsers());
+                        break;
+                    }
+
+                    //Records and changes database for a song played
+                    case SONG_PLAYED : {
+                        SongPlayedRequest songPlayedRequest = (SongPlayedRequest) incomingRequest;
+                        SearchSongs.updateSongPlayed(songPlayedRequest.getUserId(), songPlayedRequest.getHistoryString(),
+                                songPlayedRequest.getSongId());
+                        break;
+                    }
+
+                    //Records and changes database for a song liked
+                    case SONG_LIKED : {
+                        LikedRequest likedRequest = (LikedRequest) incomingRequest;
+                        SearchSongs.updateSongLiked(likedRequest.getUser(), likedRequest.getLikedSongs());
+                        break;
+                    }
+
+                    //Executes a request to create a new group
+                    case CREATE_GROUP : {
+                        CreateGroupRequest createGroupRequest = (CreateGroupRequest) incomingRequest;
+                        GroupConnect.creatingGroup(createGroupRequest.getUsersList(), createGroupRequest.getGrpName());
+                        break;
+                    }
+
+                    //executes to give groups to display for a user
+                    case PERSONAL_GROUPS_SET : {
+                        PersonalGroupsRequest groupsRequest = (PersonalGroupsRequest) incomingRequest;
+
+                        //Send back names of groups
+                        objectOutputStream.writeObject(GroupConnect.getPersonalGroups(groupsRequest.getUserID()));
+                        objectOutputStream.flush();
+                        break;
+                    }
+
+                    //Gives Group info to Client
+                    case LOAD_GROUP : {
+                        LoadGroupRequest loadGroupRequest = (LoadGroupRequest) incomingRequest;
+
+                        //Send back group's info
+                        objectOutputStream.writeObject(GroupConnect.getGroupInfo(loadGroupRequest.getGrpId()));
+                        objectOutputStream.flush();
+                        break;
+                    }
+
+                    //Gives back Group chat for a particular group
+                    case LOAD_GROUP_CHATS : {
+                        LoadGroupChatRequest loadGroupChatRequest = (LoadGroupChatRequest) incomingRequest;
+                        objectOutputStream.writeObject(GroupConnect.gettingGroupChat(loadGroupChatRequest.getGroupId()));
+                        break;
+                    }
+
+                    //Stores Chat Received
+                    case CHAT_SEND : {
+                        SendChatRequest chatRequest = (SendChatRequest) incomingRequest;
+                        GroupConnect.saveChat(chatRequest.getChatMsg(), chatRequest.getGroupId());
+                        break;
+                    }
+
                 }
 
             } catch (EOFException e) {
@@ -202,10 +246,7 @@ public class HandleClient implements Runnable {
             } catch (SocketException e){
                 System.out.println("[SERVER] User connection lost");
                 break;
-            } catch (IOException e) {
-                e.printStackTrace();
-                break;
-            } catch (ClassNotFoundException e) {
+            } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
                 break;
             }

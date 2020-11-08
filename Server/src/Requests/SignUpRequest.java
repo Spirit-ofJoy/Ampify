@@ -11,7 +11,7 @@ public class SignUpRequest extends Request{
     private String preferenceArtists;
 
     public SignUpRequest(String uname, String paswd, String prefLang, String prefGenre, String prefArtist) {
-        this.reqType = String.valueOf(Constant.SIGNUP_START);
+        this.reqType = (Constant.SIGNUP_START);
         this.username = uname;
         this.password = paswd;
         this.preferenceLanguage = prefLang;
@@ -20,7 +20,7 @@ public class SignUpRequest extends Request{
     }
 
     @Override
-    public String getReqType() {
+    public Constant getReqType() {
         return this.reqType;
     }
 

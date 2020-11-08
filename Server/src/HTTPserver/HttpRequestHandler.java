@@ -72,14 +72,13 @@ public class HttpRequestHandler implements HttpHandler {
         byte[] buff = new byte[1024];                           // Creating a small buffer to hold bytes as we read them
         int read = 0;
 
-        /*while((read = stream.read(buff)) > 0) {                // sending bytes to the client
+        while((read = stream.read(buff)) > 0) {                // sending bytes to the client
             os.write(buff, 0, read);
         }
 
+        os.flush();
         os.close();                                            // Closing the streams
         stream.close();
 
-         */
-        stream.transferTo(os);
     }
 }

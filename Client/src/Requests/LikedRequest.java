@@ -7,13 +7,13 @@ public class LikedRequest extends Request{
     private String likedSongs;
 
     public LikedRequest(String userID, String likedChange) {
-        reqType = String.valueOf(Constant.SONG_LIKED);
+        reqType = (Constant.SONG_LIKED);
         this.user = userID;
         this.likedSongs = likedChange;
     }
 
     @Override
-    public String getReqType() {
+    public Constant getReqType() {
         return reqType;
     }
 

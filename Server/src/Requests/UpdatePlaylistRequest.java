@@ -8,14 +8,14 @@ public class UpdatePlaylistRequest extends Request{
     private String playlistID;
 
     public UpdatePlaylistRequest(String playlistContents, String playlistViewer, String playlistkey) {
-        reqType = String.valueOf(Constant.UPDATE_PLAYLIST);
+        reqType = (Constant.UPDATE_PLAYLIST);
         this.songsList = playlistContents;
         this.userViewer = playlistViewer;
         this.playlistID = playlistkey;
     }
 
     @Override
-    public String getReqType() {
+    public Constant getReqType() {
         return reqType;
     }
 

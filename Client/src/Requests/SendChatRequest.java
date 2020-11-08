@@ -7,13 +7,13 @@ public class SendChatRequest extends Request{
     private String groupId;
 
     public SendChatRequest(String chat, String group) {
-        reqType = String.valueOf(Constant.CHAT_SEND);
+        reqType = (Constant.CHAT_SEND);
         this.chatMsg = chat;
         this.groupId = group;
     }
 
     @Override
-    public String getReqType() {
+    public Constant getReqType() {
         return reqType;
     }
 

@@ -8,11 +8,11 @@ import java.io.Serializable;
 public class NewReleasesRequest extends Request implements Serializable {
 
     public NewReleasesRequest() {
-        this.reqType = String.valueOf(Constant.NEW_RELEASES_LIST);
+        this.reqType = (Constant.NEW_RELEASES_LIST);
     }
 
     @Override
-    public String getReqType() {
+    public Constant getReqType() {
         return this.reqType;
     }
 

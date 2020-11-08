@@ -9,13 +9,13 @@ public class LoginRequest extends Request implements Serializable {
     private String password;
 
     public LoginRequest(String uname, String  pass){
-        this.reqType = String.valueOf(Constant.LOGIN_CHECK);
+        this.reqType = (Constant.LOGIN_CHECK);
         this.username = uname;
         this.password = pass;
     }
 
     @Override
-    public String getReqType() {
+    public Constant getReqType() {
         return this.reqType;
     }
 

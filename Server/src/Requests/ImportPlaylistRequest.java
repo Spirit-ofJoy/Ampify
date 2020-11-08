@@ -7,13 +7,13 @@ public class ImportPlaylistRequest extends Request{
     private String userID;
 
     public ImportPlaylistRequest(String uid, String pid) {
-        reqType = String.valueOf(Constant.IMPORT_PLAYLIST);
+        reqType = (Constant.IMPORT_PLAYLIST);
         this.userID = uid;
         this.playlistID = pid;
     }
 
     @Override
-    public String getReqType() {
+    public Constant getReqType() {
         return reqType;
     }
 

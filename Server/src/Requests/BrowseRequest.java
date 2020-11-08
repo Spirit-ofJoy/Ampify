@@ -7,11 +7,11 @@ import java.io.Serializable;
 public class BrowseRequest extends Request implements Serializable {
 
     public BrowseRequest() {
-        this.reqType = String.valueOf(Constant.SONG_BROWSE);
+        this.reqType = (Constant.SONG_BROWSE);
     }
 
     @Override
-    public String getReqType() {
+    public Constant getReqType() {
         return reqType;
     }
 }

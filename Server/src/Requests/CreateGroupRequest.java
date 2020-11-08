@@ -7,13 +7,13 @@ public class CreateGroupRequest extends Request{
     private String grpName;
 
     public CreateGroupRequest(String users, String name) {
-        reqType = String.valueOf(Constant.CREATE_GROUP);
+        reqType = (Constant.CREATE_GROUP);
         this.usersList = users;
         this.grpName = name;
     }
 
     @Override
-    public String getReqType() {
+    public Constant getReqType() {
         return reqType;
     }
 

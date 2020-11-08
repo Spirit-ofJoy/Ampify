@@ -7,12 +7,12 @@ public class SignUpResponse extends Response{
     private String status;
 
     public SignUpResponse(String finalStatus) {
-        this.respType = String.valueOf(Constant.SIGNUP_START);
+        this.respType = (Constant.SIGNUP_START);
         this.status = finalStatus;
     }
 
     @Override
-    public String getRespType() {
+    public Constant getRespType() {
         return this.respType;
     }
 

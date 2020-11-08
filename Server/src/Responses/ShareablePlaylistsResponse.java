@@ -11,12 +11,12 @@ public class ShareablePlaylistsResponse extends Response implements Serializable
     public ArrayList<Playlist> sharePlaylists;
 
     public ShareablePlaylistsResponse(ArrayList<Playlist> playlistsResult) {
-        this.respType = String.valueOf(Constant.SHARE_PLAYLISTS_SET);
+        this.respType = (Constant.SHARE_PLAYLISTS_SET);
         this.sharePlaylists = playlistsResult;
     }
 
     @Override
-    public String getRespType() {
+    public Constant getRespType() {
         return respType;
     }
 }

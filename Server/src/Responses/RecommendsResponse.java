@@ -12,13 +12,13 @@ public class RecommendsResponse extends Response implements Serializable {
     public ArrayList recommendations = new ArrayList<SongInfo>();
 
     public RecommendsResponse(ArrayList<SongInfo> recommends) throws SQLException {
-        this.respType = String.valueOf(Constant.PERSONAL_RECOMMENDS);
+        this.respType = (Constant.PERSONAL_RECOMMENDS);
 
         this.recommendations = recommends;
     }
 
     @Override
-    public String getRespType() {
+    public Constant getRespType() {
         return respType;
     }
 }

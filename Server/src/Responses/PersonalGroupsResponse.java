@@ -12,11 +12,11 @@ public class PersonalGroupsResponse extends Response{
     public PersonalGroupsResponse( ArrayList<String> gnames,  ArrayList<String> gids){
         this.grpIdList = gids;
         this.grpNamesList = gnames;
-        this.respType = String.valueOf(Constant.PERSONAL_GROUPS_SET);
+        this.respType = (Constant.PERSONAL_GROUPS_SET);
     }
 
     @Override
-    public String getRespType() {
+    public Constant getRespType() {
         return respType;
     }
 }

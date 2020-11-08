@@ -8,12 +8,12 @@ public class PersonalPlaylistsRequest extends Request implements Serializable {
     private String userID;
 
     public PersonalPlaylistsRequest(String id) {
-        this.reqType = String.valueOf(Constant.PERSONAL_PLAYLISTS_SET);
+        this.reqType = (Constant.PERSONAL_PLAYLISTS_SET);
         this.userID = id;
     }
 
     @Override
-    public String getReqType() {
+    public Constant getReqType() {
         return reqType;
     }
 

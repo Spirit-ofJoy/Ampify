@@ -11,7 +11,7 @@ public class CreatePlaylistRequest extends Request implements Serializable {
     private int visibility;
 
     public CreatePlaylistRequest(String songs, String uid, String pname, int visible) {
-        reqType = String.valueOf(Constant.CREATE_PLAYLIST);
+        reqType = (Constant.CREATE_PLAYLIST);
         this.songsList = songs;
         this.ownerID = uid;
         this.playlistName = pname;
@@ -19,7 +19,7 @@ public class CreatePlaylistRequest extends Request implements Serializable {
     }
 
     @Override
-    public String getReqType() {
+    public Constant getReqType() {
         return reqType;
     }
 

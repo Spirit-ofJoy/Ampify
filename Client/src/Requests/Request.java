@@ -1,9 +1,11 @@
 package Requests;
 
+import constants.Constant;
+
 import java.io.Serializable;
 
 //Object sent from client to Server
 public abstract class Request implements Serializable{
-    protected String reqType;
-    public abstract String getReqType() ;
+    protected Constant reqType;
+    public abstract Constant getReqType() ;
 }

@@ -15,12 +15,12 @@ public class LoginResponse extends Response implements Serializable {
 
 
     public LoginResponse(String id) {              //Login serialized response if User not found
-        this.respType = String.valueOf(Constant.LOGIN_CHECK);
+        this.respType = (Constant.LOGIN_CHECK);
         this.userID = id;
     }
 
     public LoginResponse(String id, String history, String liked, String disliked, String playlists){      //Login serialized response loads back profile if user found
-        this.respType = "LOGIN_CHECK";
+        this.respType = (Constant.LOGIN_CHECK);
         this.userID = id;
         this.History = history;
         this.Liked = liked;
@@ -29,7 +29,7 @@ public class LoginResponse extends Response implements Serializable {
     }
 
     @Override
-    public String getRespType() {
+    public Constant getRespType() {
         return this.respType;
     }
 

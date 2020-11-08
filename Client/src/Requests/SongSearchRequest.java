@@ -9,13 +9,13 @@ public class SongSearchRequest extends Request implements Serializable {
     private String searchKey;
 
     public SongSearchRequest(String type, String key) {
-        this.reqType = String.valueOf(Constant.SONG_SEARCH);
+        this.reqType = (Constant.SONG_SEARCH);
         this.searchType = type;
         this.searchKey = key;
     }
 
     @Override
-    public String getReqType() {
+    public Constant getReqType() {
         return reqType;
     }
 

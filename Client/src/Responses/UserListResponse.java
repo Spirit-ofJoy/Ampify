@@ -12,11 +12,11 @@ public class UserListResponse extends Response{
     public UserListResponse( ArrayList<String> unames,  ArrayList<String> uids){
         this.useridList = uids;
         this.usernamesList = unames;
-        this.respType = String.valueOf(Constant.USERS_LIST);
+        this.respType = (Constant.USERS_LIST);
     }
 
     @Override
-    public String getRespType() {
+    public Constant getRespType() {
         return respType;
     }
 }

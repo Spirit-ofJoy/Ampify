@@ -6,12 +6,12 @@ public class LoadGroupChatResponse extends Response{
     private String messages;
 
     public LoadGroupChatResponse(String chat) {
-        respType = String.valueOf(Constant.LOAD_GROUP_CHATS);
+        respType = (Constant.LOAD_GROUP_CHATS);
         this.messages = chat;
     }
 
     @Override
-    public String getRespType() {
+    public Constant getRespType() {
         return respType;
     }
 

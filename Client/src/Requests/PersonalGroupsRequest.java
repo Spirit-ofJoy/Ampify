@@ -6,12 +6,12 @@ public class PersonalGroupsRequest extends Request{
     private String userID;
 
     public PersonalGroupsRequest(String id) {
-        this.reqType = String.valueOf(Constant.PERSONAL_GROUPS_SET );
+        this.reqType = (Constant.PERSONAL_GROUPS_SET );
         this.userID = id;
     }
 
     @Override
-    public String getReqType() {
+    public Constant getReqType() {
         return reqType;
     }
 

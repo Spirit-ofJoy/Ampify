@@ -10,12 +10,12 @@ public class HistoryInfoResponse extends Response implements Serializable {
     public ArrayList<String> historySongNames = new ArrayList<String>();
 
     public HistoryInfoResponse(ArrayList<String> queryList) {
-        this.respType = String.valueOf(Constant.HISTORY_INFO);
+        this.respType = (Constant.HISTORY_INFO);
         this.historySongNames = queryList;
     }
 
     @Override
-    public String getRespType() {
+    public Constant getRespType() {
         return this.respType;
     }
 }
