@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Collections;
 
+import static radioServer.radioList.activeRadios;
+
 @SuppressWarnings("restriction")
 public class radioHttpRequestHandler implements HttpHandler {
 
@@ -23,7 +25,12 @@ public class radioHttpRequestHandler implements HttpHandler {
 
         // Get the @PARAM_STRING from the request. Here we know where is the song in server that the user is asking for
         // response is the file_destination of the requested song
-        String response=exchange.getAttribute(PARAM_STRING).toString();;
+        String response=exchange.getAttribute(PARAM_STRING).toString();
+
+        if(response.equals("list_Of_Available_Radios")){
+            response = activeRadios();
+        }
+
         exchange.getResponseHeaders().put("Content-Type", Collections.singletonList(("text/plain"))); //for a audio file
 
         System.out.println("Response: " + response);

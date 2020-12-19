@@ -8,8 +8,8 @@ import static radioServer.Song_Queue.create_songs_String;
 
 public class RadioMain {
 
-    private static final String CONTEXT = "/ampify";
-    private static final int PORT = 8000;
+    public static final String CONTEXT = "/ampify";
+    public static final int PORT = 8000;
 
     public static void startRADIO() throws IOException, UnsupportedAudioFileException {
         // Create a new StreamingHttpServer with HttpRequestFilter and HttpRequestHandler
@@ -18,7 +18,7 @@ public class RadioMain {
 
         // Start the server
         httpServer.start();
-        create_radio_file(create_songs_String());
+        create_radio_file(create_songs_String(), "Overwritable Radio");
         System.out.println("Server is started and listening on port " + PORT);
 
         /*
@@ -26,12 +26,15 @@ public class RadioMain {
          */
 
          /*
-             STREAM       http://localhost:8000/ampify?radio=radio1
+             STREAM       http://localhost:8000/ampify?radio=radioName
+             Radio List   http://localhost:8000/ampify?radio=list_Of_Available_Radios
          */
 
     }
 
+    /*
     public static void main(String[] args) throws Exception {
         startRADIO();
     }
+     */
 }

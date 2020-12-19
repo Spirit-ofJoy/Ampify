@@ -9,6 +9,7 @@ import java.net.URI;
 
 import static radioServer.radioFile.read_radio_file;
 import static radioServer.radioFile.response_parser;
+import static radioServer.radioList.*;
 
 
 @SuppressWarnings("restriction")
@@ -51,11 +52,21 @@ public class HttpRequestFilter extends Filter {
         URI uri = exchange.getRequestURI();
         String paramString = createStringFromQuery(uri);
 
-        paramString = RADIO_FOLDER + paramString;
-        // Set paramString as a request attribute
-        exchange.setAttribute("paramString", response_parser(read_radio_file(new File(paramString))));
-        // Chain the request to HttpRequestHandler
-        chain.doFilter(exchange);
+        if( !( paramString.equals("list_Of_Available_Radios") ) ){
+
+            paramString = RADIO_FOLDER + paramString;
+            // Set paramString as a request attribute
+            exchange.setAttribute("paramString", response_parser(read_radio_file(new File(paramString))));
+            // Chain the request to HttpRequestHandler
+            chain.doFilter(exchange);
+        } else {
+            paramString = activeRadios();
+            exchange.setAttribute("paramString", paramString);
+            // Chain the request to HttpRequestHandler
+            chain.doFilter(exchange);
+        }
+
+
 
     }
 

@@ -20,18 +20,18 @@
    <children>
       <AnchorPane prefHeight="549.0" prefWidth="526.0">
          <children>
-            <ListView fx:id="all_songs" layoutX="37.0" layoutY="76.0" prefHeight="369.0" prefWidth="255.0" visible="false" />
+            <ListView fx:id="all_songs" editable="true" layoutX="23.0" layoutY="76.0" prefHeight="369.0" prefWidth="269.0" />
             <Text layoutX="189.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AMPIFY RADIO SERVER" wrappingWidth="189.47003173828125">
                <font>
                   <Font name="Cambria" size="17.0" />
                </font>
             </Text>
-            <ListView fx:id="queue_songs" layoutX="37.0" layoutY="76.0" prefHeight="348.0" prefWidth="468.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" />
-            <Button fx:id="addtoqueue" layoutX="347.0" layoutY="388.0" mnemonicParsing="false" onAction="#addtoqueue" text="Add songs to Radio" visible="false" />
-            <TextField fx:id="name" layoutX="37.0" layoutY="474.0" onAction="#name_of_radio" prefHeight="34.0" prefWidth="255.0" visible="false" />
-            <Button fx:id="save" layoutX="305.0" layoutY="478.0" mnemonicParsing="false" onAction="#save" prefHeight="35.0" prefWidth="43.0" text="Save" visible="false" />
-            <Button fx:id="host_radio" layoutX="405.0" layoutY="442.0" mnemonicParsing="false" onAction="#host_radio" prefHeight="64.0" prefWidth="93.0" text="HOST RADIO" />
-            <Button fx:id="auto_fill" layoutX="202.0" layoutY="461.0" mnemonicParsing="false" onAction="#auto_fill" prefHeight="26.0" prefWidth="121.0" text="Auto-fill" />
+            <ListView fx:id="queue_songs" layoutX="306.0" layoutY="76.0" prefHeight="307.0" prefWidth="200.0" AnchorPane.leftAnchor="306.0" AnchorPane.rightAnchor="20.0" />
+            <Button fx:id="addtoqueue" layoutX="347.0" layoutY="394.0" mnemonicParsing="false" onAction="#addtoqueue" text="Add songs to Radio" />
+            <TextField fx:id="name" layoutX="23.0" layoutY="474.0" onAction="#name_of_radio" prefHeight="34.0" prefWidth="269.0" />
+            <Button fx:id="save" layoutX="305.0" layoutY="474.0" mnemonicParsing="false" onAction="#save" prefHeight="34.0" prefWidth="43.0" text="Save" />
+            <Button fx:id="host_radio" layoutX="405.0" layoutY="472.0" mnemonicParsing="false" onAction="#host_radio" prefHeight="34.0" prefWidth="93.0" text="HOST RADIO" />
+            <Button fx:id="auto_fill" layoutX="347.0" layoutY="432.0" mnemonicParsing="false" onAction="#auto_fill" prefHeight="26.0" prefWidth="121.0" text="Auto-fill" />
          </children>
       </AnchorPane>
    </children>

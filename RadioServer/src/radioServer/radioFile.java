@@ -12,13 +12,13 @@ public class radioFile {
 
     /**
      * @param create_songs_string This function creates a radio file out of the song string it is given
-     *                     in the folder assets/songs
+     *                            in the folder assets/songs
      */
-    public static void create_radio_file(String create_songs_string){
+    public static void create_radio_file(String create_songs_string, String radioName){
         //storing the bytes of the string in byte array
         byte[] radio_file_bytes = create_songs_string.getBytes();
         //writing the bytes into a file that can be read later
-        try(OutputStream outputStream = new FileOutputStream(ASSETS_LOCATION+"../radio/radio1")) {
+        try(OutputStream outputStream = new FileOutputStream(ASSETS_LOCATION+"../radio/" + (radioName + radio_end_time(create_songs_string) ) ) ) {
             outputStream.write(radio_file_bytes);
         } catch (IOException e) {
             e.printStackTrace();
@@ -63,6 +63,22 @@ public class radioFile {
     }
 
     /**
+     * @param radio_file give the radio file string
+     * @return the time when the radio ends
+     */
+    public static String radio_end_time(String radio_file){
+        return '.'+radio_file.substring(radio_file.length()-14,radio_file.length()-1);
+    }
+
+    /**
+     * @param radioName The list name of radio as saved in the server. the name is saved in the format of "[radioName];[radio_end_time]"
+     * @return usable name without the end time
+     */
+    public static String useRadioName(String radioName){
+        return radioName.substring(0,radioName.length()-14);
+    }
+
+    /**
      * @param compareThis Take one long parsable string
      * @param with take another long parsable string
      * @return boolean if compareThis>with
@@ -102,29 +118,27 @@ public class radioFile {
      * @return @respond_by(String radio_file,int index) or the responce the http client will get
      *         after going on the link of his radio file
      */
-    public static String response_parser(String radio_file){
+    public static String response_parser(String radio_file) {
         //getting local time to compare the time starting time of the radio songs
         String local_time = String.valueOf((System.currentTimeMillis()));
         //file index locations for one song detail
-        int separator_index=1;
-        int next_separator=next_separator(radio_file,separator_index);
+        int separator_index = 1;
+        int next_separator = next_separator(radio_file, separator_index);
 
-        while(true){
+        while (true) {
             /*
             System.out.println(get_start_time(radio_file,next_separator+1));
             System.out.println(GreaterThan(get_start_time(radio_file,next_separator+1),local_time));
              */
             //comparing the time of stream start and local time and responding if the time for song stream has come
-            if(GreaterThan(get_start_time(radio_file,next_separator+1),local_time)){
-                return respond_by(radio_file,separator_index);
+            if (GreaterThan(get_start_time(radio_file, next_separator + 1), local_time)) {
+                return respond_by(radio_file, separator_index);
             }
             //else change the index values of the separators
             else {
-                separator_index = next_separator+1;
-                next_separator = next_separator(radio_file,separator_index);
+                separator_index = next_separator + 1;
+                next_separator = next_separator(radio_file, separator_index);
             }
         }
     }
-
-
 }

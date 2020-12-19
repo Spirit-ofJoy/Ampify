@@ -7,7 +7,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.*;
 import java.util.Collections;
 
-import static radioServer.songDuration.getDuration;
+import static radioServer.songDetails.*;
 
 /**
  * This class handles the song queue in the Radio Server.
