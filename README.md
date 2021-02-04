@@ -1,8 +1,8 @@
 # Ampify 
 
-![Generic badge](https://img.shields.io/badge/Built%a0with-Java-blue.svg)
-![Generic badge](https://img.shields.io/badge/Built%a0with-JavaFX-blue.svg)
-![Generic badge](https://img.shields.io/badge/Backend%a0-MySQL-red.svg)
+[![Generic badge](https://img.shields.io/badge/Built%a0with-Java-blue.svg)](https://www.java.com/en/)
+[![Generic badge](https://img.shields.io/badge/Built%a0with-JavaFX-blue.svg)](https://openjfx.io/)
+[![Generic badge](https://img.shields.io/badge/Backend%a0-MySQL-red.svg)](https://www.mysql.com/)
 
 ## Introduction:
 Ampify is a Java-based music playing/streaming application. An Avishkar, Softablitz project built since the good people at TPO have to face each day with a broken music system.
