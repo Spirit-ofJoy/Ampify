@@ -1,5 +1,5 @@
-# Ampify 
----
+ Ampify 
+ ---
 
 ![Generic badge](https://img.shields.io/badge/Built%a0with-Java-blue.svg)
 ![Generic badge](https://img.shields.io/badge/Built%a0with-JavaFX-blue.svg)
