@@ -9,7 +9,7 @@ Ampify is a Java-based music playing/streaming application. An Avishkar, Softabl
 
 ## Basic Features:
 
-1. A user can login / register.
+1. A user can login and register.
 2. New users choose the languages, artists and genres they like.
 3. Basic media player features like play, pause, play next, repeat, shuffle, seekbar, adjust volume, length of the song in front of each song.etc.
 4. A user can see his most played and recently played songs.
