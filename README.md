@@ -50,4 +50,4 @@ Ampify is a Java-based music playing/streaming application. An Avishkar, Softabl
 
 * [Ayush Sharma](https://github.com/ayayushsharma)
 * [Syed Zameer Qasim](https://github.com/szqskywalker)
-* [Yashendu Paresh](https://github.com/Spirit-ofJoy)
+* [Yashendu Paresh Pandey](https://github.com/Spirit-ofJoy)
